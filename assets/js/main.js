@@ -222,6 +222,7 @@
         return '<div>' + esc(l.icon) + ' ' + esc(l.label) + '</div>';
       }).join("");
       return sectionHead("Horizon Japan", "Interactive Map", D.regions.intro) +
+        '<div class="map-wrap"><img src="assets/img/map-japan.svg" alt="Horizon Japan festival map" loading="lazy"></div>' +
         '<div class="region-grid">' + cards + '</div>' +
         '<div class="legend">' + legend + '</div>';
     },
@@ -243,7 +244,9 @@
 
     houses: function () {
       var cards = D.houses.items.map(function (h) {
-        return '<div class="house-card"><h3>' + esc(h.name) + '</h3>' +
+        return '<div class="house-card">' +
+          (h.img ? '<img class="house-img" src="' + esc(h.img) + '" alt="' + esc(h.name) + '" loading="lazy">' : '') +
+          '<h3>' + esc(h.name) + '</h3>' +
           '<div class="price">' + esc(h.price) + '</div>' +
           '<div class="bonus">' + esc(h.bonus) + '</div>' +
           '<p>' + esc(h.note) + '</p></div>';
