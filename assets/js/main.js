@@ -125,8 +125,8 @@
       var facts = D.facts.map(function (f) {
         return '<div class="fact"><div class="k">' + esc(f.k) + '</div><div class="v">' + esc(f.v) + '</div></div>';
       }).join("");
-      var feats = D.features.map(function (f) {
-        return '<div class="card"><span class="ico">' + esc(f.icon) + '</span><h3>' + esc(f.title) + '</h3><p>' + esc(f.body) + '</p></div>';
+      var feats = D.features.map(function (f, i) {
+        return '<div class="card"><span class="ico">' + String(i + 1).padStart(2, "0") + '</span><h3>' + esc(f.title) + '</h3><p>' + esc(f.body) + '</p></div>';
       }).join("");
       var h = D.hero;
 
@@ -201,7 +201,7 @@
       var cards = D.regions.items.map(function (r) {
         var feats = r.features.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("");
         return '<div class="region-card" role="button" tabindex="0" aria-expanded="false">' +
-          '<h3>' + (r.known ? "📍 " : "🗺️ ") + esc(r.name) + '</h3>' +
+          '<h3>' + esc(r.name) + (r.known ? ' <span class="rtag ok">Confirmed</span>' : ' <span class="rtag">Reported</span>') + '</h3>' +
           '<p class="blurb">' + esc(r.blurb) + '</p>' +
           '<ul class="feats">' + feats + '</ul></div>';
       }).join("");
