@@ -12,8 +12,8 @@
 window.FH6DATA = {
   meta: {
     title: "Forza Horizon 6 Guide",
-    tagline: "Your co-pilot through Horizon Japan",
-    description: "A strategy guide for Forza Horizon 6 — cars, barn finds, treasure cars, aftermarket & Forza Edition cars, the Estate, the interactive Japan map, and a beginner's path to Horizon Legend.",
+    tagline: "An unofficial, source-checked guide to the festival in Japan",
+    description: "Forza Horizon 6 lands in a fictionalised Japan with the biggest map the series has ever built and 550+ cars. This guide covers the car list, barn finds, treasure cars, the Estate, the interactive Japan map, and a beginner path to Horizon Legend — with sources noted for everything.",
     lang: "en",
     developer: "Playground Games (with Turn 10 Studios)",
     publisher: "Xbox Game Studios",
@@ -34,9 +34,9 @@ window.FH6DATA = {
   ],
 
   hero: {
-    eyebrow: "Horizon Japan is open",
+    eyebrow: "Horizon Japan",
     title: "Forza Horizon 6",
-    subtitle: "Master the festival, explore the largest open-world map in the series, and chase Horizon Legend status.",
+    subtitle: "550+ cars, the largest map the series has ever built, and a festival that finally lands in Japan. Here's the straight talk on what to do first, which cars actually matter, and where everything is hidden.",
     cover: "2025 Toyota GR GT Prototype"
   },
 
@@ -139,7 +139,7 @@ window.FH6DATA = {
   // BEST CARS
   // ---------------------------------------------------------------------------
   bestCars: {
-    intro: "There is no single 'best' car — it depends on the job. Below are strong, sourced picks for each discipline, drawn from the walkthrough reward cars and reviewer recommendations.",
+    intro: "Forget hunting for one 'best' car — Horizon is built so different machines win at different things. These are the standout picks for each discipline, pulled from the walkthrough reward cars and what reviewers actually rated.",
     categories: [
       { cat: "Top Speed / Fastest", picks: [
         { car: "GMA T.50", why: "Reward for Speed Traps — a raw, lightweight hypercar." },
@@ -315,16 +315,16 @@ window.FH6DATA = {
   // FEATURES (extra context, shown on home)
   // ---------------------------------------------------------------------------
   features: [
-    { icon: "🤖", title: "ANNA AI Assistant", body: "Drives you to any destination and offers Cinema Mode for clean screenshot tours." },
-    { icon: "🏗️", title: "The Estate", body: "A blank mountain valley you build and decorate directly in the open world — permanent and visitable by friends." },
-    { icon: "🅿️", title: "Garages", body: "8 car-display spaces with fully customizable interiors you can share or download [WIKI]." },
-    { icon: "🎨", title: "Deeper Customization", body: "Bodykits, rims, paint, liveries, and — for the first time — window decals." },
-    { icon: "🏁", title: "Horizon Play", body: "Spec Racing, The Eliminator (up to 72 players [WIKI]), Touge Showdown, Hide & Seek, and more." },
-    { icon: "📻", title: "9 Radio Stations", body: "Mix of genres — or mute them and run your own playlist." },
-    { icon: "🗺️", title: "Festival Playlist", body: "Weekly seasons across a four-week series with exclusive cars and credits." },
-    { icon: "🎮", title: "EventLab", body: "Create and share your own events and tracks." },
-    { icon: "📿", title: "Wristband Progression", body: "Returns from Horizon 1 & 2 — earn cars through races, events and stunts; Gold unlocks Legend Island [WIKI]." },
-    { icon: "📔", title: "Collection Journal", body: "Photo spots logged as stamps as you explore Japan [WIKI]." }
+    { title: "ANNA", body: "The in-game co-driver. Hand the wheel to her on long drives, or flip on Cinema Mode to hide the HUD for clean photo runs." },
+    { title: "The Estate", body: "Your own patch of rural Japan. Build and decorate it right in the world, then invite friends to cruise through." },
+    { title: "Garages", body: "Eight of them double as fast-travel points, with customisable interiors you can share or download." },
+    { title: "Tuning & paint", body: "Bodykits, rims, liveries — and for the first time in the series, window decals." },
+    { title: "Horizon Play", body: "The returning multiplayer mash-ups: Spec Racing, The Eliminator (72 players at once), Touge Showdown, Hide & Seek." },
+    { title: "Radio", body: "Nine stations, every genre. Or mute them and run your own playlist like a normal person." },
+    { title: "Festival Playlist", body: "A new season drops every week across a four-week series, each with exclusive cars and credit payouts." },
+    { title: "EventLab", body: "Build your own events and tracks, then publish them for the rest of the festival to play." },
+    { title: "Wristbands", body: "The classic progression ladder returns: race, stunt and explore your way up it. Hit Gold and Legend Island opens." },
+    { title: "Collection Journal", body: "Every photo spot and landmark you find gets logged as a stamp as you roam Japan." }
   ],
 
   // ---------------------------------------------------------------------------
