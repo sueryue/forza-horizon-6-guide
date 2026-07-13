@@ -177,13 +177,26 @@
     },
 
     cars: function () {
+      var NAV_SVG = {
+        list:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l2-5.5A2 2 0 0 1 7 6h10a2 2 0 0 1 2 1.5L21 13"/><rect x="3" y="13" width="18" height="5" rx="1.6"/><circle cx="7.6" cy="18" r="1.5"/><circle cx="16.4" cy="18" r="1.5"/></svg>',
+        best:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4h10v4a5 5 0 0 1-10 0V4z"/><path d="M7 5H4.5a2 2 0 0 0 0 4H7"/><path d="M17 5h2.5a2 2 0 0 1 0 4H17"/><path d="M12 13v3"/><path d="M9 20h6"/><path d="M10 16.5h4l-1 3.5h-2z"/></svg>',
+        after:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+        forza:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="9" r="5"/><path d="m15.5 7.5 2.3 4.6a1.5 1.5 0 0 1-1 2L12 17l-4.8-2.9a1.5 1.5 0 0 1-1-2l2.3-4.6"/><path d="M7 15.5 5 21l4-1 2-3"/><path d="M17 15.5 19 21l-4-1-2-3"/></svg>',
+        treasure:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v1H3v-1z"/><rect x="3" y="11" width="18" height="8" rx="1"/><path d="M3 14h18"/><path d="M12 11v8"/><circle cx="12" cy="13" r="1"/></svg>',
+        barn:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 12 6l9 6"/><path d="M5 12v7h14v-7"/><path d="M12 19v-7"/><path d="M12 12l-2.6 7M12 12l2.6 7"/></svg>'
+      };
+      var navItems = [
+        { k: "cars-list",        l: "All cars",          i: NAV_SVG.list },
+        { k: "cars-best",        l: "Best by discipline", i: NAV_SVG.best },
+        { k: "cars-aftermarket", l: "Aftermarket",        i: NAV_SVG.after },
+        { k: "cars-forza",       l: "Forza Edition",      i: NAV_SVG.forza },
+        { k: "cars-treasure",    l: "Treasure",           i: NAV_SVG.treasure },
+        { k: "cars-barn",        l: "Barn Finds",         i: NAV_SVG.barn }
+      ];
       var subnav = '<nav class="cars-subnav" aria-label="Cars sections">' +
-        '<button type="button" data-scroll="cars-list">All cars</button>' +
-        '<button type="button" data-scroll="cars-best">Best by discipline</button>' +
-        '<button type="button" data-scroll="cars-aftermarket">Aftermarket</button>' +
-        '<button type="button" data-scroll="cars-forza">Forza Edition</button>' +
-        '<button type="button" data-scroll="cars-treasure">Treasure</button>' +
-        '<button type="button" data-scroll="cars-barn">Barn Finds</button>' +
+        navItems.map(function (n) {
+          return '<button type="button" data-scroll="' + n.k + '">' + n.i + '<span class="lbl">' + esc(n.l) + '</span></button>';
+        }).join("") +
         '</nav>';
       return '<div class="cars-hub">' + subnav +
         carSection("cars-list", renderCarsList()) +
