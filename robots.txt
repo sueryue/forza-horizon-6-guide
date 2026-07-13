@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Generative-engine crawlers welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://sueryue.github.io/forza-horizon-6-guide/sitemap.xml
+Sitemap: https://sueryue.github.io/forza-horizon-6-guide/rss.xml
