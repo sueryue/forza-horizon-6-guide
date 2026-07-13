@@ -359,6 +359,76 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .car-sec { padding-top: 26px; scroll-margin-top: 120px; }
 .car-sec + .car-sec { margin-top: 10px; border-top: 1px solid var(--border); }
 
+/* ---------- Cars overview strip ---------- */
+.cars-overview { margin: 22px 0 6px; }
+.co-head {
+  font-family: var(--display); font-weight: 700; font-size: .82rem;
+  text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent);
+  margin-bottom: 12px;
+}
+.grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.way {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); padding: 15px 16px; transition: all .3s var(--ease);
+}
+.way:hover { border-color: var(--border-strong); background: var(--surface-2); transform: translateY(-3px); }
+.way h4 { font-family: var(--display); margin: 0 0 5px; font-size: 1rem; }
+.way p { margin: 0; color: var(--text-dim); font-size: .85rem; }
+
+/* ---------- Map extra blocks ---------- */
+.map-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+.me-block {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--surface); padding: 18px;
+}
+.me-block h3 {
+  font-family: var(--display); font-size: 1.08rem; margin: 0 0 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.me-block h3::before {
+  content: ""; width: 7px; height: 22px; border-radius: 4px;
+  background: linear-gradient(var(--accent), var(--accent-2));
+}
+.me-list { margin: 0; padding: 0; list-style: none; }
+.me-list li { font-size: .9rem; color: var(--text-dim); padding: 7px 0; border-top: 1px solid var(--border); }
+.me-list li:first-child { border-top: none; }
+.me-list b { color: var(--text); font-weight: 700; }
+
+/* ---------- Beginner glossary + credits ---------- */
+.glossary { margin-top: 26px; border-top: 1px solid var(--border); padding-top: 22px; }
+.glossary > h3, .credits-box > h3 {
+  font-family: var(--display); font-size: 1.15rem; margin: 0 0 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.glossary > h3::before, .credits-box > h3::before {
+  content: ""; width: 8px; height: 24px; border-radius: 4px;
+  background: linear-gradient(var(--accent), var(--accent-2));
+}
+.glossary dl { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 14px; margin: 0; }
+.gl { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 14px 16px; }
+.gl dt { font-family: var(--display); font-weight: 700; color: var(--accent); font-size: .95rem; margin-bottom: 4px; }
+.gl dd { margin: 0; color: var(--text-dim); font-size: .88rem; line-height: 1.55; }
+.credits-box {
+  margin-top: 26px; border: 1px solid color-mix(in srgb, var(--ok) 35%, transparent);
+  border-radius: var(--radius); background: color-mix(in srgb, var(--ok) 9%, transparent);
+  padding: 18px 20px;
+}
+.credits-box ul { margin: 0; padding-left: 20px; color: var(--text); font-size: .92rem; }
+.credits-box li { margin: 6px 0; }
+
+/* ---------- Houses tips ---------- */
+.house-tips { margin-top: 24px; border-top: 1px solid var(--border); padding-top: 22px; }
+.house-tips > h3 {
+  font-family: var(--display); font-size: 1.15rem; margin: 0 0 14px;
+  display: flex; align-items: center; gap: 10px;
+}
+.house-tips > h3::before {
+  content: ""; width: 8px; height: 24px; border-radius: 4px;
+  background: linear-gradient(var(--accent), var(--accent-2));
+}
+.house-tips ul { margin: 0; padding-left: 20px; color: var(--text-dim); font-size: .92rem; }
+.house-tips li { margin: 6px 0; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 880px) {
   .nav-wrap { gap: 8px; padding: 10px 14px; }
@@ -367,6 +437,9 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
   .menu-btn { display: none; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; }
+  .grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
+  .map-extra { grid-template-columns: 1fr; }
+  .glossary dl { grid-template-columns: 1fr; }
 }
 @media (max-width: 520px) {
   .hero { padding: 38px 22px; }
