@@ -306,8 +306,8 @@ window.FH6DATA = {
     countLabel: "headline property",
     intro: "Forza Horizon 6 features player property. Wikipedia confirms one headline customisable property — the Estate, a mountainside plot in rural Japan you build and decorate [WIKI]. Community guides list additional houses, but Wikipedia does not enumerate them. Important correction: the \"8\" figure some guides cite refers to Garages (car-display and fast-travel points), not houses [WIKI].",
     items: [
-      { name: "The Estate", price: "Unlocked via progression", bonus: "Build & decorate in the open world; daily credit payouts", note: "Wikipedia-confirmed [WIKI]: a customisable mountainside property in rural Japan. Develop it with Estate tools and claim daily payouts via My Horizon → Message Center." },
-      { name: "Garages (8)", price: "Fast-travel points", bonus: "Car-display spaces with customisable interiors", note: "Wikipedia confirms 8 garages that double as fast-travel points and shareable car-display spaces [WIKI] — distinct from player houses." }
+      { name: "The Estate", img: "assets/img/house-estate.svg", price: "Unlocked via progression", bonus: "Build & decorate in the open world; daily credit payouts", note: "Wikipedia-confirmed [WIKI]: a customisable mountainside property in rural Japan. Develop it with Estate tools and claim daily payouts via My Horizon → Message Center." },
+      { name: "Garages (8)", img: "assets/img/house-garage.svg", price: "Fast-travel points", bonus: "Car-display spaces with customisable interiors", note: "Wikipedia confirms 8 garages that double as fast-travel points and shareable car-display spaces [WIKI] — distinct from player houses." }
     ]
   },
 
