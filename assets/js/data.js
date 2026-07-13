@@ -45,6 +45,12 @@ window.FH6DATA = {
   // ---------------------------------------------------------------------------
   cars: {
     intro: "Forza Horizon 6 launches with 550+ cars [WIKI]. The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced.",
+    getWays: [
+      { t: "Autoshow", d: "Buy any car outright with credits. Full price, but you pick exactly the model you want." },
+      { t: "Wheelspins", d: "Free spins from level-ups, story events, and the Festival Playlist — a chance at rare cars and big credit bundles." },
+      { t: "Aftermarket", d: "Green CT icons on the map mark secondhand, fully-tuned cars that cost less than the Autoshow." },
+      { t: "Treasure & Barn", d: "Free hidden cars: photo-clue Treasure Cars and stamp-gated Barn Finds scattered across Japan." }
+    ],
     groups: [
       {
         title: "Confirmed vehicles (Wikipedia)",
@@ -205,6 +211,19 @@ window.FH6DATA = {
       { icon: "G", label: "Garages — 8 car-display + fast-travel points" },
       { icon: "A", label: "Aftermarket Cars — green CT icons on the map" },
       { icon: "T", label: "Treasure Cars — photo-clue only, no marker until found" }
+    ],
+    prStunts: [
+      { t: "Speed Traps", d: "Flash through a gate above a target speed. Three-star for Super Wheelspins and Skill Points." },
+      { t: "Speed Zones", d: "Hold a target average speed across a measured stretch of road." },
+      { t: "Danger Signs", d: "Launch off a ramp and fly as far as the jump will carry you." },
+      { t: "Drift Zones", d: "Bank the highest drift score before you cross the finish line." },
+      { t: "Trailblazers", d: "Point-to-point sprint against the clock — the shortest, smoothest line wins." }
+    ],
+    tips: [
+      "Fast-travel to any road you've already driven — explore first, blink later.",
+      "Discover Japan stamps unlock Barn Find rumors and feed the Collection Journal.",
+      "Photo spots (PH) double as Collection Journal stamps — stop and shoot them as you pass.",
+      "Garages (G) are free fast-travel points; unlock all 8 early to cross the huge map in seconds."
     ]
   },
 
@@ -234,6 +253,27 @@ window.FH6DATA = {
       "Raise camera FOV (Video) for a wider view.",
       "Build your own music playlist — the 9 in-game stations repeat fast.",
       "Turn off car damage if you'd rather keep cars pristine."
+    ],
+    glossary: [
+      { t: "Wristbands", d: "The progression ladder. Race, stunt, and explore to climb from Yellow up to Gold — which opens Legend Island." },
+      { t: "Festival Playlist", d: "A new season every week across a four-week series, each with exclusive cars and credit payouts." },
+      { t: "ANNA", d: "Your in-game co-driver. She can drive you to a destination, or you can flip on Cinema Mode to hide the HUD for clean photo runs." },
+      { t: "Wheelspin / Super Wheelspin", d: "Free prizes from level-ups and PR stunts — cars, credits, and cosmetics." },
+      { t: "PR Stunt", d: "Speed Traps, Speed Zones, Danger Signs, Drift Zones, and Trailblazers. Three-star them for Super Wheelspins." },
+      { t: "Discover Japan", d: "The exploration meta — earn stamps by finding landmarks, photographing them, and driving the map." },
+      { t: "Collection Journal", d: "Logs every photo spot and landmark you find as you roam Japan." },
+      { t: "Aftermarket Car", d: "Secondhand, fully-tuned cars marked by green CT icons on the map — cheaper than the Autoshow." },
+      { t: "Treasure / Barn Car", d: "Free hidden cars: Treasure via photo clues, Barn Finds via stamp-gated rumors." },
+      { t: "The Estate", d: "Your customisable mountainside property in rural Japan, with daily credit payouts." },
+      { t: "EventLab", d: "Build your own events and tracks, then publish them for the festival to play." },
+      { t: "Horizon Play", d: "Multiplayer mash-ups: Spec Racing, The Eliminator (72 players), Touge Showdown, Hide & Seek." }
+    ],
+    credits: [
+      "Crank difficulty up and switch assists off — up to +125% credits per race, if you can still win.",
+      "Three-star PR stunts for Super Wheelspins; chain them with Skill Chains to feed Car Mastery trees.",
+      "Drive through Mascots scattered across the map for easy credits as you explore.",
+      "Claim The Estate's daily credit payouts via My Horizon → Message Center.",
+      "Work the weekly Festival Playlist — its reward cars and payouts compound fast."
     ]
   },
 
@@ -308,6 +348,13 @@ window.FH6DATA = {
     items: [
       { name: "The Estate", img: "assets/img/house-estate.svg", price: "Unlocked via progression", bonus: "Build & decorate in the open world; daily credit payouts", note: "Wikipedia-confirmed [WIKI]: a customisable mountainside property in rural Japan. Develop it with Estate tools and claim daily payouts via My Horizon → Message Center." },
       { name: "Garages (8)", img: "assets/img/house-garage.svg", price: "Fast-travel points", bonus: "Car-display spaces with customisable interiors", note: "Wikipedia confirms 8 garages that double as fast-travel points and shareable car-display spaces [WIKI] — distinct from player houses." }
+    ],
+    tips: [
+      "Unlock The Estate through normal progression — it's the one property Wikipedia confirms [WIKI].",
+      "At the Estate you build and decorate in the open world, then collect daily credit payouts via My Horizon → Message Center.",
+      "Garages double as free fast-travel points — unlock all 8 early to cross the big map in seconds.",
+      "Garage interiors are customisable and shareable — download the community's best layouts.",
+      "Prioritise the Estate first: daily payouts are a steady credit stream while you explore."
     ]
   },
 
