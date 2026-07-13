@@ -196,7 +196,7 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .card:hover { transform: translateY(-4px); border-color: var(--border-strong); background: var(--surface-2); }
 .card h3 { font-family: var(--display); margin: 0 0 6px; font-size: 1.1rem; }
 .card p { margin: 0; color: var(--text-dim); font-size: .92rem; }
-.card .ico { font-size: 1.5rem; margin-bottom: 8px; display: block; }
+.card .ico { font-family: var(--display); font-size: .82rem; font-weight: 700; letter-spacing: .12em; color: var(--accent); margin-bottom: 10px; display: block; }
 
 /* ---------- Car cards ---------- */
 .car-group { margin-top: 30px; }
@@ -267,6 +267,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .region-card:hover, .region-card.open { border-color: var(--border-strong); background: var(--surface-2); transform: translateY(-3px); }
 .region-card h3 { font-family: var(--display); margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
 .region-card .blurb { color: var(--text-dim); font-size: .9rem; margin: 0; }
+.rtag { font-size: .6rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border-strong); color: var(--text-dim); vertical-align: middle; }
+.rtag.ok { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 50%, transparent); }
 .region-card .feats { margin: 12px 0 0; padding: 0; list-style: none; display: none; }
 .region-card.open .feats { display: block; animation: fadeUp .35s var(--ease) both; }
 .region-card .feats li {
