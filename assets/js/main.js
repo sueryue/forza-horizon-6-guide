@@ -53,6 +53,15 @@
     return sectionHead("Garage", "Cars List", D.cars.intro) + groups;
   }
 
+  function renderCarsOverview() {
+    var ways = D.cars.getWays.map(function (w) {
+      return '<div class="way"><h4>' + esc(w.t) + '</h4><p>' + esc(w.d) + '</p></div>';
+    }).join("");
+    return '<div class="cars-overview">' +
+      '<div class="co-head">Four ways to fill your garage</div>' +
+      '<div class="grid cols-4">' + ways + '</div></div>';
+  }
+
   function renderBest() {
     var cats = D.bestCars.categories.map(function (c) {
       var picks = c.picks.map(function (p) {
@@ -198,7 +207,7 @@
           return '<button type="button" data-scroll="' + n.k + '">' + n.i + '<span class="lbl">' + esc(n.l) + '</span></button>';
         }).join("") +
         '</nav>';
-      return '<div class="cars-hub">' + subnav +
+      return '<div class="cars-hub">' + subnav + renderCarsOverview() +
         carSection("cars-list", renderCarsList()) +
         carSection("cars-best", renderBest()) +
         carSection("cars-aftermarket", renderAftermarket()) +
@@ -221,17 +230,31 @@
       var legend = D.regions.legend.map(function (l) {
         return '<div>' + esc(l.icon) + ' ' + esc(l.label) + '</div>';
       }).join("");
+      var stunts = D.regions.prStunts.map(function (s) {
+        return '<li><b>' + esc(s.t) + '</b> — ' + esc(s.d) + '</li>';
+      }).join("");
+      var tips = D.regions.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join("");
+      var extra = '<div class="map-extra">' +
+        '<div class="me-block"><h3>PR stunts &amp; activities</h3><ul class="me-list">' + stunts + '</ul></div>' +
+        '<div class="me-block"><h3>Exploring tips</h3><ul class="me-list">' + tips + '</ul></div>' +
+        '</div>';
       return sectionHead("Horizon Japan", "Interactive Map", D.regions.intro) +
         '<div class="map-wrap"><img src="assets/img/map-japan.svg" alt="Horizon Japan festival map" loading="lazy"></div>' +
         '<div class="region-grid">' + cards + '</div>' +
-        '<div class="legend">' + legend + '</div>';
+        '<div class="legend">' + legend + '</div>' + extra;
     },
 
     beginner: function () {
       var settings = D.beginner.settings.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join("");
+      var gl = D.beginner.glossary.map(function (g) {
+        return '<div class="gl"><dt>' + esc(g.t) + '</dt><dd>' + esc(g.d) + '</dd></div>';
+      }).join("");
+      var cred = D.beginner.credits.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("");
       return sectionHead("No spoilers", "Beginner's Guide", D.beginner.intro) +
         ol(D.beginner.steps) +
-        '<div class="settings-box"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>';
+        '<div class="settings-box"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>' +
+        '<div class="glossary"><h3>Horizon glossary</h3><dl>' + gl + '</dl></div>' +
+        '<div class="credits-box"><h3>Credit farming 101</h3><ul>' + cred + '</ul></div>';
     },
 
     /* (barn merged into Cars hub) */
@@ -251,11 +274,13 @@
           '<div class="bonus">' + esc(h.bonus) + '</div>' +
           '<p>' + esc(h.note) + '</p></div>';
       }).join("");
+      var tips = D.houses.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join("");
       return sectionHead("Settle in", "Houses & Property", D.houses.intro) +
         '<div class="facts"><div class="fact"><div class="k">Confirmed property</div><div class="v">The Estate</div></div>' +
           '<div class="fact"><div class="k">Garages</div><div class="v">8 [WIKI]</div></div>' +
           '<div class="fact"><div class="k">Note</div><div class="v">"8" = garages, not houses</div></div></div>' +
-        '<div class="house-grid" style="margin-top:18px">' + cards + '</div>';
+        '<div class="house-grid" style="margin-top:18px">' + cards + '</div>' +
+        '<div class="house-tips"><h3>Living in Japan</h3><ul>' + tips + '</ul></div>';
     }
   };
 
