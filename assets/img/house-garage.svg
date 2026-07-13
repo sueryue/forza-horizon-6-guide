@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" role="img" aria-label="Forza Horizon 6 - Garage / fast-travel point (original illustration)">
+  <defs>
+    <linearGradient id="gbg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0c0a1e"/>
+      <stop offset="100%" stop-color="#150d2a"/>
+    </linearGradient>
+    <linearGradient id="gfloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a1330"/>
+      <stop offset="100%" stop-color="#07060f"/>
+    </linearGradient>
+    <filter id="gglow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="340" fill="url(#gbg)"/>
+  <rect x="0" y="252" width="600" height="88" fill="url(#gfloor)"/>
+  <rect x="0" y="250" width="600" height="3" fill="#1de9ff" opacity="0.4" filter="url(#gglow)"/>
+
+  <!-- showroom structure -->
+  <rect x="118" y="92" width="364" height="162" fill="#120c24" stroke="#2a2444" stroke-width="1.5"/>
+  <rect x="102" y="76" width="396" height="20" rx="3" fill="#0e0a1e" stroke="#2a2444" stroke-width="1.5"/>
+  <rect x="118" y="92" width="14" height="162" fill="#0d0920"/>
+  <rect x="468" y="92" width="14" height="162" fill="#0d0920"/>
+
+  <!-- neon ceiling strips -->
+  <g filter="url(#gglow)">
+    <rect x="140" y="104" width="320" height="3" fill="#36e0ff" opacity="0.8"/>
+    <rect x="140" y="244" width="320" height="3" fill="#ff4fd8" opacity="0.7"/>
+  </g>
+  <text x="300" y="90" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="800" letter-spacing="4" fill="#eafcff">GARAGE</text>
+
+  <!-- displayed sports car -->
+  <g transform="translate(196,210)">
+    <path d="M6 44 q5 -24 52 -28 l46 -3 q28 2 44 22 l14 9 q5 6 -2 8 l-190 0 q-7 -6 -2 -10 z" fill="#0d0d18" stroke="#2a2a3a" stroke-width="2"/>
+    <path d="M62 18 q5 -13 32 -13 l26 0 q20 1 28 16 l-24 4 -70 0 z" fill="#1b2b3a"/>
+    <path d="M96 5 l18 16 -30 0 z" fill="#36e0ff" opacity="0.55"/>
+    <circle cx="48" cy="50" r="12" fill="#050507" stroke="#2a2a30" stroke-width="3"/>
+    <circle cx="160" cy="50" r="12" fill="#050507" stroke="#2a2a30" stroke-width="3"/>
+    <circle cx="48" cy="50" r="5" fill="#2a2a30"/>
+    <circle cx="160" cy="50" r="5" fill="#2a2a30"/>
+    <rect x="0" y="40" width="12" height="6" rx="2" fill="#36e0ff" filter="url(#gglow)"/>
+  </g>
+
+  <!-- fast-travel waypoint -->
+  <g transform="translate(300,150)" filter="url(#gglow)">
+    <circle r="16" fill="#0a0818" stroke="#1de9ff" stroke-width="2"/>
+    <path d="M0 -8 L7 4 L0 -1 L-7 4 Z" fill="#1de9ff"/>
+  </g>
+
+  <text x="26" y="314" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="20" font-weight="800" letter-spacing="2" fill="#eafcff">GARAGES</text>
+  <text x="28" y="330" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="3" fill="#ffd166">8 FAST-TRAVEL POINTS</text>
+</svg>
