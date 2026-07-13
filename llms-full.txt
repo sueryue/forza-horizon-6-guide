@@ -1,0 +1,315 @@
+# Forza Horizon 6 Guide — Horizon Japan
+
+> Unofficial fan strategy guide. Primary source: the English Wikipedia article on Forza Horizon 6. 
+> Gameplay detail where Wikipedia is silent is drawn from community guides (Reddit, IGN, GamesRadar, game8, Red Bull, Polygon) and labelled community-sourced. No car names, locations, or stats are invented.
+
+**Your co-pilot through Horizon Japan** — A strategy guide for Forza Horizon 6 — cars, barn finds, treasure cars, aftermarket & Forza Edition cars, the Estate, the interactive Japan map, and a beginner's path to Horizon Legend.
+
+## Key facts (Wikipedia-confirmed)
+- **Setting**: Japan (fictionalised)
+- **Released**: May 19, 2026
+- **Cars at launch**: 550+
+- **Developer**: Playground Games
+- **Publisher**: Xbox Game Studios
+- **Platforms**: PC · Xbox · PS5
+- **Garages**: 8 (fast-travel)
+- **The Eliminator**: up to 72 players
+
+## Beginner's guide (path to Horizon Legend)
+New to Horizon Japan? Follow this path — distilled from the Reddit no-spoiler guide, RedBull tips, Polygon's 10 tips, and the official First Drive, cross-checked against Wikipedia's confirmed systems.
+
+### 1. Qualify, then Invitational
+Run the Horizon Qualifiers, then the Horizon Invitational. Finishing it grants your first (Yellow) Wristband and unlocks the festival, multiplayer, and free cars.
+
+### 2. Pick a starter that matches your style
+Silvia K'S for drift, Celica GT-Four for balance, GMC Jimmy for off-road. All three end up in your garage anyway.
+
+### 3. Don't blow credits at the Autoshow
+Wheelspins, story events, and the Festival Playlist hand out cars fast. Spend early credits tuning your starter instead.
+
+### 4. Earn Discover Japan stamps
+Explore regions, discover landmarks, and photograph them. Stamps feed your Collection Journal and unlock content [WIKI].
+
+### 5. Farm mascots
+Mascots sit across the map — drive through them for credits. (Exact count is community-reported; clear them as you explore.)
+
+### 6. Grab Aftermarket Cars
+Watch the minimap for green CT car icons. They're secondhand, fully tuned, and cheaper than the Autoshow.
+
+### 7. Use ANNA when you're tired
+The AI assistant can drive you to a destination; Cinema Mode hides the UI for screenshot tours.
+
+### 8. Nail Drag Meets
+Handbrake + launch control, release on the final light. Jumping the gun lurches you forward.
+
+### 9. Three-star PR stunts
+Speed Zones, Danger Signs, and Drift Zones earn Super Wheelspins and Skill Points for Car Mastery trees.
+
+### 10. Turn up difficulty for credits
+Higher difficulty + assists off can pay up to +125% credits per race. Only when you can still win.
+
+### 11. Photo everything
+Press Up for photo mode. The Horizon Promo challenge gives festival points per car photographed, and the journal wants landmark shots.
+
+### 12. Fast-travel smart
+You can teleport to almost anywhere you've already visited — including the middle of a road. Explore first, blink later.
+
+### 13. Unlock the Estate
+The Estate is your customisable mountainside property in rural Japan [WIKI] — build and decorate it, and collect daily credit payouts via the My Horizon message center.
+
+### 14. Treasure & Barn loop
+Treasure Cars hide behind photo clues (no marker until found). Barn Finds appear as rumours once stamps unlock them. (Counts are community-reported — see those sections.)
+
+### Recommended settings
+- Enable Proximity Radar (HUD & Gameplay) to see cars behind you.
+- Raise camera FOV (Video) for a wider view.
+- Build your own music playlist — the 9 in-game stations repeat fast.
+- Turn off car damage if you'd rather keep cars pristine.
+
+## Cars
+Forza Horizon 6 launches with 550+ cars [WIKI]. The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced.
+
+### Confirmed vehicles (Wikipedia) [WIKI]
+_From the official key art and cross-title loyalty rewards [WIKI]._
+- **2025 Toyota GR GT Prototype** — *Cover car*: Headline machine on the FH6 key art, with Mount Fuji and Tokyo behind it [WIKI].
+- **2024 Toyota Land Cruiser 250** — *Key art*: Featured alongside the GR GT Prototype in the reveal key art [WIKI].
+- **2021 Mercedes-AMG One** — *Loyalty (FH5)*: Returning reward for playing Forza Horizon 5 [WIKI].
+- **2016 Aston Martin Vulcan** — *Loyalty (FH4)*: Returning reward for playing Forza Horizon 4 [WIKI].
+- **2016 Lamborghini Centenario LP 770-4** — *Loyalty (FH3)*: Returning reward for playing Forza Horizon 3 [WIKI].
+- **2014 Lamborghini Huracán LP 610-4** — *Loyalty (FH2)*: Returning reward for playing Forza Horizon 2 [WIKI].
+- **2013 Dodge SRT Viper GTS** — *Loyalty (FH1)*: Returning reward for playing Forza Horizon 1 [WIKI].
+- **2024 Chevrolet Corvette E-Ray** — *Loyalty (Motorsport)*: Returning reward for Forza Motorsport (2023) [WIKI].
+
+### Starter Cars (community-sourced)
+_Handed to you at the start of the festival per community guides. Not enumerated by Wikipedia._
+- **1989 Nissan Silvia K'S** — *Drift-friendly*: Great for learning Touge and drift zones.
+- **1994 Toyota Celica GT-Four ST205** — *All-rounder*: Balanced for mixed road and light off-road.
+- **1970 GMC Jimmy** — *Off-road*: Heavy on tarmac, strong in the northern mountains.
+
+### Prologue & Festival Cars (community-sourced)
+_Appear during the opening drive and early festival events per community guides._
+- **2024 Nissan GT-R Nismo** — *Prologue*: Driven through the Hokubu fields at the very start.
+- **2021 RJ Anderson #37 Polaris RZR Pro 4 Truck** — *Prologue*: Snow-circuit opener.
+- **1995 Porsche 911 GT2** — *Prologue*
+- **Mazda RX-7 Type R** — *Prologue*
+- **2023 BMW M2** — *Prologue*
+- **2020 Toyota GR Supra** — *Prologue*
+
+### Event Path Reward Cars (community-sourced)
+_Cars tied to specific Horizon Festival and Explore Japan milestones (from the IGN walkthrough)._
+- **2022 Toyota GR86**
+- **2001 Mitsubishi Lancer Evolution VI GSR TM Edition**
+- **2024 Ram 1500 TRX**
+- **Aston Martin Vulcan** — *Loyalty reward*: Forza Loyalty reward if you played earlier titles.
+- **Ford RS200** — *Wristband event*: Pier Pressure — Tokyo docks.
+- **Lotus Exige WTAC** — *Road Racing*
+- **Subaru Impreza** — *Sekibe Scramble*
+- **Mitsubishi Lancer Evo** — *Sekibe Scramble*
+- **Lamborghini Huracán Sterrato** — *Dirt Racing max*
+- **Mini JCW Buggy** — *Cross Country*
+- **GMA T.50** — *Speed Traps*
+- **Porsche 911 GT3 RS '12** — *Speed Zones*
+- **M12S Warthog CST** — *Danger Signs*
+- **Mazda RX-8 #99** — *Drift Zones*
+- **Mercedes-Benz G 65** — *Trailblazers*
+- **Lexus LFA FE** — *Street / Touge ultimate*
+- **Honda NSX-R '05** — *Regional Mascots*
+- **Audi R8 '13** — *Day Trips*
+- **Nissan 240 #777** — *Drift Club Japan*
+- **Honda Civic '84** — *Moto Auto Zine*
+- **Toyota GR86 "86 Stories"** — *Yuji's Auto*
+- **Porsche 918** — *Horizon Play*
+- **Porsche Cayman GT4 RS** — *Road Rivals*
+- **Opel Manta 400** — *Dirt Rivals*
+- **#37 undefined Pro 2 Truck** — *Cross Country Rivals*
+- **Subaru Vivio FE** — *Horizon Life*
+- **Nissan Nismo GT-R '24** — *Touge & Street Rivals*
+- **Koenigsegg Agera RS** — *Explore Japan landmark*
+
+### Featured Roster (community-sourced sample)
+_A slice of the launch roster — the full list spans 64+ pages on IGN._
+- **1969 Toyota 2000GT**
+- **1964 Ferrari 250 GTO**
+- **1954 Mercedes-Benz 300SL**
+- **1994 Ferrari 355 Berlinetta**
+- **1991 Ferrari 512 TR**
+- **1973 Porsche 911 Carrera RS**
+- **1995 Porsche 911 GT2**
+- **2004 Porsche 996 GT3**
+- **1982 Porsche 911 Turbo**
+- **1989 Porsche 944 Turbo**
+
+## Best cars by discipline
+There is no single 'best' car — it depends on the job. Below are strong, sourced picks for each discipline, drawn from the walkthrough reward cars and reviewer recommendations.
+
+### Top Speed / Fastest
+- **GMA T.50** — Reward for Speed Traps — a raw, lightweight hypercar.
+- **Koenigsegg Agera RS** — Granted for discovering Japanese landmarks via Explore Japan.
+- **2025 GR GT Prototype** — The cover car; built for straight-line pace.
+- **Nissan Nismo GT-R '24** — Top reward from Touge & Street Rivals.
+
+### Drifting
+- **Nissan 240 #777** — Drift Club Japan reward — purpose-built slide machine.
+- **Mazda RX-8 #99** — Drift Zones reward; rotary balance.
+- **Nissan Silvia K'S (starter)** — Rocket-Bunny-style starter that rewards precise throttle.
+- **Mazda RX-7 Type R** — Featured in the prologue Touge intro.
+
+### Drag Racing
+- **M12S Warthog CST** — Danger Signs reward; brutal launch.
+- **Ram 1500 TRX** — First-wristband reward with serious grunt.
+- **RJ Anderson #37 Polaris RZR Pro 4** — Prologue truck; strong off-the-line.
+
+### Off-road / Rally
+- **Lamborghini Huracán Sterrato** — Dirt Racing max reward.
+- **Mini JCW Buggy** — Cross Country reward.
+- **#37 Pro 2 Truck** — Cross Country Rivals reward.
+- **GMC Jimmy (starter)** — Surprisingly capable in the snowy north.
+
+### Best All-rounder Starter
+- **Toyota Celica GT-Four ST205** — Balanced AWD turbo — comfortable on road and light trails while you learn.
+
+### Best Cars FAQ
+
+**Q: Is there one single best car in Forza Horizon 6?**
+No. The right car depends on the job — top speed, drift, drag, off-road and all-round driving each favour different builds. Use the picks above as a starting point and tune to taste.
+
+**Q: What is the best all-rounder starter car?**
+The Toyota Celica GT-Four ST205: a balanced AWD turbo that is comfortable on road and light trails while you learn the map. The Nissan Silvia K'S is the better pick if you want to learn drifting, and the GMC Jimmy if you'll spend time off-road or in the snow.
+
+**Q: What is the fastest car, and how do I unlock it?**
+The GMA T.50 is the top-speed pick and is granted for clearing Speed Traps. The Koenigsegg Agera RS comes from discovering Japanese landmarks via Explore Japan, and the 2025 GR GT Prototype (the cover car) is built for straight-line pace.
+
+**Q: What is the best car for drifting?**
+The Nissan 240 #777 (Drift Club Japan reward) and the Mazda RX-8 #99 (Drift Zones reward) are purpose-built slide machines; the Nissan Silvia K'S starter also rewards precise throttle control.
+
+**Q: What is the best car for drag racing?**
+The M12S Warthog CST (Danger Signs reward) has a brutal launch, the Ram 1500 TRX is a first-wristband reward with serious grunt, and the RJ Anderson #37 Polaris RZR Pro 4 is strong off the line.
+
+**Q: What is the best off-road / rally car?**
+The Lamborghini Huracán Sterrato (Dirt Racing max reward) and the Mini JCW Buggy (Cross Country reward) handle loose surfaces best; the #37 Pro 2 Truck and GMC Jimmy are solid too.
+
+**Q: How many cars are in Forza Horizon 6 at launch?**
+550+ cars at launch [WIKI]. The lists above are curated, sourced picks — not the full roster.
+
+**Q: What is the best car for farming credits?**
+Any of the fast event-reward cars above will do; pair it with higher difficulty and assists off for up to +125% credit payouts, and three-star PR stunts for Super Wheelspins.
+
+## Interactive map — regions of Japan
+Forza Horizon 6 is set in a fictionalised Japan with the largest open-world map in the series [WIKI]. The areas below are named in Wikipedia; community guides report the full map spans 10 regions — we list what is encyclopaedically confirmed and clearly mark the rest.
+
+### Tokyo (confirmed)
+The largest urban area in any Forza Horizon game — about five times the size of previous city areas [WIKI]. Districts include Shibuya Crossing, Ginko Avenue, and Tokyo Tower, linked by elevated highways. Mix of neon downtown, suburbs, and industrial docks [WIKI].
+Highlights: Shibuya Crossing; Ginko Avenue; Tokyo Tower; Elevated highways; Neon downtown · suburbs · industrial docks; ≈5× the size of prior city areas [WIKI].
+
+### Legend Island (confirmed)
+A special area unlocked with the Gold Wristband, featuring unique challenges, exclusive events, and a second Horizon Festival [WIKI].
+Highlights: Gold Wristband unlock; Unique challenges; Exclusive events; Second Horizon Festival.
+
+### Rural Japan (confirmed)
+The countryside, home to the Estate — your customisable mountainside property [WIKI]. Scenic driving and overlooks.
+Highlights: The Estate (customisable property); Mountainous scenery; Open-world building.
+
+### Mount Fuji (confirmed)
+Japan's iconic peak appears as a backdrop behind Tokyo and the key art — a landmark rather than a drivable district [WIKI].
+Highlights: Backdrop landmark; Visible from Tokyo; Key-art centerpiece.
+
+### More regions (community-reported) (community-reported)
+Community guides describe the full map as 10 regions. Beyond Tokyo, Legend Island, Rural Japan and Mount Fuji, Wikipedia does not name the others, so we won't invent them.
+Highlights: Community: 10 regions total; Discover by driving in; Contributes to Discover Japan stamps.
+
+### Map legend
+- 🎯 PR Stunts (Speed Traps, Speed Zones, Danger Signs, Drift Zones, Trailblazers)
+- 🧸 Mascots (smash for credits)
+- 📸 Photo / landmark spots (Collection Journal stamps)
+- 🏠 The Estate (customisable property)
+- 🅿️ Garages (8 car-display + fast-travel points)
+- 🚗 Aftermarket Cars (green CT icons)
+- 💎 Treasure Cars (photo-clue only, no marker until found)
+
+## Barn Finds
+**Count**: 14 (community-reported).
+Barn Finds are reported by community guides as classic cars abandoned in barns across Japan, gated behind your Discover Japan stamps. Note: Wikipedia does not confirm this mechanic or its count.
+
+**How to find them:**
+- Earn Discover Japan stamps by exploring regions, photographing landmarks, and completing stories.
+- Each stamp milestone unlocks new Barn Find rumors.
+- A purple circle appears on the map — drive into it to reveal the barn's rough area.
+- Search the circle for the barn; restore the car and add it to your collection.
+
+_Exact barn-find car names and coordinates are still being mapped by the community. We won't list coordinates we can't verify._
+
+## Treasure Cars
+**Count**: 9 (community-reported).
+Treasure Cars are reported by community guides as abandoned vehicles hidden across the map, found only via photo clues (no map marker until discovered). Note: Wikipedia does not confirm this mechanic or its count.
+
+**How to find them:**
+- Drive around Japan; the game notifies you when you're near a Treasure Car.
+- A menu photo shows the approximate location — the in-game clues barely describe it.
+- Find the exact spot, claim the car, and it's added to your collection for free.
+- Once discovered, the location stays marked on your map.
+- A systematic north-to-south sweep covers all of them in a couple of hours.
+
+_All are reported free and spread across the regions. Specific model names aren't published yet, so we list the mechanic rather than guess._
+
+## Aftermarket Cars
+Aftermarket Cars are secondhand vehicles scattered across the map. They match your current campaign progression, come fully tuned with kits, and cost less than the Autoshow. (Wikipedia confirms deep car customisation but does not define this specific system; details below are community-sourced.)
+
+**How to get them:**
+- Watch the minimap for green CT car icons while driving to events.
+- Drive up and buy directly — no auction house needed.
+- They're a cheap, ready-to-race alternative to the Autoshow early on.
+
+## Forza Edition Cars
+Forza Edition (FE) cars are rare, specially-tuned variants found on the road and as rewards. Wikipedia does not confirm this category; the examples below are community-sourced.
+- **Lexus LFA FE** — Ultimate reward for Street Racing & Touge.
+- **Subaru Vivio FE** — Horizon Life Events reward.
+- **Nissan Nismo GT-R '24** — Top reward from Touge & Street Rivals.
+
+## Houses & property
+Forza Horizon 6 features player property. Wikipedia confirms one headline customisable property — the Estate, a mountainside plot in rural Japan you build and decorate [WIKI]. Community guides list additional houses, but Wikipedia does not enumerate them. Important correction: the "8" figure some guides cite refers to Garages (car-display and fast-travel points), not houses [WIKI].
+
+### The Estate
+- **Price**: Unlocked via progression
+- **Bonus**: Build & decorate in the open world; daily credit payouts
+- Wikipedia-confirmed [WIKI]: a customisable mountainside property in rural Japan. Develop it with Estate tools and claim daily payouts via My Horizon → Message Center.
+
+### Garages (8)
+- **Price**: Fast-travel points
+- **Bonus**: Car-display spaces with customisable interiors
+- Wikipedia confirms 8 garages that double as fast-travel points and shareable car-display spaces [WIKI] — distinct from player houses.
+
+## Critical reception (Wikipedia)
+Forza Horizon 6 received universal acclaim. On Metacritic it scored 90/100 (PC) and 91/100 (Xbox Series X/S); OpenCritic recorded a 100% recommend rate across 142 reviews [WIKI].
+- IGN: 10/10
+- Eurogamer: 5/5
+- Giant Bomb: 5/5
+- Video Games Chronicle: 5/5
+- Game Informer: 9.25/10
+- Destructoid: 9/10
+- PCGamesN: 9/10
+- Shacknews: 9/10
+- Pure Xbox: 9/10
+- Hardcore Gamer: 4.5/5
+- TechRadar: 4.5/5
+- GamesRadar+: 4/5
+- GameSpot: 8/10
+- PC Gamer (US): 84/100
+
+Critics praised the Japan setting, the expansive open world, the driving feel, and the variety of activities. PC Gamer called the cutscene dialogue "bland" and GamesRadar+ called the story "shallow"; some noted the structure felt conservative [WIKI].
+
+## Development & release (Wikipedia)
+Forza Horizon 6 is developed by Playground Games with assistance from Turn 10 Studios, and published by Xbox Game Studios [WIKI].
+- **Sep 25, 2025** — Revealed at Tokyo Game Show [WIKI].
+- **Dec 2025** — Turn 10 Studios shifts to focus on Forza Horizon 6 [WIKI].
+- **Jan 22, 2026** — Gameplay premieres at the Xbox Developer Direct [WIKI].
+- **Apr 20, 2026** — Limited-edition Xbox controller and headset announced (launch May 19) [WIKI].
+- **May 7–31, 2026** — Crunchyroll subscribers receive a free car voucher [WIKI].
+- **May 15, 2026** — Premium early access begins [WIKI].
+- **May 19, 2026** — Worldwide launch on Windows and Xbox Series X/S [WIKI].
+- **May 10, 2026** — 155 GB preload leaked/decrypted on Steam; Playground banned the leaker [WIKI].
+- **May 21, 2026** — Surpasses 6 million players [WIKI].
+- **May 24, 2026** — 300,000 concurrent players on Steam — 52nd-highest all-time peak [WIKI].
+- **Late 2026** — PlayStation 5 version planned [WIKI].
+
+---
+Unofficial fan-made resource. Not affiliated with Playground Games or Xbox Game Studios. Game content © their respective owners.
