@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Forza Horizon 6 - Horizon Japan key art">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a0820"/>
+      <stop offset="42%" stop-color="#3a0d4f"/>
+      <stop offset="72%" stop-color="#b3245f"/>
+      <stop offset="100%" stop-color="#ff7a3c"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff3c4"/>
+      <stop offset="55%" stop-color="#ffd166"/>
+      <stop offset="100%" stop-color="#ff9a3c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fuji" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1d44"/>
+      <stop offset="100%" stop-color="#140d28"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="460" fill="url(#sky)"/>
+
+  <g fill="#ffffff" opacity="0.8">
+    <circle cx="120" cy="60" r="1.6"/><circle cx="240" cy="40" r="1.2"/><circle cx="360" cy="80" r="1.4"/>
+    <circle cx="520" cy="50" r="1.1"/><circle cx="700" cy="70" r="1.5"/><circle cx="980" cy="40" r="1.3"/>
+    <circle cx="1080" cy="90" r="1.6"/><circle cx="60" cy="120" r="1.2"/>
+  </g>
+
+  <circle cx="880" cy="170" r="160" fill="url(#sun)" opacity="0.9"/>
+  <circle cx="880" cy="170" r="86" fill="#ffd166" filter="url(#glow)"/>
+
+  <polygon points="250,330 600,120 950,330" fill="url(#fuji)"/>
+  <polygon points="545,168 600,120 655,168 632,160 615,172 596,158 575,172 558,160" fill="#e9e6ff" opacity="0.92"/>
+  <rect x="250" y="320" width="700" height="20" fill="#1a1230" opacity="0.5"/>
+
+  <g fill="#0a0818">
+    <rect x="0" y="250" width="70" height="110"/>
+    <rect x="78" y="210" width="46" height="150"/>
+    <rect x="132" y="270" width="60" height="90"/>
+    <rect x="200" y="190" width="40" height="170"/>
+    <rect x="248" y="240" width="80" height="120"/>
+    <rect x="336" y="160" width="52" height="200"/>
+    <rect x="396" y="220" width="64" height="140"/>
+    <rect x="468" y="200" width="44" height="160"/>
+    <rect x="1010" y="230" width="70" height="130"/>
+    <rect x="1088" y="190" width="50" height="170"/>
+    <rect x="1146" y="250" width="54" height="110"/>
+  </g>
+  <g filter="url(#glow)">
+    <rect x="90" y="230" width="6" height="6" fill="#36e0ff"/>
+    <rect x="104" y="250" width="6" height="6" fill="#ff4fd8"/>
+    <rect x="212" y="210" width="6" height="6" fill="#ff4fd8"/>
+    <rect x="226" y="240" width="6" height="6" fill="#36e0ff"/>
+    <rect x="350" y="190" width="6" height="6" fill="#36e0ff"/>
+    <rect x="364" y="220" width="6" height="6" fill="#ff4fd8"/>
+    <rect x="1100" y="210" width="6" height="6" fill="#36e0ff"/>
+    <rect x="1114" y="240" width="6" height="6" fill="#ff4fd8"/>
+  </g>
+
+  <rect x="0" y="360" width="1200" height="100" fill="#07060f"/>
+  <line x1="0" y1="412" x2="1200" y2="412" stroke="#00e5ff" stroke-width="3" opacity="0.7" filter="url(#glow)"/>
+  <g stroke="#13304a" stroke-width="2" opacity="0.6">
+    <line x1="600" y1="412" x2="520" y2="460"/>
+    <line x1="600" y1="412" x2="680" y2="460"/>
+  </g>
+
+  <ellipse cx="600" cy="408" rx="150" ry="14" fill="#00e5ff" opacity="0.35" filter="url(#glow)"/>
+  <g fill="#0d0d14">
+    <path d="M470 400 q10 -34 70 -40 q30 -4 60 6 q40 14 90 8 q40 -4 60 14 l14 22 q4 8 -6 10 l-300 0 q-12 -2 -8 -12 z"/>
+  </g>
+  <path d="M548 372 q24 -10 52 -4 l-6 18 -44 0 z" fill="#1b2b3a"/>
+  <path d="M604 368 q26 -2 52 8 l-4 16 -48 -2 z" fill="#1b2b3a"/>
+  <circle cx="540" cy="408" r="20" fill="#050507" stroke="#222" stroke-width="3"/>
+  <circle cx="690" cy="408" r="20" fill="#050507" stroke="#222" stroke-width="3"/>
+  <circle cx="540" cy="408" r="8" fill="#2a2a30"/>
+  <circle cx="690" cy="408" r="8" fill="#2a2a30"/>
+  <circle cx="704" cy="392" r="4" fill="#fff7d6" filter="url(#glow)"/>
+</svg>
