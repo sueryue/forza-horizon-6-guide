@@ -198,13 +198,13 @@ window.FH6DATA = {
         features: ["Community: 10 regions total", "Discover by driving in", "Contributes to Discover Japan stamps"] }
     ],
     legend: [
-      { icon: "🎯", label: "PR Stunts (Speed Traps, Speed Zones, Danger Signs, Drift Zones, Trailblazers)" },
-      { icon: "🧸", label: "Mascots (smash for credits)" },
-      { icon: "📸", label: "Photo / landmark spots (Collection Journal stamps)" },
-      { icon: "🏠", label: "The Estate (customisable property)" },
-      { icon: "🅿️", label: "Garages (8 car-display + fast-travel points)" },
-      { icon: "🚗", label: "Aftermarket Cars (green CT icons)" },
-      { icon: "💎", label: "Treasure Cars (photo-clue only, no marker until found)" }
+      { icon: "PR", label: "Speed Traps, Speed Zones, Danger Signs, Drift Zones, Trailblazers" },
+      { icon: "M", label: "Mascots — drive through them for credits" },
+      { icon: "PH", label: "Photo & landmark spots (Collection Journal stamps)" },
+      { icon: "H", label: "The Estate — your customisable property" },
+      { icon: "G", label: "Garages — 8 car-display + fast-travel points" },
+      { icon: "A", label: "Aftermarket Cars — green CT icons on the map" },
+      { icon: "T", label: "Treasure Cars — photo-clue only, no marker until found" }
     ]
   },
 
