@@ -1,0 +1,7 @@
+# Forza Horizon 6 Guide
+
+> An unofficial, community-driven strategy guide for Forza Horizon 6 (Horizon Japan): cars, barn finds, treasure cars, aftermarket & Forza Edition cars, houses, the interactive Japan map, and a beginner's path to Horizon Legend. Primary source: the English Wikipedia article; community guides fill gameplay detail and are labelled as such.
+
+## Guide sections
+- [Full guide (llms-full.txt)](https://sueryue.github.io/forza-horizon-6-guide/llms-full.txt): the complete guide as clean, citable markdown — beginner path, car list, best cars, map regions, barn finds, treasure cars, aftermarket/Forza Edition cars, houses, critic scores, and development timeline.
+- [Live site](https://sueryue.github.io/forza-horizon-6-guide/): the interactive guide (JavaScript-rendered; same content as llms-full.txt).
