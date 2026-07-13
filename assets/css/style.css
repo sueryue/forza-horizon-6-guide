@@ -324,18 +324,37 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .footer-wrap { max-width: var(--maxw); margin: 0 auto; padding: 30px 20px; }
 .footer-meta { margin-top: 18px; color: var(--text-dim); font-size: .8rem; }
 
+/* ---------- Cars hub (merged car sections) ---------- */
+.cars-hub { margin-top: 8px; }
+.cars-subnav {
+  position: sticky; top: 64px; z-index: 20;
+  display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+  padding: 10px 2px; margin-bottom: 18px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+.cars-subnav::-webkit-scrollbar { display: none; }
+.cars-subnav button {
+  flex: 0 0 auto; padding: 7px 14px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text-dim); font: inherit; font-size: .85rem; font-weight: 500;
+  cursor: pointer; white-space: nowrap; transition: all .25s var(--ease);
+}
+.cars-subnav button:hover { color: var(--text); border-color: var(--border-strong); }
+.cars-subnav button.active {
+  color: #04121a; border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.car-sec { padding-top: 26px; scroll-margin-top: 120px; }
+.car-sec + .car-sec { margin-top: 10px; border-top: 1px solid var(--border); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 880px) {
-  .menu-btn { display: grid; }
-  .nav {
-    position: absolute; top: 100%; left: 0; right: 0;
-    flex-direction: column; align-items: stretch; gap: 2px;
-    background: color-mix(in srgb, var(--bg) 96%, transparent);
-    backdrop-filter: blur(18px); border-bottom: 1px solid var(--border);
-    padding: 10px 14px; max-height: 0; overflow: hidden; transition: max-height .35s var(--ease);
-  }
-  .nav.open { max-height: 70vh; overflow-y: auto; }
-  .nav a { padding: 11px 14px; }
+  .nav-wrap { gap: 8px; padding: 10px 14px; }
+  .nav { margin-left: 0; flex: 1 1 auto; }
+  .nav a { padding: 8px 11px; font-size: .85rem; }
+  .menu-btn { display: none; }
   .facts { grid-template-columns: repeat(2, 1fr); }
   .grid.cols-3, .grid.cols-2 { grid-template-columns: 1fr; }
 }
