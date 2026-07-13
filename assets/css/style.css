@@ -339,11 +339,15 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .cars-subnav::-webkit-scrollbar { display: none; }
 .cars-subnav button {
   flex: 0 0 auto; padding: 7px 14px; border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 7px;
   border: 1px solid var(--border); background: var(--surface);
   color: var(--text-dim); font: inherit; font-size: .85rem; font-weight: 500;
   cursor: pointer; white-space: nowrap; transition: all .25s var(--ease);
 }
+.cars-subnav button svg { width: 17px; height: 17px; flex: 0 0 auto; transition: transform .25s var(--ease); }
+.cars-subnav button .lbl { line-height: 1; }
 .cars-subnav button:hover { color: var(--text); border-color: var(--border-strong); }
+.cars-subnav button:hover svg { transform: scale(1.12); }
 .cars-subnav button.active {
   color: #04121a; border-color: transparent;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
