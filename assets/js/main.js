@@ -80,8 +80,8 @@
   }
 
   function renderForzaEdition() {
-    var ex = D.forzaEdition.examples.map(function (e) {
-      return '<div class="card"><span class="ico">⭐</span><h3>' + esc(e.car) + '</h3><p>' + esc(e.note) + '</p></div>';
+    var ex = D.forzaEdition.examples.map(function (e, i) {
+      return '<div class="card"><span class="ico">' + String(i + 1).padStart(2, "0") + '</span><h3>' + esc(e.car) + '</h3><p>' + esc(e.note) + '</p></div>';
     }).join("");
     return sectionHead("Rare variants", "Forza Edition Cars", D.forzaEdition.intro) +
       '<div class="grid cols-3">' + ex + '</div>' +
@@ -168,8 +168,8 @@
         '<section class="section">' +
           sectionHead("New to the festival?", "Start here", "Follow the beginner path, then chase cars, treasure, and the Estate.") +
           '<div class="grid cols-2">' +
-            '<a class="card" href="#beginner" style="display:block"><span class="ico">🚦</span><h3>Beginner\'s Guide</h3><p>14 steps from Qualifiers to Horizon Legend.</p></a>' +
-            '<a class="card" href="#cars" style="display:block"><span class="ico">🏎️</span><h3>Cars List</h3><p>Starters, reward cars, and a slice of the 550+ roster.</p></a>' +
+            '<a class="card" href="#beginner" style="display:block"><span class="ico">01</span><h3>Beginner\'s Guide</h3><p>14 steps from Qualifiers to Horizon Legend.</p></a>' +
+            '<a class="card" href="#cars" style="display:block"><span class="ico">02</span><h3>Cars List</h3><p>Starters, reward cars, and a slice of the 550+ roster.</p></a>' +
           '</div>' +
         '</section>' +
         reception +
