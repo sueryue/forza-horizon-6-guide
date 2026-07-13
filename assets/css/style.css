@@ -277,6 +277,8 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .region-card .feats li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
 .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--border); }
 .legend div { display: flex; align-items: center; gap: 8px; font-size: .85rem; color: var(--text-dim); }
+.map-wrap { margin: 18px 0 6px; }
+.map-wrap img { width: 100%; height: auto; display: block; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: 0 14px 44px -20px rgba(0,0,0,.75); }
 
 /* ---------- Beginner steps ---------- */
 .steps { display: grid; gap: 12px; }
@@ -306,7 +308,9 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .house-card {
   border: 1px solid var(--border); border-radius: var(--radius);
   background: var(--surface); padding: 18px; transition: all .3s var(--ease);
+  overflow: hidden;
 }
+.house-img { display: block; width: 100%; height: auto; margin: -18px -18px 14px; }
 .house-card:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
 .house-card h3 { font-family: var(--display); margin: 0 0 6px; }
 .house-card .price { color: var(--accent); font-weight: 700; font-size: .85rem; }
