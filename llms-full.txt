@@ -3,7 +3,7 @@
 > Unofficial fan strategy guide. Primary source: the English Wikipedia article on Forza Horizon 6. 
 > Gameplay detail where Wikipedia is silent is drawn from community guides (Reddit, IGN, GamesRadar, game8, Red Bull, Polygon) and labelled community-sourced. No car names, locations, or stats are invented.
 
-**Your co-pilot through Horizon Japan** — A strategy guide for Forza Horizon 6 — cars, barn finds, treasure cars, aftermarket & Forza Edition cars, the Estate, the interactive Japan map, and a beginner's path to Horizon Legend.
+**An unofficial, source-checked guide to the festival in Japan** — Forza Horizon 6 lands in a fictionalised Japan with the biggest map the series has ever built and 550+ cars. This guide covers the car list, barn finds, treasure cars, the Estate, the interactive Japan map, and a beginner path to Horizon Legend — with sources noted for everything.
 
 ## Key facts (Wikipedia-confirmed)
 - **Setting**: Japan (fictionalised)
@@ -140,7 +140,7 @@ _A slice of the launch roster — the full list spans 64+ pages on IGN._
 - **1989 Porsche 944 Turbo**
 
 ## Best cars by discipline
-There is no single 'best' car — it depends on the job. Below are strong, sourced picks for each discipline, drawn from the walkthrough reward cars and reviewer recommendations.
+Forget hunting for one 'best' car — Horizon is built so different machines win at different things. These are the standout picks for each discipline, pulled from the walkthrough reward cars and what reviewers actually rated.
 
 ### Top Speed / Fastest
 - **GMA T.50** — Reward for Speed Traps — a raw, lightweight hypercar.
