@@ -31,6 +31,93 @@
       }).join("") + '</ol>';
   }
 
+  /* ---------- car sub-renderers (composed into the single Cars hub) ---------- */
+  function renderCarsList() {
+    var groups = D.cars.groups.map(function (g) {
+      var cards = g.items.map(function (c) {
+        return '<div class="car-card">' +
+          '<div class="monogram">' + esc(mono(c.make)) + '</div>' +
+          '<div class="car-meta">' +
+            '<div class="yr">' + esc(c.year || "—") + '</div>' +
+            '<div class="nm">' + esc(c.model) + '</div>' +
+            '<div class="mk">' + esc(c.make) + '</div>' +
+            (c.tag ? '<span class="tag">' + esc(c.tag) + '</span>' : '') +
+            (c.note ? '<div class="car-note">' + esc(c.note) + '</div>' : '') +
+          '</div></div>';
+      }).join("");
+      return '<div class="car-group"><h3>' + esc(g.title) +
+        (g.badge ? ' <span class="badge">' + esc(g.badge) + '</span>' : '') + '</h3>' +
+        (g.note ? '<p class="note">' + esc(g.note) + '</p>' : '') +
+        '<div class="car-grid">' + cards + '</div></div>';
+    }).join("");
+    return sectionHead("Garage", "Cars List", D.cars.intro) + groups;
+  }
+
+  function renderBest() {
+    var cats = D.bestCars.categories.map(function (c) {
+      var picks = c.picks.map(function (p) {
+        return '<div class="pick"><div class="pc">' + esc(p.car) + '</div><div class="pw">' + esc(p.why) + '</div></div>';
+      }).join("");
+      return '<div class="best-cat"><h3>' + esc(c.cat) + '</h3><div class="grid cols-2">' + picks + '</div></div>';
+    }).join("");
+    var faqHtml = "";
+    if (D.bestCars.faq && D.bestCars.faq.length) {
+      var faqItems = D.bestCars.faq.map(function (f) {
+        return '<div class="faq-item"><h4>' + esc(f.q) + '</h4><p>' + esc(f.a) + '</p></div>';
+      }).join("");
+      faqHtml = '<div class="best-faq"><h3>Frequently asked questions</h3>' + faqItems + '</div>';
+    }
+    return sectionHead("Right tool, right job", "Best Cars", D.bestCars.intro) + cats + faqHtml;
+  }
+
+  function renderAftermarket() {
+    var steps = D.aftermarket.howTo.map(function (s, i) {
+      return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
+    }).join("");
+    return sectionHead("Cheap & ready", "Aftermarket Cars", D.aftermarket.intro) +
+      '<ol class="steps" style="list-style:none;padding:0;margin-top:8px;counter-reset:s">' + steps + '</ol>' +
+      '<div class="callout"><b>Tip:</b> ' + esc(D.aftermarket.note) + '</div>';
+  }
+
+  function renderForzaEdition() {
+    var ex = D.forzaEdition.examples.map(function (e) {
+      return '<div class="card"><span class="ico">⭐</span><h3>' + esc(e.car) + '</h3><p>' + esc(e.note) + '</p></div>';
+    }).join("");
+    return sectionHead("Rare variants", "Forza Edition Cars", D.forzaEdition.intro) +
+      '<div class="grid cols-3">' + ex + '</div>' +
+      '<div class="callout"><b>Note:</b> ' + esc(D.forzaEdition.note) + '</div>';
+  }
+
+  function renderTreasure() {
+    var steps = D.treasureCars.howTo.map(function (s, i) {
+      return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
+    }).join("");
+    return sectionHead("Find the photo", "Treasure Cars", D.treasureCars.count + " abandoned cars are reported hidden across the map — found only by photo clues (community-sourced — Wikipedia is silent).") +
+      '<div class="facts"><div class="fact"><div class="k">Reported Treasure Cars</div><div class="v">' + esc(D.treasureCars.count) + '</div></div>' +
+        '<div class="fact"><div class="k">Source</div><div class="v">' + esc(D.treasureCars.countSource) + '</div></div>' +
+        '<div class="fact"><div class="k">Map marker</div><div class="v">None until found</div></div></div>' +
+      '<p class="lead" style="margin-top:16px">' + esc(D.treasureCars.intro) + '</p>' +
+      '<ol class="steps" style="list-style:none;padding:0;margin-top:16px;counter-reset:s">' + steps + '</ol>' +
+      '<div class="callout"><b>Honest note:</b> ' + esc(D.treasureCars.note) + '</div>';
+  }
+
+  function renderBarn() {
+    var steps = D.barnFinds.howTo.map(function (s, i) {
+      return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
+    }).join("");
+    return sectionHead("Rust never sleeps", "Barn Finds", D.barnFinds.count + " classic cars are reported hidden in barns across Japan (community-sourced — Wikipedia is silent).") +
+      '<div class="facts"><div class="fact"><div class="k">Reported Barn Finds</div><div class="v">' + esc(D.barnFinds.count) + '</div></div>' +
+        '<div class="fact"><div class="k">Source</div><div class="v">' + esc(D.barnFinds.countSource) + '</div></div>' +
+        '<div class="fact"><div class="k">Unlock gate</div><div class="v">Stamps</div></div></div>' +
+      '<p class="lead" style="margin-top:16px">' + esc(D.barnFinds.intro) + '</p>' +
+      '<ol class="steps" style="list-style:none;padding:0;margin-top:16px;counter-reset:s">' + steps + '</ol>' +
+      '<div class="callout"><b>Honest note:</b> ' + esc(D.barnFinds.note) + '</div>';
+  }
+
+  function carSection(id, inner) {
+    return '<section id="' + id + '" class="car-sec">' + inner + '</section>';
+  }
+
   /* ---------- page renderers ---------- */
   var pages = {
     home: function () {
@@ -90,42 +177,25 @@
     },
 
     cars: function () {
-      var groups = D.cars.groups.map(function (g) {
-        var cards = g.items.map(function (c) {
-          return '<div class="car-card">' +
-            '<div class="monogram">' + esc(mono(c.make)) + '</div>' +
-            '<div class="car-meta">' +
-              '<div class="yr">' + esc(c.year || "—") + '</div>' +
-              '<div class="nm">' + esc(c.model) + '</div>' +
-              '<div class="mk">' + esc(c.make) + '</div>' +
-              (c.tag ? '<span class="tag">' + esc(c.tag) + '</span>' : '') +
-              (c.note ? '<div class="car-note">' + esc(c.note) + '</div>' : '') +
-            '</div></div>';
-        }).join("");
-        return '<div class="car-group"><h3>' + esc(g.title) +
-          (g.badge ? ' <span class="badge">' + esc(g.badge) + '</span>' : '') + '</h3>' +
-          (g.note ? '<p class="note">' + esc(g.note) + '</p>' : '') +
-          '<div class="car-grid">' + cards + '</div></div>';
-      }).join("");
-      return sectionHead("Garage", "Cars List", D.cars.intro) + groups;
+      var subnav = '<nav class="cars-subnav" aria-label="Cars sections">' +
+        '<button type="button" data-scroll="cars-list">All cars</button>' +
+        '<button type="button" data-scroll="cars-best">Best by discipline</button>' +
+        '<button type="button" data-scroll="cars-aftermarket">Aftermarket</button>' +
+        '<button type="button" data-scroll="cars-forza">Forza Edition</button>' +
+        '<button type="button" data-scroll="cars-treasure">Treasure</button>' +
+        '<button type="button" data-scroll="cars-barn">Barn Finds</button>' +
+        '</nav>';
+      return '<div class="cars-hub">' + subnav +
+        carSection("cars-list", renderCarsList()) +
+        carSection("cars-best", renderBest()) +
+        carSection("cars-aftermarket", renderAftermarket()) +
+        carSection("cars-forza", renderForzaEdition()) +
+        carSection("cars-treasure", renderTreasure()) +
+        carSection("cars-barn", renderBarn()) +
+        '</div>';
     },
 
-    best: function () {
-      var cats = D.bestCars.categories.map(function (c) {
-        var picks = c.picks.map(function (p) {
-          return '<div class="pick"><div class="pc">' + esc(p.car) + '</div><div class="pw">' + esc(p.why) + '</div></div>';
-        }).join("");
-        return '<div class="best-cat"><h3>' + esc(c.cat) + '</h3><div class="grid cols-2">' + picks + '</div></div>';
-      }).join("");
-      var faqHtml = "";
-      if (D.bestCars.faq && D.bestCars.faq.length) {
-        var faqItems = D.bestCars.faq.map(function (f) {
-          return '<div class="faq-item"><h4>' + esc(f.q) + '</h4><p>' + esc(f.a) + '</p></div>';
-        }).join("");
-        faqHtml = '<div class="best-faq"><h3>Frequently asked questions</h3>' + faqItems + '</div>';
-      }
-      return sectionHead("Right tool, right job", "Best Cars", D.bestCars.intro) + cats + faqHtml;
-    },
+    /* best/barn/treasure/aftermarket/forza-edition are merged into the Cars hub */
 
     map: function () {
       var cards = D.regions.items.map(function (r) {
@@ -150,49 +220,13 @@
         '<div class="settings-box"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>';
     },
 
-    barn: function () {
-      var steps = D.barnFinds.howTo.map(function (s, i) {
-        return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
-      }).join("");
-      return sectionHead("Rust never sleeps", "Barn Finds", D.barnFinds.count + " classic cars are reported hidden in barns across Japan (community-sourced — Wikipedia is silent).") +
-        '<div class="facts"><div class="fact"><div class="k">Reported Barn Finds</div><div class="v">' + esc(D.barnFinds.count) + '</div></div>' +
-          '<div class="fact"><div class="k">Source</div><div class="v">' + esc(D.barnFinds.countSource) + '</div></div>' +
-          '<div class="fact"><div class="k">Unlock gate</div><div class="v">Stamps</div></div></div>' +
-        '<p class="lead" style="margin-top:16px">' + esc(D.barnFinds.intro) + '</p>' +
-        '<ol class="steps" style="list-style:none;padding:0;margin-top:16px;counter-reset:s">' + steps + '</ol>' +
-        '<div class="callout"><b>Honest note:</b> ' + esc(D.barnFinds.note) + '</div>';
-    },
+    /* (barn merged into Cars hub) */
 
-    treasure: function () {
-      var steps = D.treasureCars.howTo.map(function (s, i) {
-        return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
-      }).join("");
-      return sectionHead("Find the photo", "Treasure Cars", D.treasureCars.count + " abandoned cars are reported hidden across the map — found only by photo clues (community-sourced — Wikipedia is silent).") +
-        '<div class="facts"><div class="fact"><div class="k">Reported Treasure Cars</div><div class="v">' + esc(D.treasureCars.count) + '</div></div>' +
-          '<div class="fact"><div class="k">Source</div><div class="v">' + esc(D.treasureCars.countSource) + '</div></div>' +
-          '<div class="fact"><div class="k">Map marker</div><div class="v">None until found</div></div></div>' +
-        '<p class="lead" style="margin-top:16px">' + esc(D.treasureCars.intro) + '</p>' +
-        '<ol class="steps" style="list-style:none;padding:0;margin-top:16px;counter-reset:s">' + steps + '</ol>' +
-        '<div class="callout"><b>Honest note:</b> ' + esc(D.treasureCars.note) + '</div>';
-    },
+    /* (treasure merged into Cars hub) */
 
-    aftermarket: function () {
-      var steps = D.aftermarket.howTo.map(function (s, i) {
-        return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
-      }).join("");
-      return sectionHead("Cheap & ready", "Aftermarket Cars", D.aftermarket.intro) +
-        '<ol class="steps" style="list-style:none;padding:0;margin-top:8px;counter-reset:s">' + steps + '</ol>' +
-        '<div class="callout"><b>Tip:</b> ' + esc(D.aftermarket.note) + '</div>';
-    },
+    /* (aftermarket merged into Cars hub) */
 
-    "forza-edition": function () {
-      var ex = D.forzaEdition.examples.map(function (e) {
-        return '<div class="card"><span class="ico">⭐</span><h3>' + esc(e.car) + '</h3><p>' + esc(e.note) + '</p></div>';
-      }).join("");
-      return sectionHead("Rare variants", "Forza Edition Cars", D.forzaEdition.intro) +
-        '<div class="grid cols-3">' + ex + '</div>' +
-        '<div class="callout"><b>Note:</b> ' + esc(D.forzaEdition.note) + '</div>';
-    },
+    /* (forza-edition merged into Cars hub) */
 
     houses: function () {
       var cards = D.houses.items.map(function (h) {
@@ -211,9 +245,13 @@
 
   var TITLES = {
     home: "Forza Horizon 6 Guide",
-    cars: "Cars List", best: "Best Cars", map: "Interactive Map",
-    beginner: "Beginner's Guide", barn: "Barn Finds", treasure: "Treasure Cars",
-    aftermarket: "Aftermarket Cars", "forza-edition": "Forza Edition Cars", houses: "Houses"
+    cars: "Cars", map: "Interactive Map",
+    beginner: "Beginner's Guide", houses: "Houses"
+  };
+  // Deep-link aliases (old URLs) -> scroll target inside the Cars hub.
+  var CAR_SCROLL = {
+    best: "cars-best", barn: "cars-barn", treasure: "cars-treasure",
+    aftermarket: "cars-aftermarket", "forza-edition": "cars-forza"
   };
 
   /* ---------- router ---------- */
@@ -221,17 +259,30 @@
 
   function currentPage() {
     var h = (location.hash || "").replace(/^#/, "");
+    if (CAR_SCROLL[h]) return "cars"; // old car deep-links -> Cars hub (scrolled)
     return pages[h] ? h : "home";
   }
 
   function render() {
+    var raw = (location.hash || "").replace(/^#/, "");
     var page = currentPage();
     app.innerHTML = (pages[page] || pages.home)();
     document.title = (TITLES[page] || "Guide") + " — Forza Horizon 6 Guide";
     // active nav
     var links = document.querySelectorAll("#nav a");
+    var activeNav = (page === "cars") ? "cars" : page;
     for (var i = 0; i < links.length; i++) {
-      links[i].classList.toggle("active", links[i].getAttribute("data-nav") === page);
+      links[i].classList.toggle("active", links[i].getAttribute("data-nav") === activeNav);
+    }
+    // scroll: deep-link into a Cars sub-section, else top
+    if (CAR_SCROLL[raw]) {
+      var target = document.getElementById(CAR_SCROLL[raw]);
+      if (target) {
+        requestAnimationFrame(function () {
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+        return;
+      }
     }
     window.scrollTo(0, 0);
   }
@@ -254,6 +305,19 @@
     btn.addEventListener("click", function () { nav.classList.toggle("open"); });
     nav.addEventListener("click", function (e) {
       if (e.target.closest("a")) nav.classList.remove("open");
+    });
+  }
+  function initCarsSubnav() {
+    // in-page jump buttons inside the Cars hub (don't change the hash/route)
+    app.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-scroll]");
+      if (!b) return;
+      e.preventDefault();
+      var el = document.getElementById(b.getAttribute("data-scroll"));
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      var all = app.querySelectorAll(".cars-subnav [data-scroll]");
+      for (var i = 0; i < all.length; i++) all[i].classList.remove("active");
+      b.classList.add("active");
     });
   }
   function initRegions() {
@@ -279,6 +343,7 @@
     initTheme();
     initMenu();
     initRegions();
+    initCarsSubnav();
     window.addEventListener("hashchange", render);
     render();
   }
