@@ -218,6 +218,8 @@
         sectionHead("From TGS to launch", "Development & Release", D.development.intro) +
         '<ul class="timeline">' + devItems + '</ul></section>';
 
+      var platforms = renderPlatformsSection();
+
       return '' +
         '<section class="hero hero--art">' +
           '<p class="eyebrow">' + esc(h.eyebrow) + '</p>' +
@@ -240,7 +242,8 @@
           '</div>' +
         '</section>' +
         reception +
-        development;
+        development +
+        platforms;
     },
 
     cars: function () {
@@ -442,8 +445,10 @@
           steps + '</section>';
       }).join("");
       return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>';
-    },
-    platforms: function () {
+    }
+  };
+
+  function renderPlatformsSection() {
       var p = D.platforms;
       var stores = p.stores.map(function (s) {
         var live = /avail/i.test(s.status);
@@ -470,22 +475,22 @@
       var feats = p.requirements.features.map(function (f) {
         return '<li class="chip">' + esc(f) + '</li>';
       }).join("");
-      return sectionHead("Get the game", "Platforms & Requirements", p.intro) +
+      return '<section class="section">' +
+        sectionHead("Get the game", "Platforms & Requirements", p.intro) +
         '<div class="pf-grid">' + stores + '</div>' +
         '<p class="pf-mobile">' + esc(p.mobileNote) + '</p>' +
         '<div class="section-head" style="margin-top:36px"><h2>PC System Requirements</h2>' +
           '<p class="sub">Download size: <b>' + esc(p.requirements.size) + '</b> · ' + esc(p.requirements.console) + '</p></div>' +
         '<div class="spec-grid">' + tiers + '</div>' +
-        '<div class="pf-feats"><span class="pf-feats-lbl">PC features</span><ul class="chip-row">' + feats + '</ul></div>';
-    }
-  };
+        '<div class="pf-feats"><span class="pf-feats-lbl">PC features</span><ul class="chip-row">' + feats + '</ul></div>' +
+        '</section>';
+  }
 
   var TITLES = {
     home: "Forza Horizon 6 Guide",
     wiki: "Wiki", database: "Database", guides: "Guides",
     cars: "Cars", map: "Interactive Map",
-    beginner: "Beginner's Guide", houses: "Houses", media: "Media",
-    platforms: "Platforms"
+    beginner: "Beginner's Guide", houses: "Houses", media: "Media"
   };
   // Deep-link aliases (old URLs) -> scroll target inside the Cars hub.
   var CAR_SCROLL = {
