@@ -431,29 +431,15 @@ window.FH6DATA = {
   },
 
   // ---------------------------------------------------------------------------
-  // MEDIA - official trailers (real, embeddable YouTube IDs) + trailer stills.
-  // Screenshots use the official trailer thumbnail frames (real game imagery,
-  // not fabricated). To show YOUR OWN captures, drop .jpg files into
-  // assets/img/shots/ and add { src: "assets/img/shots/xx.jpg", label: "..." }
-  // entries to the shots array below.
+  // MEDIA - official trailers (real, embeddable YouTube IDs).
   // ---------------------------------------------------------------------------
   media: {
-    intro: "Official trailers from the Forza channel, plus still frames pulled from those trailers. Want your own in-game captures in the gallery? Drop .jpg files into assets/img/shots/ and point a shots entry at them in data.js.",
+    intro: "Official trailers from the Forza channel - the best way to see Horizon Japan in motion.",
     videos: [
       { id: "oYhaW-Vr4wg", title: "Official Launch Trailer", date: "May 8, 2026", desc: "The full launch trailer - Japan's festivals, mountains, and 550+ cars." },
       { id: "dj2PkwfrRP0", title: "Gameplay Overview - Xbox Developer Direct 2026", date: "Jan 22, 2026", desc: "First extended gameplay look: the Japan map, new features, and the festival journey." },
       { id: "HyjVC7fKLVg", title: "The Art of Driving - Official Trailer", date: "Apr 6, 2026", desc: "Larry Chen hosts a tour of the car culture woven through Horizon Japan." },
       { id: "H1qlPZMfmiU", title: "Official 6-Minute Opening Preview", date: "Xbox", desc: "Six minutes of the opening drive through Japan's roads and landmarks." }
-    ],
-    // Still frames sourced from the official trailers above (real game imagery).
-    // Replace an entry's `id` with `src: "assets/img/shots/xx.jpg"` to use a local capture.
-    shots: [
-      { id: "oYhaW-Vr4wg", label: "Launch Trailer" },
-      { id: "dj2PkwfrRP0", label: "Gameplay Overview" },
-      { id: "HyjVC7fKLVg", label: "The Art of Driving" },
-      { id: "H1qlPZMfmiU", label: "Opening Preview" },
-      { id: "oYhaW-Vr4wg", label: "Horizon Japan" },
-      { id: "dj2PkwfrRP0", label: "Tokyo & Touge" }
     ]
   },
 

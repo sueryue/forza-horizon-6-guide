@@ -4,6 +4,7 @@
 (function () {
   "use strict";
   var D = window.FH6DATA;
+  var GS = window.FH6GS || { guides: [] };
 
   /* ---------- helpers ---------- */
   function esc(s) {
@@ -220,6 +221,9 @@
 
       var platforms = renderPlatformsSection();
       var media = renderMediaSection();
+      var wiki = renderWikiSection();
+      var database = renderDatabaseSection();
+      var community = renderCommunityGuidesSection();
 
       return '' +
         '<section class="hero hero--art">' +
@@ -244,8 +248,11 @@
         '</section>' +
         reception +
         development +
+        wiki +
+        database +
         platforms +
-        media;
+        media +
+        community;
     },
 
     cars: function () {
@@ -358,8 +365,30 @@
         '<div class="house-tips"><h3>Living in Japan</h3><ul>' + tips + '</ul></div>';
     },
 
-    /* ---------- Wiki: encyclopedia reference ---------- */
-    wiki: function () {
+    /* (wiki moved to the Overview page as renderWikiSection()) */
+
+    /* (database moved to the Overview page as renderDatabaseSection()) */
+
+    /* ---------- Guides: curated walkthroughs ---------- */
+    guides: function () {
+      var g = D.guides;
+      var navItems = g.items.map(function (it) {
+        return '<button type="button" data-scroll="' + it.id + '"><span class="lbl">' + esc(it.title) + '</span></button>';
+      }).join("");
+      var subnav = '<nav class="cars-subnav guide-subnav" data-subnav aria-label="Guides">' + navItems + '</nav>';
+      var secs = g.items.map(function (it) {
+        var steps = ol(it.steps.map(function (s) { return { n: s.n, title: s.title, body: s.body }; }));
+        return '<section id="' + it.id + '" class="guide-sec">' +
+          '<div class="guide-head"><h3>' + esc(it.title) + '</h3>' +
+          (it.tag ? '<span class="badge">' + esc(it.tag) + '</span>' : '') + '</div>' +
+          (it.lead ? '<p class="guide-lead">' + esc(it.lead) + '</p>' : '') +
+          steps + '</section>';
+      }).join("");
+      return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>';
+    }
+  };
+
+  function renderWikiSection() {
       var w = D.wiki;
       var cats = w.cats.map(function (c) {
         var entries = c.items.map(function (e) {
@@ -367,11 +396,13 @@
         }).join("");
         return '<section class="wiki-cat"><h3 class="wiki-cat-h">' + esc(c.name) + '</h3><div class="wiki-grid">' + entries + '</div></section>';
       }).join("");
-      return sectionHead("Encyclopedia", "Wiki", w.intro) + '<div class="wiki-wrap">' + cats + '</div>';
-    },
+      return '<section class="section">' +
+        sectionHead("Encyclopedia", "Wiki", w.intro) +
+        '<div class="wiki-wrap">' + cats + '</div>' +
+      '</section>';
+  }
 
-    /* ---------- Database: sortable / searchable car table ---------- */
-    database: function () {
+  function renderDatabaseSection() {
       var db = D.database;
       var rows = [];
       D.cars.groups.forEach(function (g) {
@@ -394,7 +425,8 @@
         DISCIPLINES.map(function (d, i) {
           return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-db-disc="' + d.k + '">' + esc(d.l) + '</button>';
         }).join("") + '</div>';
-      return sectionHead("Raw data", "Database", db.intro) +
+      return '<section class="section">' +
+        sectionHead("Raw data", "Database", db.intro) +
         '<div class="db-toolbar">' + chips +
           '<input type="search" class="db-search" id="db-search" placeholder="Search make, model, year, tag…" aria-label="Search cars">' +
         '</div>' +
@@ -406,27 +438,9 @@
           '<th data-sort="disc" class="sortable">Discipline</th>' +
           '<th data-sort="tag" class="sortable">Source / Tag</th>' +
         '</tr></thead><tbody>' + body + '</tbody></table></div>' +
-        '<p class="db-note">' + esc(db.note) + '</p>';
-    },
-
-    /* ---------- Guides: curated walkthroughs ---------- */
-    guides: function () {
-      var g = D.guides;
-      var navItems = g.items.map(function (it) {
-        return '<button type="button" data-scroll="' + it.id + '"><span class="lbl">' + esc(it.title) + '</span></button>';
-      }).join("");
-      var subnav = '<nav class="cars-subnav guide-subnav" data-subnav aria-label="Guides">' + navItems + '</nav>';
-      var secs = g.items.map(function (it) {
-        var steps = ol(it.steps.map(function (s) { return { n: s.n, title: s.title, body: s.body }; }));
-        return '<section id="' + it.id + '" class="guide-sec">' +
-          '<div class="guide-head"><h3>' + esc(it.title) + '</h3>' +
-          (it.tag ? '<span class="badge">' + esc(it.tag) + '</span>' : '') + '</div>' +
-          (it.lead ? '<p class="guide-lead">' + esc(it.lead) + '</p>' : '') +
-          steps + '</section>';
-      }).join("");
-      return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>';
-    }
-  };
+        '<p class="db-note">' + esc(db.note) + '</p>' +
+      '</section>';
+  }
 
   function renderPlatformsSection() {
       var p = D.platforms;
@@ -475,22 +489,43 @@
           '<div class="vid-meta"><h3>' + esc(v.title) + '</h3><p class="vid-date">' + esc(v.date) + '</p><p>' + esc(v.desc) + '</p></div>' +
         '</div>';
       }).join("");
-      var shots = m.shots.map(function (s) {
-        var src = s.src ? esc(s.src) : 'https://i.ytimg.com/vi/' + esc(s.id) + '/hqdefault.jpg';
-        var onerr = s.src ? '' : ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + esc(s.id) + '/mqdefault.jpg\'"';
-        return '<figure class="shot"><img loading="lazy" src="' + src + '" alt="' + esc(s.label) + ' - official trailer still" ' + onerr + '>' +
-          '<figcaption>' + esc(s.label) + '</figcaption></figure>';
+      return sectionHead("Watch the trailers", "Media", m.intro) +
+        '<section class="section media-videos"><h3 class="sub">Official trailers</h3><div class="media-grid">' + vids + '</div></section>';
+  }
+
+  function renderCommunityGuidesSection() {
+      var guides = GS.guides || [];
+      if (!guides.length) return '';
+      var cats = {};
+      guides.forEach(function (g) {
+        var c = g.cat || "General";
+        (cats[c] = cats[c] || []).push(g);
+      });
+      var catOrder = Object.keys(cats);
+      var blocks = catOrder.map(function (c) {
+        var cards = cats[c].map(function (g) {
+          var pts = (g.points && g.points.length)
+            ? '<ul class="cg-points">' + g.points.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join("") + '</ul>'
+            : '';
+          return '<article class="cg-card">' +
+            '<div class="cg-head"><h4>' + esc(g.titleEn) + '</h4>' +
+            '<span class="cg-badge">via Gamersky</span></div>' +
+            (g.titleCn ? '<p class="cg-cn">' + esc(g.titleCn) + '</p>' : '') +
+            '<p class="cg-sum">' + esc(g.summaryEn) + '</p>' + pts +
+            '<a class="cg-src" href="' + esc(g.src) + '" target="_blank" rel="noopener">Read original (中文) ↗</a>' +
+          '</article>';
+        }).join("");
+        return '<div class="cg-cat"><h3 class="cg-cat-h">' + esc(c) + '</h3><div class="cg-grid">' + cards + '</div></div>';
       }).join("");
-      return sectionHead("Watch & screenshots", "Media", m.intro) +
-        '<section class="section media-videos"><h3 class="sub">Official trailers</h3><div class="media-grid">' + vids + '</div></section>' +
-        '<section class="section media-shots"><h3 class="sub">Screenshots &amp; stills</h3>' +
-          '<p class="shot-note">Frames pulled from the official trailers. To show your own captures, drop .jpg files into <code>assets/img/shots/</code> and add a <code>shots</code> entry with <code>src</code> in <code>data.js</code>.</p>' +
-          '<div class="shot-grid">' + shots + '</div></section>';
+      return '<section class="section community-guides">' +
+        sectionHead("From the community", "More Guides", "Curated, machine-translated English summaries of Gamersky's Chinese strategy guides, grouped by topic. Each links back to the original. Nothing here is invented - the source is the authority.") +
+        '<div class="cg-wrap">' + blocks + '</div>' +
+      '</section>';
   }
 
   var TITLES = {
     home: "Forza Horizon 6 Guide",
-    wiki: "Wiki", database: "Database", guides: "Guides",
+    guides: "Guides",
     cars: "Cars", map: "Interactive Map",
     beginner: "Beginner's Guide", houses: "Houses"
   };
@@ -514,7 +549,7 @@
     var page = currentPage();
     app.innerHTML = (pages[page] || pages.home)();
     setupReveal();
-    if (page === "database") filterDb();
+    if (page === "home" || page === "database") filterDb();
     document.title = (TITLES[page] || "Guide") + " — Forza Horizon 6 Guide";
     // active nav
     var links = document.querySelectorAll("#nav a");
@@ -633,7 +668,7 @@
     : null;
   function setupReveal() {
     if (!revealIO || !document.documentElement.classList.contains('js-reveal')) return;
-    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec, .pf-card, .spec-card, .vid-card, .shot';
+    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec, .pf-card, .spec-card, .vid-card, .cg-card';
     var nodes = app.querySelectorAll(sel);
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
