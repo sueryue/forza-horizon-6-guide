@@ -364,6 +364,7 @@
     var raw = (location.hash || "").replace(/^#/, "");
     var page = currentPage();
     app.innerHTML = (pages[page] || pages.home)();
+    setupReveal();
     document.title = (TITLES[page] || "Guide") + " — Forza Horizon 6 Guide";
     // active nav
     var links = document.querySelectorAll("#nav a");
@@ -469,6 +470,28 @@
     });
   }
 
+  /* ---------- scroll reveal (progressive enhancement) ---------- */
+  var revealIO = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); revealIO.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 })
+    : null;
+  function setupReveal() {
+    if (!revealIO || !document.documentElement.classList.contains('js-reveal')) return;
+    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head';
+    var nodes = app.querySelectorAll(sel);
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      if (el.hasAttribute('data-reveal')) continue;
+      el.setAttribute('data-reveal', '');
+      var sibs = el.parentElement ? Array.prototype.indexOf.call(el.parentElement.children, el) : 0;
+      el.style.transitionDelay = (Math.min(sibs, 10) * 45) + 'ms';
+      revealIO.observe(el);
+    }
+  }
+
   /* ---------- boot ---------- */
   /* ---------- Google Translate (custom premium trigger over GT engine) ---------- */
   // Define the global callback up-front so it exists before Google's async script calls it.
@@ -565,6 +588,7 @@
 
   function boot() {
     if (!D) { app.innerHTML = '<p style="color:#9aa6c2">Failed to load guide data.</p>'; return; }
+    if ('IntersectionObserver' in window) document.documentElement.classList.add('js-reveal');
     initTheme();
     initMenu();
     initRegions();

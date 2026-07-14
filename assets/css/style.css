@@ -25,7 +25,7 @@
   --shadow: 0 18px 50px -20px rgba(0,0,0,0.7);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --display: "Chakra Petch", "Inter", system-ui, sans-serif;
 }
 
 [data-theme="light"] {
@@ -143,11 +143,15 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .hero > * { position: relative; z-index: 1; }
 .hero .eyebrow { color: var(--accent-2); }
 .hero h1 {
-  font-family: var(--display); font-weight: 800;
+  font-family: var(--display); font-weight: 700;
   font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: .98; margin: 8px 0 12px;
-  background: linear-gradient(100deg, #fff 10%, var(--accent) 55%, var(--accent-2) 95%);
+  letter-spacing: -.5px;
+  background: linear-gradient(100deg, #e9edf7 0%, var(--accent) 34%, #ffffff 50%, var(--accent-2) 66%, #e9edf7 100%);
+  background-size: 220% 100%;
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: heroShimmer 7s linear infinite;
 }
+@keyframes heroShimmer { 0% { background-position: 120% 0; } 100% { background-position: -120% 0; } }
 .hero p { font-size: 1.08rem; color: var(--text-dim); max-width: 60ch; margin: 0 0 22px; }
 .hero .cover-pill {
   display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;
@@ -173,6 +177,14 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .hero--art p,
 .hero--art .cover-pill { position: relative; z-index: 2; }
 .hero--art p { color: rgba(255,255,255,.88); }
+.hero--art::before {
+  content: ""; position: absolute; z-index: 0;
+  width: 62%; height: 170%; top: -35%; right: -12%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent-2) 42%, transparent), transparent 70%);
+  filter: blur(22px); opacity: .55; pointer-events: none;
+  animation: heroGlow 9s ease-in-out infinite alternate;
+}
+@keyframes heroGlow { from { transform: translateX(0) scale(1); } to { transform: translateX(-14%) scale(1.14); } }
 
 /* ---------- Facts strip ---------- */
 .facts {
@@ -507,6 +519,34 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .noscript-content p { color: var(--text-dim); line-height: 1.7; }
 .noscript-content ul, .noscript-content ol { color: var(--text-dim); line-height: 1.7; padding-left: 22px; }
 .noscript-content a { color: var(--accent); }
+
+/* ---------- Interaction delight: tactile press feedback ---------- */
+.card:active, .car-card:active, .region-card:active, .house-card:active,
+.pick:active, .way:active, .fact:active, .rec:active, .step:active,
+.faq-item:active, .gl:active, .me-block:active, .pitfall:active,
+.cf-chip:active, .cars-subnav button:active, .tm-item:active,
+.icon-btn:active, .nav a:active {
+  transform: translateY(1px) scale(.992);
+  transition-duration: .08s;
+}
+.cf-chip.active:active, .cars-subnav button.active:active,
+.tm-item.active:active, .nav a.active:active { transform: translateY(1px) scale(.985); }
+
+/* ---------- Accessibility: visible focus ring + branded selection ---------- */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.icon-btn:focus-visible, .map-pin:focus-visible, .cf-chip:focus-visible,
+.cars-subnav button:focus-visible, .tm-item:focus-visible, .nav a:focus-visible {
+  outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); color: #fff; }
+
+/* ---------- Scroll reveal (progressive enhancement, JS-guarded) ---------- */
+html.js-reveal [data-reveal] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .6s var(--ease), transform .6s var(--ease);
+  will-change: opacity, transform;
+}
+html.js-reveal [data-reveal].in { opacity: 1; transform: none; }
 
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
