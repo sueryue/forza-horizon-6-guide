@@ -509,13 +509,12 @@
             '<div class="cg-head"><h4>' + esc(g.titleEn) + '</h4>' +
             '<span class="cg-badge">via Gamersky</span></div>' +
             '<p class="cg-sum">' + esc(g.summaryEn) + '</p>' + pts +
-            '<a class="cg-src" href="' + esc(g.src) + '" target="_blank" rel="noopener">Read original (中文) ↗</a>' +
           '</article>';
         }).join("");
         return '<div class="cg-cat"><h3 class="cg-cat-h">' + esc(c) + '</h3><div class="cg-grid">' + cards + '</div></div>';
       }).join("");
       return '<section class="section community-guides">' +
-        sectionHead("From the community", "More Guides", "Curated, machine-translated English summaries of Gamersky's Chinese strategy guides, grouped by topic. Each links back to the original. Nothing here is invented - the source is the authority.") +
+        sectionHead("From the community", "More Guides", "Curated, machine-translated English summaries of Gamersky's Chinese strategy guides, grouped by topic. Nothing here is invented - the source is the authority.") +
         '<div class="cg-wrap">' + blocks + '</div>' +
       '</section>';
   }
