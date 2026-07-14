@@ -223,7 +223,6 @@
       var media = renderMediaSection();
       var wiki = renderWikiSection();
       var database = renderDatabaseSection();
-      var community = renderCommunityGuidesSection();
 
       return '' +
         '<section class="hero hero--art">' +
@@ -251,8 +250,7 @@
         wiki +
         database +
         platforms +
-        media +
-        community;
+        media;
     },
 
     cars: function () {
@@ -384,7 +382,7 @@
           (it.lead ? '<p class="guide-lead">' + esc(it.lead) + '</p>' : '') +
           steps + '</section>';
       }).join("");
-      return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>';
+      return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>' + renderCommunityGuidesSection();
     }
   };
 
@@ -510,7 +508,6 @@
           return '<article class="cg-card">' +
             '<div class="cg-head"><h4>' + esc(g.titleEn) + '</h4>' +
             '<span class="cg-badge">via Gamersky</span></div>' +
-            (g.titleCn ? '<p class="cg-cn">' + esc(g.titleCn) + '</p>' : '') +
             '<p class="cg-sum">' + esc(g.summaryEn) + '</p>' + pts +
             '<a class="cg-src" href="' + esc(g.src) + '" target="_blank" rel="noopener">Read original (中文) ↗</a>' +
           '</article>';
