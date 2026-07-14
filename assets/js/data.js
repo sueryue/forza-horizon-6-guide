@@ -354,19 +354,52 @@ window.FH6DATA = {
   // property; "8" refers to Garages, not houses)
   // ---------------------------------------------------------------------------
   houses: {
-    count: 1,
-    countLabel: "headline property",
-    intro: "Forza Horizon 6 features player property. Wikipedia confirms one headline customisable property — the Estate, a mountainside plot in rural Japan you build and decorate [WIKI]. Community guides list additional houses, but Wikipedia does not enumerate them. Important correction: the \"8\" figure some guides cite refers to Garages (car-display and fast-travel points), not houses [WIKI].",
+    count: 8,
+    countLabel: "player houses",
+    intro: "Forza Horizon 6 scatters 8 player houses across Japan, and each comes with a permanent perk that stays active no matter where you spawn. The headline is The Estate (Yashiki House) — a fully buildable plot you shape with an upgraded EventLab toolset. Houses unlock through the Discover Japan Stamp system (yellow → green → blue → orange → gold). Heads-up: the game also has 8 separate Garages (fast-travel + car-display points) — a different set of \"8\", not the houses. [RPS, TECH, FH6GUIDE]",
     items: [
-      { name: "The Estate", img: "assets/img/house-estate.svg", price: "Unlocked via progression", bonus: "Build & decorate in the open world; daily credit payouts", note: "Wikipedia-confirmed [WIKI]: a customisable mountainside property in rural Japan. Develop it with Estate tools and claim daily payouts via My Horizon → Message Center." },
-      { name: "Garages (8)", img: "assets/img/house-garage.svg", price: "Fast-travel points", bonus: "Car-display spaces with customisable interiors", note: "Wikipedia confirms 8 garages that double as fast-travel points and shareable car-display spaces [WIKI] — distinct from player houses." }
+      { name: "Mei's House", region: "Ohtani", price: "Free", unlock: "Yellow Stamp (tutorial)", perk: "Wheeler Dealer", perkDetail: "Unlocks car trading at the Autoshow", note: "Auto-unlocks after the tutorial. Grab it first — it opens Autoshow car trading.", featured: false },
+      { name: "The Estate (Yashiki House)", region: "Hokubu", price: "10,000 Cr", unlock: "1st Discover Japan Stamp", perk: "Estate Builder", perkDetail: "Build & customise tracks, structures, water and foliage", note: "The buildable base. Clear the 19 objects blocking the land, pay 10,000 Cr, and you get a permanent, friends-visitable plot. Up to 12 players can co-create via Horizon Collab.", featured: true },
+      { name: "Tokyo House", region: "Tokyo City", price: "3,000,000 Cr (free with VIP)", unlock: "Yellow Stamp", perk: "Daily Wheelspin", perkDetail: "One free spin every day", note: "Best long-term credit investment. VIP players get it for free.", featured: false },
+      { name: "Minka House", region: "Ito", price: "450,000 Cr", unlock: "Green Stamp", perk: "Credit Stunts", perkDetail: "+10% credits from Stunt Party", note: "Solid mid-game earner from skill-chain stunts.", featured: false },
+      { name: "Hakusan Mountain Lodge", region: "Sotoyama", price: "635,000 Cr", unlock: "Blue Stamp", perk: "+1 Garage Slot & +10% Horizon Life credits", perkDetail: "Extra display slot + bonus life credits", note: "Best ROI — the extra garage slot is a genuine bonus.", featured: false },
+      { name: "Fuji Unkai House", region: "Shimanoyama", price: "830,000 Cr", unlock: "Orange Stamp", perk: "Career Driver", perkDetail: "+10% credits from Jobs", note: "Best for players who grind Jobs and careers.", featured: false },
+      { name: "Soko 78", region: "Tokyo City", price: "980,000 Cr", unlock: "Purple Stamp", perk: "Import/Export", perkDetail: "-5% Autoshow discount", note: "Pays for itself after a few high-end car purchases.", featured: false },
+      { name: "Vision House", region: "Ohtani", price: "1,500,000 Cr", unlock: "Gold Stamp (Master Explorer)", perk: "+1 Garage Slot & +10% LINK Skill score", perkDetail: "Extra slot + convoy skill bonus", note: "Endgame property for convoy players; needs serious time to unlock.", featured: false }
+    ],
+    estateBuild: [
+      { t: "Main House", d: "Customisable interior and living spaces" },
+      { t: "Garage Wing", d: "Vehicle display, up to 50 slots" },
+      { t: "Workshop", d: "Tuning bay and visual customisation" },
+      { t: "Viewing Deck", d: "Panoramic photo spot for photo mode" },
+      { t: "Driveway & Paths", d: "Connect buildings and shape layouts" },
+      { t: "Gardens & Landscaping", d: "Trees, bushes, flowers, ponds" },
+      { t: "Decorative Items", d: "Benches, signs, lights, barriers" },
+      { t: "Seasonal Changes", d: "Your Estate transforms with Japan's dynamic seasons" }
+    ],
+    garages: {
+      intro: "Separate from the 8 houses, Horizon Japan has 8 Garages. These double as free fast-travel points and shareable car-display spaces with customisable, community-downloadable interiors [WIKI].",
+      note: "Don't confuse these with houses — they're fast-travel/car-display points, not owned properties."
+    },
+    order: [
+      { n: 1, name: "Mei's House", why: "Free, auto-unlocks after the tutorial; opens Autoshow trading." },
+      { n: 2, name: "The Estate", why: "Only 10,000 Cr; your permanent, buildable base." },
+      { n: 3, name: "Hakusan Mountain Lodge", why: "Best ROI — extra garage slot and +10% life credits." },
+      { n: 4, name: "Minka House", why: "Cheap +10% Stunt Party credits." },
+      { n: 5, name: "Tokyo House", why: "Daily Wheelspin — the strongest long-term grind (free with VIP)." },
+      { n: 6, name: "Fuji Unkai House", why: "+10% Job credits for career-focused players." },
+      { n: 7, name: "Soko 78", why: "-5% Autoshow discount pays off on big buys." },
+      { n: 8, name: "Vision House", why: "Endgame; needs the Gold Master Explorer Stamp." }
     ],
     tips: [
-      "Unlock The Estate through normal progression — it's the one property Wikipedia confirms [WIKI].",
-      "At the Estate you build and decorate in the open world, then collect daily credit payouts via My Horizon → Message Center.",
-      "Garages double as free fast-travel points — unlock all 8 early to cross the big map in seconds.",
-      "Garage interiors are customisable and shareable — download the community's best layouts.",
-      "Prioritise the Estate first: daily payouts are a steady credit stream while you explore."
+      "Unlock Mei's House first — it's free and opens car trading at the Autoshow.",
+      "The Estate costs just 10,000 Cr and is your permanent, buildable base; claim it early.",
+      "House perks stay active wherever you spawn, so owning all 8 stacks every bonus.",
+      "Most houses need a Discover Japan Stamp tier (yellow → gold) before they're buyable.",
+      "Hakusan Mountain Lodge gives the best ROI: an extra garage slot plus +10% Horizon Life credits.",
+      "Tokyo House's daily Wheelspin is the strongest long-term credit grind (free with VIP).",
+      "Garages are separate fast-travel points — unlock all 8 to cross the big map in seconds.",
+      "At The Estate, up to 12 players co-create via Horizon Collab; browse and download community layouts."
     ]
   },
 
@@ -499,7 +532,7 @@ window.FH6DATA = {
   guides: {
     intro: "Step-by-step walkthroughs built from the real game systems and the confirmed FH6 details on this site. Where a count comes from community reporting rather than an official source, it's flagged.",
     items: [
-      { id: "g-first", title: "Your first 10 hours", tag: "Roadmap", lead: "A relaxed path from the Qualifiers to a garage you actually like.",
+      { id: "g-first", title: "Your first 10 hours", tag: "Roadmap", shot: "https://i.ytimg.com/vi/oYhaW-Vr4wg/maxresdefault.jpg", lead: "A relaxed path from the Qualifiers to a garage you actually like.",
         steps: [
           { n: 1, title: "Run the Qualifiers, then the Invitational", body: "Finishing the Horizon Invitational grants your first (Yellow) Wristband and unlocks the festival, multiplayer and free cars." },
           { n: 2, title: "Pick a starter that fits you", body: "Silvia K'S for drift, Celica GT-Four for balance, GMC Jimmy for off-road. All three end up in your garage anyway." },
@@ -508,41 +541,41 @@ window.FH6DATA = {
           { n: 5, title: "Three-star a few PR stunts", body: "Speed Zones, Danger Signs and Drift Zones pay Super Wheelspins and Skill Points for Car Mastery." },
           { n: 6, title: "Raise difficulty for credits", body: "Higher difficulty with assists off can pay up to +125% credits per race — once you can still win." }
         ] },
-      { id: "g-barn", title: "Unlock all 14 Barn Finds", tag: "Collectibles", lead: "Classic cars hidden in barns — gated by exploration, not luck.",
+      { id: "g-barn", title: "Unlock all 14 Barn Finds", tag: "Collectibles", shot: "https://i.ytimg.com/vi/dj2PkwfrRP0/maxresdefault.jpg", lead: "Classic cars hidden in barns — gated by exploration, not luck.",
         steps: [
           { n: 1, title: "Earn Discover Japan stamps", body: "Explore regions, find landmarks and photograph them. Stamps are what unlock barn rumours." },
           { n: 2, title: "Watch for the rumour notification", body: "Once a region's stamps are met, a Barn Find rumour appears. You'll get a map hint rather than an exact pin." },
           { n: 3, title: "Drive to the hint and search", body: "Barns are tucked into the landscape. Roll up slowly and the find triggers automatically." },
           { n: 4, title: "Restore and enjoy", body: "Found barns go to your garage. 14 are reported across Japan — community-sourced; Wikipedia is silent." }
         ] },
-      { id: "g-treasure", title: "Hunt the 9 Treasure Cars", tag: "Collectibles", lead: "Abandoned cars found only through photo clues — no marker until discovered.",
+      { id: "g-treasure", title: "Hunt the 9 Treasure Cars", tag: "Collectibles", shot: "https://i.ytimg.com/vi/H1qlPZMfmiU/maxresdefault.jpg", lead: "Abandoned cars found only through photo clues — no marker until discovered.",
         steps: [
           { n: 1, title: "Get the photo clue", body: "Treasure clues show a snapshot of the location. Study the background — mountains, signs, road shape — to narrow it down." },
           { n: 2, title: "Match it on the map", body: "There is no map marker. Use landmarks and the horizon to triangulate the spot." },
           { n: 3, title: "Drive over the dig site", body: "Once you're close, the dig prompt appears. 9 treasure cars are reported — community-sourced; Wikipedia is silent." }
         ] },
-      { id: "g-drift", title: "Drift tuning basics", tag: "Tuning", lead: "Make almost any car slide predictably.",
+      { id: "g-drift", title: "Drift tuning basics", tag: "Tuning", shot: "https://i.ytimg.com/vi/HyjVC7fKLVg/maxresdefault.jpg", lead: "Make almost any car slide predictably.",
         steps: [
           { n: 1, title: "Tires: lower the pressure", body: "Drop rear tire pressure a few PSI for a looser, more forgiving slide." },
           { n: 2, title: "Differential: bias to the rear", body: "Increase rear deceleration (and acceleration) so the back steps out on throttle lift and braking." },
           { n: 3, title: "Alignment: add caster", body: "More positive caster sharpens turn-in and self-centring, which keeps drifts controllable." },
           { n: 4, title: "Power & weight", body: "RWD with healthy power drifts best; a little ballast at the rear helps rotation. Then practice on the Touge." }
         ] },
-      { id: "g-credits", title: "Farm credits efficiently", tag: "Economy", lead: "Credits fund upgrades and the cars you actually want.",
+      { id: "g-credits", title: "Farm credits efficiently", tag: "Economy", shot: "https://i.ytimg.com/vi/oYhaW-Vr4wg/maxresdefault.jpg", lead: "Credits fund upgrades and the cars you actually want.",
         steps: [
           { n: 1, title: "Turn difficulty up", body: "Higher difficulty with assists off can pay up to +125% credits per race — only when you can still win." },
           { n: 2, title: "Three-star PR stunts", body: "Speed Zones, Danger Signs and Drift Zones award Super Wheelspins, which can pay out big credit bundles." },
           { n: 3, title: "Bank Wheelspins", body: "Level-ups, story events and the Festival Playlist all grant spins — save them and open in batches." },
           { n: 4, title: "Buy Aftermarket, not Autoshow", body: "Green CT icons on the minimap sell secondhand, fully-tuned cars cheaper than new." }
         ] },
-      { id: "g-regions", title: "Complete the 10 regions", tag: "Exploration", lead: "See everything Horizon Japan has to offer.",
+      { id: "g-regions", title: "Complete the 10 regions", tag: "Exploration", shot: "https://i.ytimg.com/vi/dj2PkwfrRP0/maxresdefault.jpg", lead: "See everything Horizon Japan has to offer.",
         steps: [
           { n: 1, title: "Drive, don't fast-travel", body: "Explore first to fill the map; you can blink to visited spots later. Stamp every region." },
           { n: 2, title: "Clear PR stunts per region", body: "Each area has its own Speed Zones, Danger Signs and Drift Zones — great for accolades and spins." },
           { n: 3, title: "Collect mascots", body: "Drive through the scattered mascots for credits as you go." },
           { n: 4, title: "Photograph landmarks", body: "Landmark shots complete the Collection Journal and stack Discover Japan stamps." }
         ] },
-      { id: "g-estate", title: "Build the Estate", tag: "Property", lead: "Your own mountainside base in rural Japan [WIKI].",
+      { id: "g-estate", title: "Build the Estate", tag: "Property", shot: "https://i.ytimg.com/vi/H1qlPZMfmiU/maxresdefault.jpg", lead: "Your own mountainside base in rural Japan [WIKI].",
         steps: [
           { n: 1, title: "Unlock it", body: "The Estate becomes available as you progress the festival in rural Japan." },
           { n: 2, title: "Build & decorate", body: "Place buildings and style the grounds to taste — it's your personal festival hub." },

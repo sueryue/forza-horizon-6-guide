@@ -57,6 +57,16 @@
           '<p>' + esc(it.body) + '</p></div></li>';
       }).join("") + '</ol>';
   }
+  function stampClass(s) {
+    s = (s || "").toLowerCase();
+    if (s.indexOf("gold") >= 0) return "st-gold";
+    if (s.indexOf("purple") >= 0) return "st-purple";
+    if (s.indexOf("orange") >= 0) return "st-orange";
+    if (s.indexOf("blue") >= 0) return "st-blue";
+    if (s.indexOf("green") >= 0) return "st-green";
+    if (s.indexOf("yellow") >= 0) return "st-yellow";
+    return "st-default";
+  }
 
   /* ---------- car sub-renderers (composed into the single Cars hub) ---------- */
   var DISCIPLINES = [
@@ -331,7 +341,7 @@
       }).join("");
       return sectionHead("No spoilers", "Beginner's Guide", D.beginner.intro) +
         ol(D.beginner.steps) +
-        '<div class="pitfalls"><h3>新手避坑 · Beginner Pitfalls</h3>' + pf + '</div>' +
+        '<div class="pitfalls"><h3>Beginner Pitfalls</h3>' + pf + '</div>' +
         '<div class="settings-box"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>' +
         '<div class="glossary"><h3>Horizon glossary</h3><dl>' + gl + '</dl></div>' +
         '<div class="credits-box"><h3>Credit farming 101</h3><ul>' + cred + '</ul></div>';
@@ -346,20 +356,58 @@
     /* (forza-edition merged into Cars hub) */
 
     houses: function () {
-      var cards = D.houses.items.map(function (h) {
-        return '<div class="house-card">' +
-          (h.img ? '<img class="house-img" src="' + esc(h.img) + '" alt="' + esc(h.name) + '" loading="lazy">' : '') +
-          '<h3>' + esc(h.name) + '</h3>' +
-          '<div class="price">' + esc(h.price) + '</div>' +
-          '<div class="bonus">' + esc(h.bonus) + '</div>' +
-          '<p>' + esc(h.note) + '</p></div>';
+      var h = D.houses;
+      var cards = h.items.map(function (it) {
+        return '<article class="house-card' + (it.featured ? ' featured' : '') + '">' +
+          (it.featured ? '<span class="house-flag">Buildable base</span>' : '') +
+          '<div class="house-top">' +
+            '<h3>' + esc(it.name) + '</h3>' +
+            '<span class="region-tag">' + esc(it.region) + '</span>' +
+          '</div>' +
+          '<div class="house-meta">' +
+            '<span class="hm price">' + esc(it.price) + '</span>' +
+            '<span class="hm stamp ' + stampClass(it.unlock) + '">' + esc(it.unlock) + '</span>' +
+          '</div>' +
+          '<div class="perk"><span class="perk-name">' + esc(it.perk) + '</span>' +
+            '<span class="perk-detail">' + esc(it.perkDetail) + '</span></div>' +
+          '<p>' + esc(it.note) + '</p>' +
+        '</article>';
       }).join("");
-      var tips = D.houses.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join("");
-      return sectionHead("Settle in", "Houses & Property", D.houses.intro) +
-        '<div class="facts"><div class="fact"><div class="k">Confirmed property</div><div class="v">The Estate</div></div>' +
-          '<div class="fact"><div class="k">Garages</div><div class="v">8 [WIKI]</div></div>' +
-          '<div class="fact"><div class="k">Note</div><div class="v">"8" = garages, not houses</div></div></div>' +
+
+      var build = h.estateBuild.map(function (b) {
+        return '<li><span class="eb-t">' + esc(b.t) + '</span><span class="eb-d">' + esc(b.d) + '</span></li>';
+      }).join("");
+
+      var order = h.order.map(function (o) {
+        return '<li><span class="ord-n">' + o.n + '</span>' +
+          '<span class="ord-body"><span class="ord-name">' + esc(o.name) + '</span>' +
+          '<span class="ord-why">' + esc(o.why) + '</span></span></li>';
+      }).join("");
+
+      var tips = h.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join("");
+
+      return sectionHead("Settle in", "Houses & Property", h.intro) +
+        '<div class="facts">' +
+          '<div class="fact"><div class="k">Player houses</div><div class="v">8</div></div>' +
+          '<div class="fact"><div class="k">Garages</div><div class="v">8</div></div>' +
+          '<div class="fact"><div class="k">Unlock system</div><div class="v">Discover Japan Stamps</div></div>' +
+          '<div class="fact"><div class="k">Headline</div><div class="v">The Estate</div></div>' +
+        '</div>' +
         '<div class="house-grid" style="margin-top:18px">' + cards + '</div>' +
+        '<div class="estate-box">' +
+          '<div class="estate-head"><h3>What you can build at The Estate</h3>' +
+            '<span class="estate-sub">Powered by an upgraded EventLab toolset [FH6GUIDE]</span></div>' +
+          '<ul class="estate-list">' + build + '</ul>' +
+        '</div>' +
+        '<div class="garages-box">' +
+          '<h3>Garages — the other "8"</h3>' +
+          '<p>' + esc(h.garages.intro) + '</p>' +
+          '<p class="muted">' + esc(h.garages.note) + '</p>' +
+        '</div>' +
+        '<div class="order-box">' +
+          '<h3>Recommended purchase order</h3>' +
+          '<ol class="order-list">' + order + '</ol>' +
+        '</div>' +
         '<div class="house-tips"><h3>Living in Japan</h3><ul>' + tips + '</ul></div>';
     },
 
@@ -376,9 +424,13 @@
       var subnav = '<nav class="cars-subnav guide-subnav" data-subnav aria-label="Guides">' + navItems + '</nav>';
       var secs = g.items.map(function (it) {
         var steps = ol(it.steps.map(function (s) { return { n: s.n, title: s.title, body: s.body }; }));
+        var banner = it.shot
+          ? '<figure class="guide-shot"><img src="' + esc(it.shot) + '" alt="' + esc(it.title) + ' — official Forza Horizon 6 gameplay still" loading="lazy"><figcaption>Official gameplay still</figcaption></figure>'
+          : '';
         return '<section id="' + it.id + '" class="guide-sec">' +
           '<div class="guide-head"><h3>' + esc(it.title) + '</h3>' +
           (it.tag ? '<span class="badge">' + esc(it.tag) + '</span>' : '') + '</div>' +
+          banner +
           (it.lead ? '<p class="guide-lead">' + esc(it.lead) + '</p>' : '') +
           steps + '</section>';
       }).join("");
@@ -491,6 +543,17 @@
         '<section class="section media-videos"><h3 class="sub">Official trailers</h3><div class="media-grid">' + vids + '</div></section>';
   }
 
+  var CG_CAT_IMG = {
+    "Hidden Cars & Barn Finds": "https://i.ytimg.com/vi/dj2PkwfrRP0/maxresdefault.jpg",
+    "Car Recommendations": "https://i.ytimg.com/vi/oYhaW-Vr4wg/maxresdefault.jpg",
+    "Purchasing": "https://i.ytimg.com/vi/oYhaW-Vr4wg/maxresdefault.jpg",
+    "Liveries & Tuning": "https://i.ytimg.com/vi/HyjVC7fKLVg/maxresdefault.jpg",
+    "Walkthrough": "https://i.ytimg.com/vi/dj2PkwfrRP0/maxresdefault.jpg",
+    "Features & Systems": "https://i.ytimg.com/vi/oYhaW-Vr4wg/maxresdefault.jpg",
+    "Season & Festival Playlist": "https://i.ytimg.com/vi/oYhaW-Vr4wg/maxresdefault.jpg",
+    "Collectibles & Photos": "https://i.ytimg.com/vi/H1qlPZMfmiU/maxresdefault.jpg",
+    "Performance & Settings": "https://i.ytimg.com/vi/HyjVC7fKLVg/maxresdefault.jpg"
+  };
   function renderCommunityGuidesSection() {
       var guides = GS.guides || [];
       if (!guides.length) return '';
@@ -511,7 +574,9 @@
             '<p class="cg-sum">' + esc(g.summaryEn) + '</p>' + pts +
           '</article>';
         }).join("");
-        return '<div class="cg-cat"><h3 class="cg-cat-h">' + esc(c) + '</h3><div class="cg-grid">' + cards + '</div></div>';
+        var ci = CG_CAT_IMG[c];
+        var catBanner = ci ? '<figure class="cg-cat-img"><img src="' + esc(ci) + '" alt="' + esc(c) + ' — official Forza Horizon 6 gameplay still" loading="lazy"><figcaption>Official gameplay still</figcaption></figure>' : '';
+        return '<div class="cg-cat">' + catBanner + '<h3 class="cg-cat-h">' + esc(c) + '</h3><div class="cg-grid">' + cards + '</div></div>';
       }).join("");
       return '<section class="section community-guides">' +
         sectionHead("From the community", "More Guides", "Curated, machine-translated English summaries of Gamersky's Chinese strategy guides, grouped by topic. Nothing here is invented - the source is the authority.") +

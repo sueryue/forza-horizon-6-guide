@@ -10,7 +10,7 @@ window.FH6GS = {
       cat: "Hidden Cars & Barn Finds",
       titleEn: "All Secret Garages & Barn Finds",
       titleCn: "《极限竞速：地平线6》秘藏座驾与车房宝物全收集攻略",
-      summaryEn: "Every Secret Garage (私藏座驾) and Barn Find (车房宝物) in Horizon Japan, with locations.",
+      summaryEn: "Every Secret Garage and Barn Find in Horizon Japan, with locations.",
       points: [
         "9 Secret Garages (drive up to unlock): Nissan Figaro (Tokyo, near Rainbow Bridge), Ford GT '05 (South Bank), Nissan Safari Turbo (Ito), Dodge Charger R/T (Nanano), Mazda RX-7 GSL-SE (Otani), Porsche 959 '87 (Frost Mountain), BMW M1 '81 (North), Mitsubishi Evo III '95 (Takagi), Lancia Stratos HF '74 (Soto-yama).",
         "15 Barn Finds unlock by raising exploration points to earn Commemorative Medals, then they appear on the map.",
@@ -38,7 +38,7 @@ window.FH6GS = {
       summaryEn: "Standard/Deluxe/Premium editions, pre-order bonuses including the Ferrari J50, and the PC minimum specs.",
       points: [
         "Launch: May 19, 2026; Premium edition plays 4 days early (May 15).",
-        "Platforms: Steam (¥298/¥398/¥498), Xbox Series X, and PS5 (no PS5 price listed).",
+        "Platforms: Steam, Xbox Series X, and PS5 (no PS5 price listed).",
         "Pre-order any edition to get a pre-tuned exclusive Ferrari J50 (only 10 built, honouring Ferrari's 50 years in Japan).",
         "Car Pass = 30 cars, one unlocked weekly from May 19; included in Deluxe and Premium.",
         "Min specs: Windows 10 22H2, Intel i5-8400 / Ryzen 5 1600, 16 GB RAM, GTX 1650 / RX 6500 XT / Arc A380."
