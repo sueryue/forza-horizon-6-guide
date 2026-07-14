@@ -745,3 +745,80 @@ html.no-google-translate .translate-btn { opacity: .55; }
   max-width: 68ch;
 }
 
+/* ============================================================
+   MEDIA board — video gallery + screenshot grid
+   ============================================================ */
+.media-videos, .media-shots { margin-top: 30px; }
+.media-videos .sub, .media-shots .sub {
+  font-family: var(--display); font-weight: 700;
+  font-size: var(--fs-h3); line-height: var(--lh-head);
+  margin: 0 0 14px; letter-spacing: -.2px;
+  display: flex; align-items: center; gap: 10px;
+}
+.media-videos .sub::before, .media-shots .sub::before {
+  content: ""; width: 10px; height: 28px; border-radius: 5px;
+  background: linear-gradient(180deg, var(--accent-warm), var(--accent-2));
+}
+
+/* video grid: click-to-play cards */
+.media-grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+.vid-card {
+  position: relative; display: block; width: 100%;
+  border: 1px solid var(--border); border-radius: 18px; overflow: hidden;
+  background: var(--card); cursor: pointer; padding: 0; margin: 0;
+  text-align: left; color: inherit; font: inherit;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+.vid-card:hover { transform: translateY(-5px); border-color: color-mix(in srgb, var(--accent) 55%, var(--border)); box-shadow: 0 18px 40px -22px rgba(0,0,0,.6); }
+.vid-card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.vid-thumb { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #0a1422; }
+.vid-play {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%,-50%);
+  width: 60px; height: 60px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255,138,61,.92); color: #fff;
+  box-shadow: 0 8px 24px -6px rgba(255,138,61,.7);
+  transition: transform .3s var(--ease), background .3s var(--ease);
+}
+.vid-play svg { width: 26px; height: 26px; margin-left: 3px; }
+.vid-card:hover .vid-play { transform: translate(-50%,-50%) scale(1.1); background: var(--accent-warm); }
+.vid-meta { padding: 14px 16px 16px; }
+.vid-meta h3 { font-family: var(--display); font-weight: 700; font-size: 1.02rem; line-height: 1.25; margin: 0 0 6px; }
+.vid-date { color: var(--accent-warm); font-size: .78rem; font-weight: 600; margin: 0 0 6px; letter-spacing: .3px; }
+.vid-meta p:last-child { color: var(--text-dim); font-size: .86rem; line-height: 1.5; margin: 0; max-width: 60ch; }
+.vid-card.is-playing { cursor: default; }
+.vid-frame { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; }
+
+/* screenshot / still grid */
+.shot-note { color: var(--text-dim); font-size: .85rem; line-height: 1.55; max-width: 68ch; margin: 0 0 16px; }
+.shot-note code { background: color-mix(in srgb, var(--accent) 14%, transparent); padding: 1px 6px; border-radius: 5px; font-size: .82em; }
+.shot-grid {
+  display: grid; gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.shot { margin: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--card); transition: transform .3s var(--ease), border-color .3s var(--ease); }
+.shot:hover { transform: translateY(-4px); border-color: color-mix(in srgb, var(--accent-2) 50%, var(--border)); }
+.shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #0a1422; }
+.shot figcaption { padding: 9px 12px; font-size: .8rem; color: var(--text-dim); font-family: var(--display); font-weight: 600; letter-spacing: .2px; }
+
+/* home featured media band */
+.home-media { margin-top: 28px; }
+.feat-vid { max-width: 760px; margin: 0 auto; }
+.feat-vid .vid-play { top: 50%; }
+.feat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+.feat-strip-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); }
+
+@media (max-width: 560px) {
+  .feat-strip { grid-template-columns: 1fr 1fr; }
+  .feat-strip-img:last-child { display: none; }
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .vid-card, .vid-play, .shot, .feat-strip-img { transition: none !important; }
+  .vid-card:hover { transform: none; }
+}
+

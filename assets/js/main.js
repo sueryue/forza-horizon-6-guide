@@ -190,6 +190,19 @@
         '<span><b>Released</b> ' + esc(m.released) + '</span>' +
       '</div>';
 
+      var featVid = "oYhaW-Vr4wg";
+      var featStrip = ["dj2PkwfrRP0", "HyjVC7fKLVg", "H1qlPZMfmiU"].map(function (id) {
+        return '<img class="feat-strip-img" loading="lazy" src="https://i.ytimg.com/vi/' + id + '/hqdefault.jpg" alt="Forza Horizon 6 official still">';
+      }).join("");
+      var featured = '<section class="section home-media">' +
+        sectionHead("See it move", "Watch the launch trailer", "Two minutes of Horizon Japan - then dive into the guides below.") +
+        '<div class="feat-vid vid-card" data-yt="' + featVid + '" role="button" tabindex="0" aria-label="Play Official Launch Trailer">' +
+          '<img class="vid-thumb" loading="lazy" src="https://i.ytimg.com/vi/' + featVid + '/hqdefault.jpg" alt="Official Launch Trailer thumbnail">' +
+          '<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' +
+        '</div>' +
+        '<div class="feat-strip">' + featStrip + '</div>' +
+      '</section>';
+
       var recScores = D.reception.scores.map(function (s) {
         return '<div class="rec"><span class="ro">' + esc(s.outlet) + '</span><span class="rs">' + esc(s.score) + '</span></div>';
       }).join("");
@@ -213,6 +226,7 @@
           '<span class="cover-pill">Cover car · <b>' + esc(h.cover) + '</b></span>' +
         '</section>' +
         credits +
+        featured +
         '<div class="facts">' + facts + '</div>' +
         '<section class="section">' +
           sectionHead("What's in the guide", "Built for Horizon Japan", "The largest open-world map in the series, 550+ cars, and a festival full of systems. Pick a section to dive in.") +
@@ -337,13 +351,35 @@
           '<div class="fact"><div class="k">Note</div><div class="v">"8" = garages, not houses</div></div></div>' +
         '<div class="house-grid" style="margin-top:18px">' + cards + '</div>' +
         '<div class="house-tips"><h3>Living in Japan</h3><ul>' + tips + '</ul></div>';
+    },
+
+    media: function () {
+      var m = D.media;
+      var vids = m.videos.map(function (v) {
+        return '<div class="vid-card" data-yt="' + esc(v.id) + '" role="button" tabindex="0" aria-label="Play ' + esc(v.title) + '">' +
+          '<img class="vid-thumb" loading="lazy" src="https://i.ytimg.com/vi/' + esc(v.id) + '/hqdefault.jpg" alt="' + esc(v.title) + ' thumbnail">' +
+          '<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' +
+          '<div class="vid-meta"><h3>' + esc(v.title) + '</h3><p class="vid-date">' + esc(v.date) + '</p><p>' + esc(v.desc) + '</p></div>' +
+        '</div>';
+      }).join("");
+      var shots = m.shots.map(function (s) {
+        var src = s.src ? esc(s.src) : 'https://i.ytimg.com/vi/' + esc(s.id) + '/hqdefault.jpg';
+        var onerr = s.src ? '' : ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + esc(s.id) + '/mqdefault.jpg\'"';
+        return '<figure class="shot"><img loading="lazy" src="' + src + '" alt="' + esc(s.label) + ' - official trailer still" ' + onerr + '>' +
+          '<figcaption>' + esc(s.label) + '</figcaption></figure>';
+      }).join("");
+      return sectionHead("Watch & screenshots", "Media", m.intro) +
+        '<section class="section media-videos"><h3 class="sub">Official trailers</h3><div class="media-grid">' + vids + '</div></section>' +
+        '<section class="section media-shots"><h3 class="sub">Screenshots &amp; stills</h3>' +
+          '<p class="shot-note">Frames pulled from the official trailers. To show your own captures, drop .jpg files into <code>assets/img/shots/</code> and add a <code>shots</code> entry with <code>src</code> in <code>data.js</code>.</p>' +
+          '<div class="shot-grid">' + shots + '</div></section>';
     }
   };
 
   var TITLES = {
     home: "Forza Horizon 6 Guide",
     cars: "Cars", map: "Interactive Map",
-    beginner: "Beginner's Guide", houses: "Houses"
+    beginner: "Beginner's Guide", houses: "Houses", media: "Media"
   };
   // Deep-link aliases (old URLs) -> scroll target inside the Cars hub.
   var CAR_SCROLL = {
@@ -586,6 +622,26 @@
     }
   }
 
+  function initMediaPlayer() {
+    // Event delegation on #app so it survives re-renders.
+    app.addEventListener("click", function (e) {
+      var c = e.target.closest(".vid-card");
+      if (!c || c.dataset.played) return;
+      var id = c.getAttribute("data-yt");
+      if (!id) return;
+      c.dataset.played = "1";
+      c.classList.add("is-playing");
+      c.innerHTML = '<iframe class="vid-frame" src="https://www.youtube-nocookie.com/embed/' + esc(id) + '?autoplay=1&rel=0&modestbranding=1" title="Forza Horizon 6 video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';
+    });
+    app.addEventListener("keydown", function (e) {
+      var t = e.target;
+      if ((e.key === "Enter" || e.key === " ") && t.classList && t.classList.contains("vid-card")) {
+        e.preventDefault();
+        t.click();
+      }
+    });
+  }
+
   function boot() {
     if (!D) { app.innerHTML = '<p style="color:#9aa6c2">Failed to load guide data.</p>'; return; }
     if ('IntersectionObserver' in window) document.documentElement.classList.add('js-reveal');
@@ -596,6 +652,7 @@
     initMapPins();
     initCarFilter();
     initTranslate();
+    initMediaPlayer();
     window.addEventListener("hashchange", render);
     render();
   }
