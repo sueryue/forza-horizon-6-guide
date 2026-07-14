@@ -219,6 +219,7 @@
         '<ul class="timeline">' + devItems + '</ul></section>';
 
       var platforms = renderPlatformsSection();
+      var media = renderMediaSection();
 
       return '' +
         '<section class="hero hero--art">' +
@@ -243,7 +244,8 @@
         '</section>' +
         reception +
         development +
-        platforms;
+        platforms +
+        media;
     },
 
     cars: function () {
@@ -356,28 +358,6 @@
         '<div class="house-tips"><h3>Living in Japan</h3><ul>' + tips + '</ul></div>';
     },
 
-    media: function () {
-      var m = D.media;
-      var vids = m.videos.map(function (v) {
-        return '<div class="vid-card" data-yt="' + esc(v.id) + '" role="button" tabindex="0" aria-label="Play ' + esc(v.title) + '">' +
-          '<img class="vid-thumb" loading="lazy" src="https://i.ytimg.com/vi/' + esc(v.id) + '/hqdefault.jpg" alt="' + esc(v.title) + ' thumbnail">' +
-          '<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' +
-          '<div class="vid-meta"><h3>' + esc(v.title) + '</h3><p class="vid-date">' + esc(v.date) + '</p><p>' + esc(v.desc) + '</p></div>' +
-        '</div>';
-      }).join("");
-      var shots = m.shots.map(function (s) {
-        var src = s.src ? esc(s.src) : 'https://i.ytimg.com/vi/' + esc(s.id) + '/hqdefault.jpg';
-        var onerr = s.src ? '' : ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + esc(s.id) + '/mqdefault.jpg\'"';
-        return '<figure class="shot"><img loading="lazy" src="' + src + '" alt="' + esc(s.label) + ' - official trailer still" ' + onerr + '>' +
-          '<figcaption>' + esc(s.label) + '</figcaption></figure>';
-      }).join("");
-      return sectionHead("Watch & screenshots", "Media", m.intro) +
-        '<section class="section media-videos"><h3 class="sub">Official trailers</h3><div class="media-grid">' + vids + '</div></section>' +
-        '<section class="section media-shots"><h3 class="sub">Screenshots &amp; stills</h3>' +
-          '<p class="shot-note">Frames pulled from the official trailers. To show your own captures, drop .jpg files into <code>assets/img/shots/</code> and add a <code>shots</code> entry with <code>src</code> in <code>data.js</code>.</p>' +
-          '<div class="shot-grid">' + shots + '</div></section>';
-    },
-
     /* ---------- Wiki: encyclopedia reference ---------- */
     wiki: function () {
       var w = D.wiki;
@@ -486,11 +466,33 @@
         '</section>';
   }
 
+  function renderMediaSection() {
+      var m = D.media;
+      var vids = m.videos.map(function (v) {
+        return '<div class="vid-card" data-yt="' + esc(v.id) + '" role="button" tabindex="0" aria-label="Play ' + esc(v.title) + '">' +
+          '<img class="vid-thumb" loading="lazy" src="https://i.ytimg.com/vi/' + esc(v.id) + '/hqdefault.jpg" alt="' + esc(v.title) + ' thumbnail">' +
+          '<span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>' +
+          '<div class="vid-meta"><h3>' + esc(v.title) + '</h3><p class="vid-date">' + esc(v.date) + '</p><p>' + esc(v.desc) + '</p></div>' +
+        '</div>';
+      }).join("");
+      var shots = m.shots.map(function (s) {
+        var src = s.src ? esc(s.src) : 'https://i.ytimg.com/vi/' + esc(s.id) + '/hqdefault.jpg';
+        var onerr = s.src ? '' : ' onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/' + esc(s.id) + '/mqdefault.jpg\'"';
+        return '<figure class="shot"><img loading="lazy" src="' + src + '" alt="' + esc(s.label) + ' - official trailer still" ' + onerr + '>' +
+          '<figcaption>' + esc(s.label) + '</figcaption></figure>';
+      }).join("");
+      return sectionHead("Watch & screenshots", "Media", m.intro) +
+        '<section class="section media-videos"><h3 class="sub">Official trailers</h3><div class="media-grid">' + vids + '</div></section>' +
+        '<section class="section media-shots"><h3 class="sub">Screenshots &amp; stills</h3>' +
+          '<p class="shot-note">Frames pulled from the official trailers. To show your own captures, drop .jpg files into <code>assets/img/shots/</code> and add a <code>shots</code> entry with <code>src</code> in <code>data.js</code>.</p>' +
+          '<div class="shot-grid">' + shots + '</div></section>';
+  }
+
   var TITLES = {
     home: "Forza Horizon 6 Guide",
     wiki: "Wiki", database: "Database", guides: "Guides",
     cars: "Cars", map: "Interactive Map",
-    beginner: "Beginner's Guide", houses: "Houses", media: "Media"
+    beginner: "Beginner's Guide", houses: "Houses"
   };
   // Deep-link aliases (old URLs) -> scroll target inside the Cars hub.
   var CAR_SCROLL = {
@@ -631,7 +633,7 @@
     : null;
   function setupReveal() {
     if (!revealIO || !document.documentElement.classList.contains('js-reveal')) return;
-    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec, .pf-card, .spec-card';
+    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec, .pf-card, .spec-card, .vid-card, .shot';
     var nodes = app.querySelectorAll(sel);
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
