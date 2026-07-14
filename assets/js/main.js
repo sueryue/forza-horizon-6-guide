@@ -475,14 +475,14 @@
   window.googleTranslateElementInit = function () {
     new google.translate.TranslateElement({
       pageLanguage: "en",
-      includedLanguages: "zh-CN,zh-TW,ja,ko,de,fr,es,pt,ru",
+      includedLanguages: "ja,ko,de,fr,es,pt,ru",
       autoDisplay: false,
       layout: google.translate.TranslateElement.InlineLayout.SIMPLE
     }, "google_translate_element");
   };
 
   function initTranslate() {
-    var LANG_CODE = { "en": "EN", "zh-CN": "中", "zh-TW": "繁", "ja": "日", "ko": "한", "de": "DE", "fr": "FR", "es": "ES", "pt": "PT", "ru": "RU" };
+    var LANG_CODE = { "en": "EN", "ja": "日", "ko": "한", "de": "DE", "fr": "FR", "es": "ES", "pt": "PT", "ru": "RU" };
     var btn = document.getElementById("translate-btn");
     var menu = document.getElementById("translate-menu");
     var code = document.getElementById("translate-code");
