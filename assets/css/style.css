@@ -211,9 +211,10 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 .car-card:hover { transform: translateY(-3px); border-color: var(--border-strong); background: var(--surface-2); }
 .monogram {
   flex: 0 0 auto; width: 50px; height: 50px; border-radius: 13px;
-  display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: .9rem;
+  display: grid; place-items: center; padding: 0;
   color: #04121a; background: linear-gradient(135deg, var(--accent), var(--accent-2));
 }
+.monogram svg { display: block; }
 .car-meta { min-width: 0; }
 .car-meta .yr { font-size: .72rem; color: var(--text-dim); }
 .car-meta .nm { font-weight: 600; font-size: .96rem; line-height: 1.2; }
@@ -511,3 +512,125 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 28px 20px 80px; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; scroll-behavior: auto; }
 }
+
+/* ---------- Google Translate button ---------- */
+.translate-wrap { position: relative; display: inline-flex; }
+.translate-btn { display: inline-flex; align-items: center; gap: 5px; width: auto; padding: 0 11px 0 10px; }
+.translate-btn svg { width: 17px; height: 17px; flex: 0 0 auto; }
+.translate-code { font-family: var(--display); font-weight: 700; font-size: .7rem; letter-spacing: .5px; line-height: 1; }
+.translate-menu {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 60;
+  width: 224px; padding: 8px; display: flex; flex-direction: column; gap: 2px;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(22px) saturate(170%); -webkit-backdrop-filter: blur(22px) saturate(170%);
+  border: 1px solid var(--border); border-radius: 16px;
+  box-shadow: 0 22px 55px -22px rgba(0,0,0,.65);
+  opacity: 0; transform: translateY(-6px) scale(.98); transform-origin: top right;
+  transition: opacity .2s var(--ease), transform .2s var(--ease);
+}
+.translate-menu[hidden] { display: none; }
+.translate-menu.open { opacity: 1; transform: translateY(0) scale(1); }
+.tm-head { font-family: var(--display); font-weight: 600; font-size: .76rem; color: var(--text-dim); padding: 4px 10px 6px; }
+.tm-item {
+  text-align: left; padding: 9px 11px; border-radius: 10px; border: 0; background: transparent;
+  color: var(--text); font-size: .9rem; cursor: pointer; transition: all .2s var(--ease);
+}
+.tm-item:hover { background: var(--surface); }
+.tm-item.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #04121a; font-weight: 600; }
+.tm-foot { font-size: .66rem; color: var(--text-dim); opacity: .65; padding: 7px 10px 2px; text-align: right; }
+
+/* keep Google's raw widget functional but invisible (we drive it via the custom menu) */
+#google_translate_element { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none; left: -9999px; top: -9999px; }
+.goog-te-banner-frame, .goog-te-balloon-frame, #goog-gt-tt, .goog-te-spinner-pos, .goog-te-menu-frame { display: none !important; }
+body > .skiptranslate { display: none !important; }
+.goog-te-gadget span { display: none !important; }
+.goog-te-gadget { font-size: 0 !important; line-height: 0 !important; }
+/* when the inline widget is blocked, hide the dead control so it doesn't look broken */
+html.no-google-translate .translate-btn { opacity: .55; }
+
+/* ---------- Map clickable markers ---------- */
+.map-canvas { position: relative; }
+.map-hint { margin: 10px 0 0; font-size: .82rem; color: var(--text-dim); text-align: center; }
+.map-pin {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  background: none; border: none; padding: 0; cursor: pointer; z-index: 4;
+}
+.map-pin .mp-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
+  animation: pinPulse 2.2s var(--ease) infinite;
+  transition: transform .25s var(--ease);
+}
+.map-pin:not(.pin-ok) .mp-dot { background: var(--accent-3); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-3) 28%, transparent); }
+.map-pin .mp-lbl {
+  font-size: .68rem; font-weight: 700; letter-spacing: .02em; white-space: nowrap;
+  color: #fff; background: rgba(8,11,22,.74); padding: 2px 8px; border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  opacity: 0; transform: translateY(-3px); transition: opacity .25s var(--ease), transform .25s var(--ease);
+  pointer-events: none;
+}
+.map-pin:hover .mp-lbl, .map-pin:focus-visible .mp-lbl { opacity: 1; transform: none; }
+.map-pin:hover .mp-dot, .map-pin:focus-visible .mp-dot { transform: scale(1.3); }
+.map-pin:focus-visible { outline: none; }
+.map-pin:focus-visible .mp-dot { box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 45%, transparent); }
+@keyframes pinPulse {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent); }
+  70%  { box-shadow: 0 0 0 13px color-mix(in srgb, var(--accent) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 0%, transparent); }
+}
+.region-card.flash {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 40%, transparent), var(--shadow);
+}
+
+/* ---------- Car discipline filter ---------- */
+.car-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 22px; }
+.cf-chip {
+  padding: 7px 14px; border-radius: 999px; cursor: pointer; font: inherit;
+  font-size: .85rem; font-weight: 500; color: var(--text-dim);
+  border: 1px solid var(--border); background: var(--surface);
+  transition: all .25s var(--ease);
+}
+.cf-chip:hover { color: var(--text); border-color: var(--border-strong); transform: translateY(-1px); }
+.cf-chip.active {
+  color: #04121a; border-color: transparent;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+}
+.car-card.is-hidden, .car-group.is-hidden { display: none; }
+.disc-pill {
+  display: inline-block; margin-top: 5px; font-size: .62rem; font-weight: 700;
+  letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
+  color: var(--text); background: var(--surface-2); border: 1px solid var(--border-strong);
+}
+.disc-pill.disc-top { color: #fca5a5; border-color: color-mix(in srgb, #f87171 45%, transparent); }
+.disc-pill.disc-drift { color: #c4b5fd; border-color: color-mix(in srgb, #a78bfa 45%, transparent); }
+.disc-pill.disc-drag { color: #fcd34d; border-color: color-mix(in srgb, #fbbf24 45%, transparent); }
+.disc-pill.disc-offroad { color: #6ee7b7; border-color: color-mix(in srgb, #34d399 45%, transparent); }
+.disc-pill.disc-allround { color: #7dd3fc; border-color: color-mix(in srgb, #38bdf8 45%, transparent); }
+
+/* ---------- Beginner pitfalls ---------- */
+.pitfalls { margin-top: 26px; border-top: 1px solid var(--border); padding-top: 22px; }
+.pitfalls > h3 {
+  font-family: var(--display); font-size: 1.2rem; margin: 0 0 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.pitfalls > h3::before {
+  content: ""; width: 8px; height: 24px; border-radius: 4px;
+  background: linear-gradient(var(--accent-2), var(--accent));
+}
+.pitfall {
+  display: flex; gap: 14px; align-items: flex-start; margin-bottom: 12px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 32%, transparent);
+  border-radius: var(--radius); background: color-mix(in srgb, var(--accent-2) 7%, transparent);
+  padding: 14px 16px;
+}
+.pitfall .pf-avoid {
+  flex: 0 0 auto; font-size: .6rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px; color: #2a0a18; white-space: nowrap; margin-top: 2px;
+  background: linear-gradient(135deg, var(--accent-2), #fb7185);
+}
+.pitfall h4 { margin: 0 0 4px; font-family: var(--display); font-size: .98rem; color: var(--text); }
+.pitfall p { margin: 0; color: var(--text-dim); font-size: .9rem; line-height: 1.55; }
+

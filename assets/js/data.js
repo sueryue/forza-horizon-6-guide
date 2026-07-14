@@ -57,85 +57,85 @@ window.FH6DATA = {
         badge: "WIKI",
         note: "From the official key art and cross-title loyalty rewards [WIKI].",
         items: [
-          { year: "2025", make: "Toyota", model: "GR GT Prototype", tag: "Cover car", note: "Headline machine on the FH6 key art, with Mount Fuji and Tokyo behind it [WIKI]." },
-          { year: "2024", make: "Toyota", model: "Land Cruiser 250", tag: "Key art", note: "Featured alongside the GR GT Prototype in the reveal key art [WIKI]." },
-          { year: "2021", make: "Mercedes-AMG", model: "One", tag: "Loyalty (FH5)", note: "Returning reward for playing Forza Horizon 5 [WIKI]." },
-          { year: "2016", make: "Aston Martin", model: "Vulcan", tag: "Loyalty (FH4)", note: "Returning reward for playing Forza Horizon 4 [WIKI]." },
-          { year: "2016", make: "Lamborghini", model: "Centenario LP 770-4", tag: "Loyalty (FH3)", note: "Returning reward for playing Forza Horizon 3 [WIKI]." },
-          { year: "2014", make: "Lamborghini", model: "Huracán LP 610-4", tag: "Loyalty (FH2)", note: "Returning reward for playing Forza Horizon 2 [WIKI]." },
-          { year: "2013", make: "Dodge", model: "SRT Viper GTS", tag: "Loyalty (FH1)", note: "Returning reward for playing Forza Horizon 1 [WIKI]." },
-          { year: "2024", make: "Chevrolet", model: "Corvette E-Ray", tag: "Loyalty (Motorsport)", note: "Returning reward for Forza Motorsport (2023) [WIKI]." }
+          { year: "2025", make: "Toyota", model: "GR GT Prototype", tag: "Cover car", note: "Headline machine on the FH6 key art, with Mount Fuji and Tokyo behind it [WIKI].", disc: "top" },
+          { year: "2024", make: "Toyota", model: "Land Cruiser 250", tag: "Key art", note: "Featured alongside the GR GT Prototype in the reveal key art [WIKI].", disc: "offroad" },
+          { year: "2021", make: "Mercedes-AMG", model: "One", tag: "Loyalty (FH5)", note: "Returning reward for playing Forza Horizon 5 [WIKI].", disc: "top" },
+          { year: "2016", make: "Aston Martin", model: "Vulcan", tag: "Loyalty (FH4)", note: "Returning reward for playing Forza Horizon 4 [WIKI].", disc: "top" },
+          { year: "2016", make: "Lamborghini", model: "Centenario LP 770-4", tag: "Loyalty (FH3)", note: "Returning reward for playing Forza Horizon 3 [WIKI].", disc: "top" },
+          { year: "2014", make: "Lamborghini", model: "Huracán LP 610-4", tag: "Loyalty (FH2)", note: "Returning reward for playing Forza Horizon 2 [WIKI].", disc: "allround" },
+          { year: "2013", make: "Dodge", model: "SRT Viper GTS", tag: "Loyalty (FH1)", note: "Returning reward for playing Forza Horizon 1 [WIKI].", disc: "allround" },
+          { year: "2024", make: "Chevrolet", model: "Corvette E-Ray", tag: "Loyalty (Motorsport)", note: "Returning reward for Forza Motorsport (2023) [WIKI].", disc: "top" }
         ]
       },
       {
         title: "Starter Cars (community-sourced)",
         note: "Handed to you at the start of the festival per community guides. Not enumerated by Wikipedia.",
         items: [
-          { year: "1989", make: "Nissan", model: "Silvia K'S", tag: "Drift-friendly", note: "Great for learning Touge and drift zones." },
-          { year: "1994", make: "Toyota", model: "Celica GT-Four ST205", tag: "All-rounder", note: "Balanced for mixed road and light off-road." },
-          { year: "1970", make: "GMC", model: "Jimmy", tag: "Off-road", note: "Heavy on tarmac, strong in the northern mountains." }
+          { year: "1989", make: "Nissan", model: "Silvia K'S", tag: "Drift-friendly", note: "Great for learning Touge and drift zones.", disc: "drift" },
+          { year: "1994", make: "Toyota", model: "Celica GT-Four ST205", tag: "All-rounder", note: "Balanced for mixed road and light off-road.", disc: "allround" },
+          { year: "1970", make: "GMC", model: "Jimmy", tag: "Off-road", note: "Heavy on tarmac, strong in the northern mountains.", disc: "offroad" }
         ]
       },
       {
         title: "Prologue & Festival Cars (community-sourced)",
         note: "Appear during the opening drive and early festival events per community guides.",
         items: [
-          { year: "2024", make: "Nissan", model: "GT-R Nismo", tag: "Prologue", note: "Driven through the Hokubu fields at the very start." },
-          { year: "2021", make: "RJ Anderson", model: "#37 Polaris RZR Pro 4 Truck", tag: "Prologue", note: "Snow-circuit opener." },
-          { year: "1995", make: "Porsche", model: "911 GT2", tag: "Prologue" },
-          { year: "", make: "Mazda", model: "RX-7 Type R", tag: "Prologue" },
-          { year: "2023", make: "BMW", model: "M2", tag: "Prologue" },
-          { year: "2020", make: "Toyota", model: "GR Supra", tag: "Prologue" }
+          { year: "2024", make: "Nissan", model: "GT-R Nismo", tag: "Prologue", note: "Driven through the Hokubu fields at the very start.", disc: "top" },
+          { year: "2021", make: "RJ Anderson", model: "#37 Polaris RZR Pro 4 Truck", tag: "Prologue", note: "Snow-circuit opener.", disc: "offroad" },
+          { year: "1995", make: "Porsche", model: "911 GT2", tag: "Prologue", disc: "top" },
+          { year: "", make: "Mazda", model: "RX-7 Type R", tag: "Prologue", disc: "drift" },
+          { year: "2023", make: "BMW", model: "M2", tag: "Prologue", disc: "allround" },
+          { year: "2020", make: "Toyota", model: "GR Supra", tag: "Prologue", disc: "allround" }
         ]
       },
       {
         title: "Event Path Reward Cars (community-sourced)",
         note: "Cars tied to specific Horizon Festival and Explore Japan milestones (from the IGN walkthrough).",
         items: [
-          { year: "2022", make: "Toyota", model: "GR86" },
-          { year: "2001", make: "Mitsubishi", model: "Lancer Evolution VI GSR TM Edition" },
-          { year: "2024", make: "Ram", model: "1500 TRX" },
-          { year: "", make: "Aston Martin", model: "Vulcan", tag: "Loyalty reward", note: "Forza Loyalty reward if you played earlier titles." },
-          { year: "", make: "Ford", model: "RS200", tag: "Wristband event", note: "Pier Pressure — Tokyo docks." },
-          { year: "", make: "Lotus", model: "Exige WTAC", tag: "Road Racing" },
-          { year: "", make: "Subaru", model: "Impreza", tag: "Sekibe Scramble" },
-          { year: "", make: "Mitsubishi", model: "Lancer Evo", tag: "Sekibe Scramble" },
-          { year: "", make: "Lamborghini", model: "Huracán Sterrato", tag: "Dirt Racing max" },
-          { year: "", make: "Mini", model: "JCW Buggy", tag: "Cross Country" },
-          { year: "", make: "GMA", model: "T.50", tag: "Speed Traps" },
-          { year: "", make: "Porsche", model: "911 GT3 RS '12", tag: "Speed Zones" },
-          { year: "", make: "M12S", model: "Warthog CST", tag: "Danger Signs" },
-          { year: "", make: "Mazda", model: "RX-8 #99", tag: "Drift Zones" },
-          { year: "", make: "Mercedes-Benz", model: "G 65", tag: "Trailblazers" },
-          { year: "", make: "Lexus", model: "LFA FE", tag: "Street / Touge ultimate" },
-          { year: "", make: "Honda", model: "NSX-R '05", tag: "Regional Mascots" },
-          { year: "", make: "Audi", model: "R8 '13", tag: "Day Trips" },
-          { year: "", make: "Nissan", model: "240 #777", tag: "Drift Club Japan" },
-          { year: "", make: "Honda", model: "Civic '84", tag: "Moto Auto Zine" },
-          { year: "", make: "Toyota", model: "GR86 \"86 Stories\"", tag: "Yuji's Auto" },
-          { year: "", make: "Porsche", model: "918", tag: "Horizon Play" },
-          { year: "", make: "Porsche", model: "Cayman GT4 RS", tag: "Road Rivals" },
-          { year: "", make: "Opel", model: "Manta 400", tag: "Dirt Rivals" },
+          { year: "2022", make: "Toyota", model: "GR86", disc: "allround" },
+          { year: "2001", make: "Mitsubishi", model: "Lancer Evolution VI GSR TM Edition", disc: "offroad" },
+          { year: "2024", make: "Ram", model: "1500 TRX", disc: "drag" },
+          { year: "", make: "Aston Martin", model: "Vulcan", tag: "Loyalty reward", note: "Forza Loyalty reward if you played earlier titles.", disc: "top" },
+          { year: "", make: "Ford", model: "RS200", tag: "Wristband event", note: "Pier Pressure — Tokyo docks.", disc: "offroad" },
+          { year: "", make: "Lotus", model: "Exige WTAC", tag: "Road Racing", disc: "allround" },
+          { year: "", make: "Subaru", model: "Impreza", tag: "Sekibe Scramble", disc: "offroad" },
+          { year: "", make: "Mitsubishi", model: "Lancer Evo", tag: "Sekibe Scramble", disc: "offroad" },
+          { year: "", make: "Lamborghini", model: "Huracán Sterrato", tag: "Dirt Racing max", disc: "offroad" },
+          { year: "", make: "Mini", model: "JCW Buggy", tag: "Cross Country", disc: "offroad" },
+          { year: "", make: "GMA", model: "T.50", tag: "Speed Traps", disc: "top" },
+          { year: "", make: "Porsche", model: "911 GT3 RS '12", tag: "Speed Zones", disc: "top" },
+          { year: "", make: "M12S", model: "Warthog CST", tag: "Danger Signs", disc: "drag" },
+          { year: "", make: "Mazda", model: "RX-8 #99", tag: "Drift Zones", disc: "drift" },
+          { year: "", make: "Mercedes-Benz", model: "G 65", tag: "Trailblazers", disc: "offroad" },
+          { year: "", make: "Lexus", model: "LFA FE", tag: "Street / Touge ultimate", disc: "allround" },
+          { year: "", make: "Honda", model: "NSX-R '05", tag: "Regional Mascots", disc: "allround" },
+          { year: "", make: "Audi", model: "R8 '13", tag: "Day Trips", disc: "allround" },
+          { year: "", make: "Nissan", model: "240 #777", tag: "Drift Club Japan", disc: "drift" },
+          { year: "", make: "Honda", model: "Civic '84", tag: "Moto Auto Zine", disc: "allround" },
+          { year: "", make: "Toyota", model: "GR86 \"86 Stories\"", tag: "Yuji's Auto", disc: "allround" },
+          { year: "", make: "Porsche", model: "918", tag: "Horizon Play", disc: "top" },
+          { year: "", make: "Porsche", model: "Cayman GT4 RS", tag: "Road Rivals", disc: "allround" },
+          { year: "", make: "Opel", model: "Manta 400", tag: "Dirt Rivals", disc: "offroad" },
           { year: "#37", model: "Pro 2 Truck", tag: "Cross Country Rivals" },
-          { year: "", make: "Subaru", model: "Vivio FE", tag: "Horizon Life" },
-          { year: "", make: "Nissan", model: "Nismo GT-R '24", tag: "Touge & Street Rivals" },
-          { year: "", make: "Koenigsegg", model: "Agera RS", tag: "Explore Japan landmark" }
+          { year: "", make: "Subaru", model: "Vivio FE", tag: "Horizon Life", disc: "allround" },
+          { year: "", make: "Nissan", model: "Nismo GT-R '24", tag: "Touge & Street Rivals", disc: "allround" },
+          { year: "", make: "Koenigsegg", model: "Agera RS", tag: "Explore Japan landmark", disc: "top" }
         ]
       },
       {
         title: "Featured Roster (community-sourced sample)",
         note: "A slice of the launch roster — the full list spans 64+ pages on IGN.",
         items: [
-          { year: "1969", make: "Toyota", model: "2000GT" },
-          { year: "1964", make: "Ferrari", model: "250 GTO" },
-          { year: "1954", make: "Mercedes-Benz", model: "300SL" },
-          { year: "1994", make: "Ferrari", model: "355 Berlinetta" },
-          { year: "1991", make: "Ferrari", model: "512 TR" },
-          { year: "1973", make: "Porsche", model: "911 Carrera RS" },
-          { year: "1995", make: "Porsche", model: "911 GT2" },
-          { year: "2004", make: "Porsche", model: "996 GT3" },
-          { year: "1982", make: "Porsche", model: "911 Turbo" },
-          { year: "1989", make: "Porsche", model: "944 Turbo" }
+          { year: "1969", make: "Toyota", model: "2000GT", disc: "allround" },
+          { year: "1964", make: "Ferrari", model: "250 GTO", disc: "allround" },
+          { year: "1954", make: "Mercedes-Benz", model: "300SL", disc: "allround" },
+          { year: "1994", make: "Ferrari", model: "355 Berlinetta", disc: "allround" },
+          { year: "1991", make: "Ferrari", model: "512 TR", disc: "allround" },
+          { year: "1973", make: "Porsche", model: "911 Carrera RS", disc: "allround" },
+          { year: "1995", make: "Porsche", model: "911 GT2", disc: "top" },
+          { year: "2004", make: "Porsche", model: "996 GT3", disc: "top" },
+          { year: "1982", make: "Porsche", model: "911 Turbo", disc: "allround" },
+          { year: "1989", make: "Porsche", model: "944 Turbo", disc: "allround" }
         ]
       }
     ]
@@ -192,13 +192,13 @@ window.FH6DATA = {
   regions: {
     intro: "Forza Horizon 6 is set in a fictionalised Japan with the largest open-world map in the series [WIKI]. The areas below are named in Wikipedia; community guides report the full map spans 10 regions — we list what is encyclopaedically confirmed and clearly mark the rest.",
     items: [
-      { name: "Tokyo", known: true, blurb: "The largest urban area in any Forza Horizon game — about five times the size of previous city areas [WIKI]. Districts include Shibuya Crossing, Ginko Avenue, and Tokyo Tower, linked by elevated highways. Mix of neon downtown, suburbs, and industrial docks [WIKI].",
+      { name: "Tokyo", known: true, pin: { x: 70, y: 58 }, blurb: "The largest urban area in any Forza Horizon game — about five times the size of previous city areas [WIKI]. Districts include Shibuya Crossing, Ginko Avenue, and Tokyo Tower, linked by elevated highways. Mix of neon downtown, suburbs, and industrial docks [WIKI].",
         features: ["Shibuya Crossing", "Ginko Avenue", "Tokyo Tower", "Elevated highways", "Neon downtown · suburbs · industrial docks", "≈5× the size of prior city areas [WIKI]"] },
-      { name: "Legend Island", known: true, blurb: "A special area unlocked with the Gold Wristband, featuring unique challenges, exclusive events, and a second Horizon Festival [WIKI].",
+      { name: "Legend Island", known: true, pin: { x: 88.2, y: 26.8 }, blurb: "A special area unlocked with the Gold Wristband, featuring unique challenges, exclusive events, and a second Horizon Festival [WIKI].",
         features: ["Gold Wristband unlock", "Unique challenges", "Exclusive events", "Second Horizon Festival"] },
-      { name: "Rural Japan", known: true, blurb: "The countryside, home to the Estate — your customisable mountainside property [WIKI]. Scenic driving and overlooks.",
+      { name: "Rural Japan", known: true, pin: { x: 30, y: 71 }, blurb: "The countryside, home to the Estate — your customisable mountainside property [WIKI]. Scenic driving and overlooks.",
         features: ["The Estate (customisable property)", "Mountainous scenery", "Open-world building"] },
-      { name: "Mount Fuji", known: true, blurb: "Japan's iconic peak appears as a backdrop behind Tokyo and the key art — a landmark rather than a drivable district [WIKI].",
+      { name: "Mount Fuji", known: true, pin: { x: 43.2, y: 40.3 }, blurb: "Japan's iconic peak appears as a backdrop behind Tokyo and the key art — a landmark rather than a drivable district [WIKI].",
         features: ["Backdrop landmark", "Visible from Tokyo", "Key-art centerpiece"] },
       { name: "More regions (community-reported)", known: false, blurb: "Community guides describe the full map as 10 regions. Beyond Tokyo, Legend Island, Rural Japan and Mount Fuji, Wikipedia does not name the others, so we won't invent them.",
         features: ["Community: 10 regions total", "Discover by driving in", "Contributes to Discover Japan stamps"] }
@@ -274,6 +274,18 @@ window.FH6DATA = {
       "Drive through Mascots scattered across the map for easy credits as you explore.",
       "Claim The Estate's daily credit payouts via My Horizon → Message Center.",
       "Work the weekly Festival Playlist — its reward cars and payouts compound fast."
+    ],
+    pitfalls: [
+      { t: "Don't blow credits at the Autoshow", b: "Wheelspins, story events and the Festival Playlist hand out cars fast — spend early credits tuning your starter instead of buying the headline car." },
+      { t: "Don't ignore Discover Japan stamps", b: "Stamps unlock Barn Find rumours and feed your Collection Journal. Skipping exploration means missing free classic cars." },
+      { t: "Don't leave assists on while chasing +125% credits", b: "Higher difficulty only pays the bonus with assists OFF. Keep the aids on and you stay at the base payout." },
+      { t: "Don't miss the green CT aftermarket icons", b: "Aftermarket Cars are secondhand, fully tuned and cheaper than the Autoshow — the best early-game value on the map." },
+      { t: "Don't read the '8 houses' figure as 8 properties", b: "Wikipedia confirms one headline property (The Estate); the '8' refers to Garages, the fast-travel points." },
+      { t: "Don't fast-travel to places you haven't driven", b: "You can only blink to roads you've already visited. Explore first, then teleport." },
+      { t: "Don't brute-force PR stunt 3-stars", b: "Pick a car built for the discipline and tune it; three-starring with the wrong machine wastes hours." },
+      { t: "Don't scrap your starter cars", b: "Silvia (drift), Celica (all-rounder) and Jimmy (off-road) each earn their keep as tool cars — keep them." },
+      { t: "Don't skip The Estate's daily payout", b: "Claim it via My Horizon → Message Center; it's a steady credit trickle while you explore." },
+      { t: "Don't only grind one event type", b: "Sweep Mascots and Photo Spots (PH) as you drive — they stack Collection Journal stamps and unlock content faster." }
     ]
   },
 

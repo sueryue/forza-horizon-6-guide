@@ -14,8 +14,34 @@
   function carName(c) {
     return (c.year ? c.year + " " : "") + c.make + " " + c.model;
   }
-  function mono(make) {
-    return (make || "?").replace(/[^A-Za-z0-9]/g, "").slice(0, 2).toUpperCase() || "?";
+  // Real car silhouette icons (inline SVG), one profile per discipline.
+  function wheelDark(r) {
+    return '<circle cx="16" cy="27" r="' + r + '" fill="#04121a"/><circle cx="48" cy="27" r="' + r + '" fill="#04121a"/>';
+  }
+  function hub(r) {
+    var h = (r * 0.42).toFixed(1);
+    return '<circle cx="16" cy="27" r="' + h + '" fill="rgba(255,255,255,.82)"/><circle cx="48" cy="27" r="' + h + '" fill="rgba(255,255,255,.82)"/>';
+  }
+  function carIcon(d) {
+    var L = "rgba(255,255,255,.28)", r = 6, body = "", acc = "";
+    if (d === "top") {
+      body = '<path d="M5 25 C6 19 11 18 19 18 L24 18 C27 12 33 11 39 13 L46 16 C54 17 59 20 59 25 L59 26 C59 27 58 27 57 27 L8 27 C6 27 5 26 5 25 Z"/>';
+      acc = '<path d="M26 18 C29 13 34 12 38 14 L44 16 C41 17 37 18 32 18 Z" fill="' + L + '"/><rect x="52" y="13" width="8" height="2" rx="1"/><rect x="57" y="13" width="2" height="6"/>';
+    } else if (d === "drift") {
+      body = '<path d="M5 25 C6 19 11 18 19 18 L24 18 C27 12 33 11 39 13 L46 16 C54 17 59 20 59 25 L59 26 C59 27 58 27 57 27 L8 27 C6 27 5 26 5 25 Z"/>';
+      acc = '<path d="M26 18 C29 13 34 12 38 14 L44 16 C41 17 37 18 32 18 Z" fill="' + L + '"/><path d="M2 12 L9 14 M1 17 L9 18 M2 22 L9 22" stroke="' + L + '" stroke-width="1.6" fill="none" stroke-linecap="round"/>';
+    } else if (d === "drag") {
+      body = '<path d="M3 24 L50 24 C52 21 55 20 58 20 L58 24 L60 25 L60 27 L5 27 Z"/>';
+      acc = '<rect x="49" y="11" width="13" height="3" rx="1"/><rect x="52" y="11" width="2" height="10"/><rect x="59" y="11" width="2" height="10"/><rect x="1" y="22" width="6" height="3" rx="1"/>';
+    } else if (d === "offroad") {
+      r = 7;
+      body = '<path d="M5 27 L5 13 Q5 10 9 10 L41 10 Q45 10 45 13 L45 18 L53 19 L53 27 Z"/>';
+      acc = '<rect x="10" y="7" width="30" height="2" rx="1"/><rect x="14" y="7" width="2" height="3"/><rect x="34" y="7" width="2" height="3"/><rect x="12" y="12" width="14" height="6" rx="1" fill="' + L + '"/><rect x="28" y="12" width="12" height="6" rx="1" fill="' + L + '"/>';
+    } else {
+      body = '<path d="M5 25 Q6 18 14 18 L22 18 Q25 13 32 13 L40 15 Q52 16 57 21 L57 25 Q57 27 53 27 L9 27 Q5 27 5 25 Z"/>';
+      acc = '<path d="M24 18 Q27 14 32 15 L39 16 C36 17 32 18 27 18 Z" fill="' + L + '"/>';
+    }
+    return '<svg viewBox="0 0 64 34" width="40" height="23" fill="#04121a" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="car icon">' + wheelDark(r) + body + hub(r) + acc + '</svg>';
   }
   function sectionHead(eyebrow, title, lead) {
     return '<div class="section-head"><p class="eyebrow">' + esc(eyebrow) + '</p>' +
@@ -32,16 +58,34 @@
   }
 
   /* ---------- car sub-renderers (composed into the single Cars hub) ---------- */
+  var DISCIPLINES = [
+    { k: "all", l: "All cars" },
+    { k: "top", l: "Top Speed" },
+    { k: "drift", l: "Drift" },
+    { k: "drag", l: "Drag" },
+    { k: "offroad", l: "Off-road" },
+    { k: "allround", l: "All-rounder" }
+  ];
+  function discLabel(k) {
+    for (var i = 0; i < DISCIPLINES.length; i++) if (DISCIPLINES[i].k === k) return DISCIPLINES[i].l;
+    return "";
+  }
   function renderCarsList() {
+    var filterBar = '<div class="car-filter" role="group" aria-label="Filter cars by discipline">' +
+      DISCIPLINES.map(function (d, i) {
+        return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-disc="' + d.k + '">' + esc(d.l) + '</button>';
+      }).join("") + '</div>';
     var groups = D.cars.groups.map(function (g) {
       var cards = g.items.map(function (c) {
-        return '<div class="car-card">' +
-          '<div class="monogram">' + esc(mono(c.make)) + '</div>' +
+        var d = c.disc || "allround";
+        return           '<div class="car-card" data-disc="' + esc(d) + '">' +
+          '<div class="monogram">' + carIcon(d) + '</div>' +
           '<div class="car-meta">' +
             '<div class="yr">' + esc(c.year || "—") + '</div>' +
             '<div class="nm">' + esc(c.model) + '</div>' +
             '<div class="mk">' + esc(c.make) + '</div>' +
             (c.tag ? '<span class="tag">' + esc(c.tag) + '</span>' : '') +
+            '<span class="disc-pill disc-' + esc(d) + '">' + esc(discLabel(d)) + '</span>' +
             (c.note ? '<div class="car-note">' + esc(c.note) + '</div>' : '') +
           '</div></div>';
       }).join("");
@@ -50,7 +94,7 @@
         (g.note ? '<p class="note">' + esc(g.note) + '</p>' : '') +
         '<div class="car-grid">' + cards + '</div></div>';
     }).join("");
-    return sectionHead("Garage", "Cars List", D.cars.intro) + groups;
+    return sectionHead("Garage", "Cars List", D.cars.intro) + filterBar + groups;
   }
 
   function renderCarsOverview() {
@@ -220,12 +264,19 @@
     /* best/barn/treasure/aftermarket/forza-edition are merged into the Cars hub */
 
     map: function () {
-      var cards = D.regions.items.map(function (r) {
+      var cards = D.regions.items.map(function (r, i) {
         var feats = r.features.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join("");
-        return '<div class="region-card" role="button" tabindex="0" aria-expanded="false">' +
+        return '<div class="region-card" data-region="' + i + '" role="button" tabindex="0" aria-expanded="false">' +
           '<h3>' + esc(r.name) + (r.known ? ' <span class="rtag ok">Confirmed</span>' : ' <span class="rtag">Reported</span>') + '</h3>' +
           '<p class="blurb">' + esc(r.blurb) + '</p>' +
           '<ul class="feats">' + feats + '</ul></div>';
+      }).join("");
+      var pins = D.regions.items.map(function (r, i) {
+        if (!r.pin) return "";
+        return '<button type="button" class="map-pin ' + (r.known ? 'pin-ok' : '') + '" ' +
+          'style="left:' + r.pin.x + '%;top:' + r.pin.y + '%" data-region="' + i + '" ' +
+          'aria-label="Jump to ' + esc(r.name) + ' region">' +
+          '<span class="mp-dot"></span><span class="mp-lbl">' + esc(r.name) + '</span></button>';
       }).join("");
       var legend = D.regions.legend.map(function (l) {
         return '<div>' + esc(l.icon) + ' ' + esc(l.label) + '</div>';
@@ -239,7 +290,8 @@
         '<div class="me-block"><h3>Exploring tips</h3><ul class="me-list">' + tips + '</ul></div>' +
         '</div>';
       return sectionHead("Horizon Japan", "Interactive Map", D.regions.intro) +
-        '<div class="map-wrap"><img src="assets/img/map-japan.svg" alt="Horizon Japan festival map" loading="lazy"></div>' +
+        '<div class="map-wrap map-canvas"><img src="assets/img/map-japan.svg" alt="Horizon Japan festival map" loading="lazy">' + pins + '</div>' +
+        '<p class="map-hint">Tap a marker to jump to that region ↓</p>' +
         '<div class="region-grid">' + cards + '</div>' +
         '<div class="legend">' + legend + '</div>' + extra;
     },
@@ -250,8 +302,12 @@
         return '<div class="gl"><dt>' + esc(g.t) + '</dt><dd>' + esc(g.d) + '</dd></div>';
       }).join("");
       var cred = D.beginner.credits.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join("");
+      var pf = (D.beginner.pitfalls || []).map(function (p) {
+        return '<div class="pitfall"><span class="pf-avoid">Avoid</span><div><h4>' + esc(p.t) + '</h4><p>' + esc(p.b) + '</p></div></div>';
+      }).join("");
       return sectionHead("No spoilers", "Beginner's Guide", D.beginner.intro) +
         ol(D.beginner.steps) +
+        '<div class="pitfalls"><h3>新手避坑 · Beginner Pitfalls</h3>' + pf + '</div>' +
         '<div class="settings-box"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>' +
         '<div class="glossary"><h3>Horizon glossary</h3><dl>' + gl + '</dl></div>' +
         '<div class="credits-box"><h3>Credit farming 101</h3><ul>' + cred + '</ul></div>';
@@ -378,13 +434,144 @@
     });
   }
 
+  function initMapPins() {
+    app.addEventListener("click", function (e) {
+      var pin = e.target.closest(".map-pin");
+      if (!pin) return;
+      e.preventDefault();
+      var idx = pin.getAttribute("data-region");
+      var card = app.querySelector('.region-card[data-region="' + idx + '"]');
+      if (!card) return;
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("open", "flash");
+      card.setAttribute("aria-expanded", "true");
+      setTimeout(function () { card.classList.remove("flash"); }, 1300);
+    });
+  }
+  function initCarFilter() {
+    app.addEventListener("click", function (e) {
+      var chip = e.target.closest(".cf-chip");
+      if (!chip) return;
+      e.preventDefault();
+      var disc = chip.getAttribute("data-disc");
+      var chips = app.querySelectorAll(".cf-chip");
+      for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("active", chips[i] === chip);
+      var cards = app.querySelectorAll(".car-card[data-disc]");
+      for (var j = 0; j < cards.length; j++) {
+        var d = cards[j].getAttribute("data-disc");
+        cards[j].classList.toggle("is-hidden", !(disc === "all" || d === disc));
+      }
+      var groups = app.querySelectorAll(".car-group");
+      for (var g = 0; g < groups.length; g++) {
+        var visible = groups[g].querySelectorAll(".car-card:not(.is-hidden)");
+        groups[g].classList.toggle("is-hidden", visible.length === 0);
+      }
+    });
+  }
+
   /* ---------- boot ---------- */
+  /* ---------- Google Translate (custom premium trigger over GT engine) ---------- */
+  // Define the global callback up-front so it exists before Google's async script calls it.
+  window.googleTranslateElementInit = function () {
+    new google.translate.TranslateElement({
+      pageLanguage: "en",
+      includedLanguages: "zh-CN,zh-TW,ja,ko,de,fr,es,pt,ru",
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, "google_translate_element");
+  };
+
+  function initTranslate() {
+    var LANG_CODE = { "en": "EN", "zh-CN": "中", "zh-TW": "繁", "ja": "日", "ko": "한", "de": "DE", "fr": "FR", "es": "ES", "pt": "PT", "ru": "RU" };
+    var btn = document.getElementById("translate-btn");
+    var menu = document.getElementById("translate-menu");
+    var code = document.getElementById("translate-code");
+    if (!btn || !menu) return;
+
+    function combo() { return document.querySelector(".goog-te-combo"); }
+
+    function applyInline(lang) {
+      var sel = combo();
+      if (!sel) return false;
+      sel.value = lang;
+      sel.dispatchEvent(new Event("change"));
+      return true;
+    }
+
+    function openExternal(lang) {
+      var u = encodeURIComponent(location.href);
+      window.open("https://translate.google.com/translate?sl=auto&tl=" + lang + "&u=" + u, "_blank", "noopener");
+    }
+
+    function setActive(lang) {
+      menu.querySelectorAll(".tm-item").forEach(function (it) {
+        it.classList.toggle("active", it.getAttribute("data-lang") === lang);
+      });
+    }
+
+    function openMenu() {
+      menu.hidden = false;
+      btn.setAttribute("aria-expanded", "true");
+      requestAnimationFrame(function () { menu.classList.add("open"); });
+    }
+    function closeMenu() {
+      menu.hidden = true;
+      menu.classList.remove("open");
+      btn.setAttribute("aria-expanded", "false");
+    }
+
+    btn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (menu.hidden) openMenu(); else closeMenu();
+    });
+    menu.addEventListener("click", function (e) { e.stopPropagation(); });
+
+    menu.querySelectorAll(".tm-item").forEach(function (it) {
+      it.addEventListener("click", function () {
+        var lang = it.getAttribute("data-lang");
+        var ok = applyInline(lang);
+        if (ok) {
+          code.textContent = LANG_CODE[lang] || "EN";
+          try { localStorage.setItem("fh6-lang", lang); } catch (e) {}
+          setActive(lang);
+        } else {
+          // inline widget unavailable (e.g. blocked region) -> open web translator
+          openExternal(lang);
+        }
+        closeMenu();
+      });
+    });
+
+    document.addEventListener("click", closeMenu);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+
+    // restore saved language once the widget is ready
+    var saved = null;
+    try { saved = localStorage.getItem("fh6-lang"); } catch (e) {}
+    if (saved && saved !== "en") {
+      var tries = 0;
+      var iv = setInterval(function () {
+        tries++;
+        if (applyInline(saved)) {
+          code.textContent = LANG_CODE[saved] || "EN";
+          setActive(saved);
+          clearInterval(iv);
+        } else if (tries > 40) {
+          clearInterval(iv);
+        }
+      }, 150);
+    }
+  }
+
   function boot() {
     if (!D) { app.innerHTML = '<p style="color:#9aa6c2">Failed to load guide data.</p>'; return; }
     initTheme();
     initMenu();
     initRegions();
     initCarsSubnav();
+    initMapPins();
+    initCarFilter();
+    initTranslate();
     window.addEventListener("hashchange", render);
     render();
   }
