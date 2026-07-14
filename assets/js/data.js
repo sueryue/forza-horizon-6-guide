@@ -457,4 +457,121 @@ window.FH6DATA = {
     ]
   },
 
+  // ---------------------------------------------------------------------------
+  // WIKI — encyclopedia reference (series-stable mechanics + confirmed FH6 facts)
+  // ---------------------------------------------------------------------------
+  wiki: {
+    intro: "Quick-reference encyclopedia for Horizon Japan. Systems and terminology that carry across the Forza Horizon series are described in general terms; FH6-specific facts are noted. Nothing here is invented — see the source notes.",
+    cats: [
+      { name: "Core systems", items: [
+        { t: "Drivatars", b: "The AI racers that fill your lobbies. They mimic the driving styles of real Forza players, so they brake, block, and recover more like humans than scripted bots." },
+        { t: "Skill chains", b: "Link drifts, jumps, near-misses and clean racing to build a Skill multiplier. A big chain banks Skill Points (SP) you spend in each car's Mastery tree." },
+        { t: "Influence & Accolades", b: "The festival's progression currency. Earning accolades unlocks wristbands, new events, and the path toward the Horizon Legend rank." },
+        { t: "Wheelspins", b: "Prize spins granted by level-ups, story events and the Festival Playlist. A Super Wheelspin is the rarer version with better odds at cars and credit bundles." },
+        { t: "Forzathon", b: "Rotating in-world events with their own point shop. Show up, complete the themed challenges, and spend Forzathon Points on cars, emotes and cosmetics." },
+        { t: "Festival Playlist", b: "The live content backbone: weekly and daily seasonal challenges. Completing them is the main way to earn exclusive cars and accolades." }
+      ]},
+      { name: "Disciplines", items: [
+        { t: "Road Racing", b: "Tarmac circuits and sprints. Favours grip, top speed and braking — the bread-and-butter of the festival." },
+        { t: "Dirt Racing", b: "Loose-surface stages through Japan's countryside. Look for rally-bred hatches and lightweight buggies." },
+        { t: "Cross Country", b: "Rugged point-to-point routes across fields, rivers and trails. Big, tough machinery wins here." },
+        { t: "Street Racing", b: "Illegal-feeling night Touge and city runs. Tight, technical, and all about rhythm and momentum." },
+        { t: "Drag", b: "Straight-line launches from a standing start. Brutal acceleration and launch control decide it." },
+        { t: "Drift", b: "Style over speed — hold the longest, smoothest slide for points. Differentials and tire setup matter most." }
+      ]},
+      { name: "Car classes", items: [
+        { t: "Performance Index (PI)", b: "Every car is ranked by a single PI number so you can race fair. Upgrades push the number up; the class is just a band of that number." },
+        { t: "D / C / B / A", b: "The lower four classes. D is the most beginner-friendly; A is fast but still accessible for most events." },
+        { t: "S1 / S2", b: "Superbike-grade and hypercar territory. High power and aero; reserved for the toughest events and PR stunts." },
+        { t: "X (Exceptional)", b: "The unrestricted class for the absolute fastest, most heavily modified machines in the game." }
+      ]},
+      { name: "Events & PR stunts", items: [
+        { t: "Circuit & Sprint", b: "Closed-loop and point-to-point races against Drivatars — the core of the campaign." },
+        { t: "Speed Zones", b: "Hit the highest average speed through a marked corridor. Reward Super Wheelspins and accolades." },
+        { t: "Danger Signs", b: "Launch off a ramp and fly as far as possible. A favourite for big-air screenshots." },
+        { t: "Drift & Trailblazer", b: "Score points in a slide, or blaze a ghost route as fast as you can. Both feed Skill Points." }
+      ]},
+      { name: "The world", items: [
+        { t: "Horizon Japan", b: "FH6's setting: a fictionalised, festival-take on Japan with the largest open-world map in the series [WIKI]." },
+        { t: "Regions", b: "Japan is split into regions — community guides report around ten, from Tokyo and Mount Fuji to rural towns and islands." },
+        { t: "The Estate", b: "Your customisable mountainside property in rural Japan. Build, decorate, and collect daily credit payouts [WIKI]." },
+        { t: "Garages", b: "Eight garages double as fast-travel points and car-display showrooms across the map [WIKI]." }
+      ]},
+      { name: "Glossary", items: [
+        { t: "Wristband", b: "The rank badge you earn by clearing accolade milestones. Higher wristbands unlock more of the map and events." },
+        { t: "Discover Japan stamps", b: "Collectible stamps earned by exploring regions, finding landmarks and photographing them." },
+        { t: "Mascots", b: "Scattered collectibles you drive through for credits as you explore." },
+        { t: "Barn Find / Treasure Car", b: "Two kinds of hidden free cars: barn finds appear as stamp-gated rumours, treasure cars hide behind photo clues with no marker until found." },
+        { t: "ANNA & Cinema Mode", b: "ANNA is the in-car assistant that can drive you to a destination; Cinema Mode hides the UI for clean screenshot tours." }
+      ]}
+    ]
+  },
+
+  // ---------------------------------------------------------------------------
+  // GUIDES — curated walkthroughs (real game systems + confirmed FH6 details)
+  // ---------------------------------------------------------------------------
+  guides: {
+    intro: "Step-by-step walkthroughs built from the real game systems and the confirmed FH6 details on this site. Where a count comes from community reporting rather than an official source, it's flagged.",
+    items: [
+      { id: "g-first", title: "Your first 10 hours", tag: "Roadmap", lead: "A relaxed path from the Qualifiers to a garage you actually like.",
+        steps: [
+          { n: 1, title: "Run the Qualifiers, then the Invitational", body: "Finishing the Horizon Invitational grants your first (Yellow) Wristband and unlocks the festival, multiplayer and free cars." },
+          { n: 2, title: "Pick a starter that fits you", body: "Silvia K'S for drift, Celica GT-Four for balance, GMC Jimmy for off-road. All three end up in your garage anyway." },
+          { n: 3, title: "Don't spend credits at the Autoshow", body: "Wheelspins, story events and the Festival Playlist hand out cars fast. Tune your starter instead." },
+          { n: 4, title: "Photo the landmarks", body: "Press Up for photo mode. Landmark shots feed your Collection Journal and earn Discover Japan stamps." },
+          { n: 5, title: "Three-star a few PR stunts", body: "Speed Zones, Danger Signs and Drift Zones pay Super Wheelspins and Skill Points for Car Mastery." },
+          { n: 6, title: "Raise difficulty for credits", body: "Higher difficulty with assists off can pay up to +125% credits per race — once you can still win." }
+        ] },
+      { id: "g-barn", title: "Unlock all 14 Barn Finds", tag: "Collectibles", lead: "Classic cars hidden in barns — gated by exploration, not luck.",
+        steps: [
+          { n: 1, title: "Earn Discover Japan stamps", body: "Explore regions, find landmarks and photograph them. Stamps are what unlock barn rumours." },
+          { n: 2, title: "Watch for the rumour notification", body: "Once a region's stamps are met, a Barn Find rumour appears. You'll get a map hint rather than an exact pin." },
+          { n: 3, title: "Drive to the hint and search", body: "Barns are tucked into the landscape. Roll up slowly and the find triggers automatically." },
+          { n: 4, title: "Restore and enjoy", body: "Found barns go to your garage. 14 are reported across Japan — community-sourced; Wikipedia is silent." }
+        ] },
+      { id: "g-treasure", title: "Hunt the 9 Treasure Cars", tag: "Collectibles", lead: "Abandoned cars found only through photo clues — no marker until discovered.",
+        steps: [
+          { n: 1, title: "Get the photo clue", body: "Treasure clues show a snapshot of the location. Study the background — mountains, signs, road shape — to narrow it down." },
+          { n: 2, title: "Match it on the map", body: "There is no map marker. Use landmarks and the horizon to triangulate the spot." },
+          { n: 3, title: "Drive over the dig site", body: "Once you're close, the dig prompt appears. 9 treasure cars are reported — community-sourced; Wikipedia is silent." }
+        ] },
+      { id: "g-drift", title: "Drift tuning basics", tag: "Tuning", lead: "Make almost any car slide predictably.",
+        steps: [
+          { n: 1, title: "Tires: lower the pressure", body: "Drop rear tire pressure a few PSI for a looser, more forgiving slide." },
+          { n: 2, title: "Differential: bias to the rear", body: "Increase rear deceleration (and acceleration) so the back steps out on throttle lift and braking." },
+          { n: 3, title: "Alignment: add caster", body: "More positive caster sharpens turn-in and self-centring, which keeps drifts controllable." },
+          { n: 4, title: "Power & weight", body: "RWD with healthy power drifts best; a little ballast at the rear helps rotation. Then practice on the Touge." }
+        ] },
+      { id: "g-credits", title: "Farm credits efficiently", tag: "Economy", lead: "Credits fund upgrades and the cars you actually want.",
+        steps: [
+          { n: 1, title: "Turn difficulty up", body: "Higher difficulty with assists off can pay up to +125% credits per race — only when you can still win." },
+          { n: 2, title: "Three-star PR stunts", body: "Speed Zones, Danger Signs and Drift Zones award Super Wheelspins, which can pay out big credit bundles." },
+          { n: 3, title: "Bank Wheelspins", body: "Level-ups, story events and the Festival Playlist all grant spins — save them and open in batches." },
+          { n: 4, title: "Buy Aftermarket, not Autoshow", body: "Green CT icons on the minimap sell secondhand, fully-tuned cars cheaper than new." }
+        ] },
+      { id: "g-regions", title: "Complete the 10 regions", tag: "Exploration", lead: "See everything Horizon Japan has to offer.",
+        steps: [
+          { n: 1, title: "Drive, don't fast-travel", body: "Explore first to fill the map; you can blink to visited spots later. Stamp every region." },
+          { n: 2, title: "Clear PR stunts per region", body: "Each area has its own Speed Zones, Danger Signs and Drift Zones — great for accolades and spins." },
+          { n: 3, title: "Collect mascots", body: "Drive through the scattered mascots for credits as you go." },
+          { n: 4, title: "Photograph landmarks", body: "Landmark shots complete the Collection Journal and stack Discover Japan stamps." }
+        ] },
+      { id: "g-estate", title: "Build the Estate", tag: "Property", lead: "Your own mountainside base in rural Japan [WIKI].",
+        steps: [
+          { n: 1, title: "Unlock it", body: "The Estate becomes available as you progress the festival in rural Japan." },
+          { n: 2, title: "Build & decorate", body: "Place buildings and style the grounds to taste — it's your personal festival hub." },
+          { n: 3, title: "Collect daily payouts", body: "Check the My Horizon message center for daily credit payouts from your property." }
+        ] }
+    ]
+  },
+
+  // ---------------------------------------------------------------------------
+  // DATABASE — metadata for the sortable/searchable car table (rows derived
+  // from D.cars.groups at render time, so the data stays single-sourced).
+  // ---------------------------------------------------------------------------
+  database: {
+    intro: "Every car on this site, in one sortable table. Search by name, filter by discipline, or click a column to sort. Data is drawn from the Cars list — 550+ total at launch [WIKI]; this is a curated slice.",
+    note: "Tip: click any column header to sort. Combine the search box with a discipline chip to narrow fast."
+  },
+
 };

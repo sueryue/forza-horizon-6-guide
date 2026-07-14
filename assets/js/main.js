@@ -260,7 +260,7 @@
         { k: "cars-treasure",    l: "Treasure",           i: NAV_SVG.treasure },
         { k: "cars-barn",        l: "Barn Finds",         i: NAV_SVG.barn }
       ];
-      var subnav = '<nav class="cars-subnav" aria-label="Cars sections">' +
+      var subnav = '<nav class="cars-subnav" data-subnav aria-label="Cars sections">' +
         navItems.map(function (n) {
           return '<button type="button" data-scroll="' + n.k + '">' + n.i + '<span class="lbl">' + esc(n.l) + '</span></button>';
         }).join("") +
@@ -373,11 +373,81 @@
         '<section class="section media-shots"><h3 class="sub">Screenshots &amp; stills</h3>' +
           '<p class="shot-note">Frames pulled from the official trailers. To show your own captures, drop .jpg files into <code>assets/img/shots/</code> and add a <code>shots</code> entry with <code>src</code> in <code>data.js</code>.</p>' +
           '<div class="shot-grid">' + shots + '</div></section>';
+    },
+
+    /* ---------- Wiki: encyclopedia reference ---------- */
+    wiki: function () {
+      var w = D.wiki;
+      var cats = w.cats.map(function (c) {
+        var entries = c.items.map(function (e) {
+          return '<article class="wiki-entry"><h4>' + esc(e.t) + '</h4><p>' + esc(e.b) + '</p></article>';
+        }).join("");
+        return '<section class="wiki-cat"><h3 class="wiki-cat-h">' + esc(c.name) + '</h3><div class="wiki-grid">' + entries + '</div></section>';
+      }).join("");
+      return sectionHead("Encyclopedia", "Wiki", w.intro) + '<div class="wiki-wrap">' + cats + '</div>';
+    },
+
+    /* ---------- Database: sortable / searchable car table ---------- */
+    database: function () {
+      var db = D.database;
+      var rows = [];
+      D.cars.groups.forEach(function (g) {
+        g.items.forEach(function (c) {
+          var d = c.disc || "allround";
+          rows.push({ year: c.year || "", make: c.make || "", model: c.model || "", tag: c.tag || "", disc: d });
+        });
+      });
+      var body = rows.map(function (r) {
+        var search = (r.year + " " + r.make + " " + r.model + " " + r.tag + " " + discLabel(r.disc)).toLowerCase();
+        return '<tr class="db-row" data-disc="' + esc(r.disc) + '" data-search="' + esc(search) + '">' +
+          '<td class="db-year">' + esc(r.year || "—") + '</td>' +
+          '<td class="db-make">' + esc(r.make) + '</td>' +
+          '<td class="db-model">' + esc(r.model) + '</td>' +
+          '<td class="db-disc"><span class="disc-pill disc-' + esc(r.disc) + '">' + esc(discLabel(r.disc)) + '</span></td>' +
+          '<td class="db-tag">' + esc(r.tag || "—") + '</td>' +
+        '</tr>';
+      }).join("");
+      var chips = '<div class="car-filter db-filter" role="group" aria-label="Filter by discipline">' +
+        DISCIPLINES.map(function (d, i) {
+          return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-db-disc="' + d.k + '">' + esc(d.l) + '</button>';
+        }).join("") + '</div>';
+      return sectionHead("Raw data", "Database", db.intro) +
+        '<div class="db-toolbar">' + chips +
+          '<input type="search" class="db-search" id="db-search" placeholder="Search make, model, year, tag…" aria-label="Search cars">' +
+        '</div>' +
+        '<p class="db-count" id="db-count"></p>' +
+        '<div class="db-scroll"><table class="db-table"><thead><tr>' +
+          '<th data-sort="year" class="sortable">Year</th>' +
+          '<th data-sort="make" class="sortable">Make</th>' +
+          '<th data-sort="model" class="sortable">Model</th>' +
+          '<th data-sort="disc" class="sortable">Discipline</th>' +
+          '<th data-sort="tag" class="sortable">Source / Tag</th>' +
+        '</tr></thead><tbody>' + body + '</tbody></table></div>' +
+        '<p class="db-note">' + esc(db.note) + '</p>';
+    },
+
+    /* ---------- Guides: curated walkthroughs ---------- */
+    guides: function () {
+      var g = D.guides;
+      var navItems = g.items.map(function (it) {
+        return '<button type="button" data-scroll="' + it.id + '"><span class="lbl">' + esc(it.title) + '</span></button>';
+      }).join("");
+      var subnav = '<nav class="cars-subnav guide-subnav" data-subnav aria-label="Guides">' + navItems + '</nav>';
+      var secs = g.items.map(function (it) {
+        var steps = ol(it.steps.map(function (s) { return { n: s.n, title: s.title, body: s.body }; }));
+        return '<section id="' + it.id + '" class="guide-sec">' +
+          '<div class="guide-head"><h3>' + esc(it.title) + '</h3>' +
+          (it.tag ? '<span class="badge">' + esc(it.tag) + '</span>' : '') + '</div>' +
+          (it.lead ? '<p class="guide-lead">' + esc(it.lead) + '</p>' : '') +
+          steps + '</section>';
+      }).join("");
+      return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>';
     }
   };
 
   var TITLES = {
     home: "Forza Horizon 6 Guide",
+    wiki: "Wiki", database: "Database", guides: "Guides",
     cars: "Cars", map: "Interactive Map",
     beginner: "Beginner's Guide", houses: "Houses", media: "Media"
   };
@@ -401,6 +471,7 @@
     var page = currentPage();
     app.innerHTML = (pages[page] || pages.home)();
     setupReveal();
+    if (page === "database") filterDb();
     document.title = (TITLES[page] || "Guide") + " — Forza Horizon 6 Guide";
     // active nav
     var links = document.querySelectorAll("#nav a");
@@ -441,16 +512,19 @@
       if (e.target.closest("a")) nav.classList.remove("open");
     });
   }
-  function initCarsSubnav() {
-    // in-page jump buttons inside the Cars hub (don't change the hash/route)
+  function initScrollSubnav() {
+    // in-page jump buttons inside any hub (Cars, Guides) — don't change the hash/route
     app.addEventListener("click", function (e) {
       var b = e.target.closest("[data-scroll]");
       if (!b) return;
       e.preventDefault();
       var el = document.getElementById(b.getAttribute("data-scroll"));
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      var all = app.querySelectorAll(".cars-subnav [data-scroll]");
-      for (var i = 0; i < all.length; i++) all[i].classList.remove("active");
+      var group = b.closest("[data-subnav]");
+      if (group) {
+        var all = group.querySelectorAll("[data-scroll]");
+        for (var i = 0; i < all.length; i++) all[i].classList.remove("active");
+      }
       b.classList.add("active");
     });
   }
@@ -516,7 +590,7 @@
     : null;
   function setupReveal() {
     if (!revealIO || !document.documentElement.classList.contains('js-reveal')) return;
-    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head';
+    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec';
     var nodes = app.querySelectorAll(sel);
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
@@ -642,15 +716,75 @@
     });
   }
 
+  /* ---------- database: search / filter / sort (progressive enhancement) ---------- */
+  function filterDb() {
+    var box = document.getElementById("db-search");
+    if (!box) return;
+    var q = (box.value || "").toLowerCase().trim();
+    var activeChip = app.querySelector("[data-db-disc].active");
+    var disc = activeChip ? activeChip.getAttribute("data-db-disc") : "all";
+    var rows = app.querySelectorAll(".db-row");
+    var shown = 0;
+    for (var i = 0; i < rows.length; i++) {
+      var r = rows[i];
+      var matchQ = !q || (r.getAttribute("data-search") || "").indexOf(q) !== -1;
+      var matchD = disc === "all" || r.getAttribute("data-disc") === disc;
+      var ok = matchQ && matchD;
+      r.classList.toggle("is-hidden", !ok);
+      if (ok) shown++;
+    }
+    var countEl = document.getElementById("db-count");
+    if (countEl) countEl.textContent = shown + " of " + rows.length + " cars";
+  }
+  function sortDb(col, th) {
+    var table = th.closest(".db-table");
+    if (!table) return;
+    var tbody = table.querySelector("tbody");
+    if (!tbody) return;
+    var rows = Array.prototype.slice.call(tbody.querySelectorAll(".db-row"));
+    var dir = th.getAttribute("data-dir") === "asc" ? "desc" : "asc";
+    var allTh = table.querySelectorAll("th.sortable");
+    for (var i = 0; i < allTh.length; i++) { allTh[i].removeAttribute("data-dir"); allTh[i].classList.remove("sort-asc", "sort-desc"); }
+    th.setAttribute("data-dir", dir);
+    th.classList.add(dir === "asc" ? "sort-asc" : "sort-desc");
+    var numCol = (col === "year");
+    rows.sort(function (a, b) {
+      var av = a.querySelector(".db-" + col).textContent.toLowerCase();
+      var bv = b.querySelector(".db-" + col).textContent.toLowerCase();
+      if (numCol) { var an = parseInt(av, 10) || 0, bn = parseInt(bv, 10) || 0; return dir === "asc" ? an - bn : bn - an; }
+      return dir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+    rows.forEach(function (r) { tbody.appendChild(r); });
+  }
+  function initDatabase() {
+    app.addEventListener("input", function (e) {
+      if (e.target.id !== "db-search") return;
+      filterDb();
+    });
+    app.addEventListener("click", function (e) {
+      var chip = e.target.closest("[data-db-disc]");
+      if (chip) {
+        e.preventDefault();
+        var chips = app.querySelectorAll("[data-db-disc]");
+        for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("active", chips[i] === chip);
+        filterDb();
+        return;
+      }
+      var th = e.target.closest(".db-table th.sortable");
+      if (th) { e.preventDefault(); sortDb(th.getAttribute("data-sort"), th); }
+    });
+  }
+
   function boot() {
     if (!D) { app.innerHTML = '<p style="color:#9aa6c2">Failed to load guide data.</p>'; return; }
     if ('IntersectionObserver' in window) document.documentElement.classList.add('js-reveal');
     initTheme();
     initMenu();
     initRegions();
-    initCarsSubnav();
+    initScrollSubnav();
     initMapPins();
     initCarFilter();
+    initDatabase();
     initTranslate();
     initMediaPlayer();
     window.addEventListener("hashchange", render);
