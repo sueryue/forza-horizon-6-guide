@@ -574,4 +574,39 @@ window.FH6DATA = {
     note: "Tip: click any column header to sort. Combine the search box with a discipline chip to narrow fast."
   },
 
+  // ---------------------------------------------------------------------------
+  // PLATFORMS & REQUIREMENTS — where to get FH6 + PC system requirements.
+  // Real storefronts only. There is NO native iOS/Android app (see mobileNote).
+  // Sources: Steam store page, forzahorizon6.net, Gamersky config article.
+  // ---------------------------------------------------------------------------
+  platforms: {
+    intro: "Forza Horizon 6 is a current-gen title — no last-gen Xbox One disc build, and no native iOS/Android app. Pick your storefront below; the PC specs table shows what your rig needs.",
+    stores: [
+      { name: "Xbox Series X|S", kind: "Console", status: "Available", date: "May 19, 2026", note: "Disc & digital · day one on Game Pass Ultimate" },
+      { name: "Steam", kind: "PC", status: "Available", date: "May 19, 2026", note: "Windows PC · day one on PC Game Pass" },
+      { name: "Microsoft Store", kind: "PC", status: "Available", date: "May 19, 2026", note: "Windows PC (Xbox app) · PC Game Pass" },
+      { name: "Xbox Cloud Gaming", kind: "Cloud", status: "Available", date: "May 19, 2026", note: "Stream on Xbox One, phone, tablet or browser via Game Pass Ultimate" },
+      { name: "PlayStation 5", kind: "Console", status: "Late 2026", date: "Later in 2026", note: "Standalone purchase · cross-save with Xbox & Steam" }
+    ],
+    mobileNote: "There is no Forza Horizon 6 app on the App Store or Google Play. On phones and tablets the game is playable only through Xbox Cloud Gaming (Game Pass Ultimate) inside the Xbox app or a mobile browser — it is streamed, not installed.",
+    requirements: {
+      size: "167 GB (SSD required)",
+      tiers: [
+        { tier: "Minimum", goal: "1080p · 60 FPS · Low", os: "Windows 10 22H2 (19045) or 11", cpu: "Intel Core i5-8400 / AMD Ryzen 5 1600", ram: "16 GB", gpu: "NVIDIA GTX 1650 / AMD RX 6500 XT / Intel Arc A380", dx: "12", storage: "167 GB SSD" },
+        { tier: "Recommended", goal: "1440p · 60 FPS · High", os: "Windows 10 22H2 or 11", cpu: "Intel Core i5-12400F / AMD Ryzen 5 5600X", ram: "16 GB", gpu: "NVIDIA RTX 3060 Ti / AMD RX 6700 XT / Intel Arc A580", dx: "12", storage: "167 GB SSD" },
+        { tier: "Extreme (4K)", goal: "4K · 60 FPS · Ultra", os: "Windows 10/11 22H2 or newer", cpu: "Intel Core i7-12700K / AMD Ryzen 7 7700X", ram: "24 GB", gpu: "NVIDIA RTX 4070 Ti / AMD RX 7900 XT", dx: "12", storage: "NVMe SSD" },
+        { tier: "Extreme (RT)", goal: "4K · 60 FPS · Ultra + Ray Tracing", os: "Windows 10/11 22H2 or newer", cpu: "Intel Core i7-12700K / AMD Ryzen 7 7700X", ram: "32 GB", gpu: "NVIDIA RTX 5070 Ti / AMD RX 9070 XT", dx: "12", storage: "NVMe SSD" }
+      ],
+      features: [
+        "Uncapped frame rate on PC",
+        "NVIDIA DLSS 4 · AMD FSR 4 · Intel XeSS 2.1",
+        "Ray-traced reflections & global illumination",
+        "Ultrawide monitor support",
+        "Steam Deck & ROG Ally verified",
+        "Controller & steering-wheel support"
+      ],
+      console: "Xbox Series X|S: Quality mode 30 FPS / 4K · Performance mode 60 FPS"
+    }
+  },
+
 };

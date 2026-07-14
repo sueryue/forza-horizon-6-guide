@@ -442,6 +442,41 @@
           steps + '</section>';
       }).join("");
       return sectionHead("Walkthroughs", "Guides", g.intro) + '<div class="guides-hub">' + subnav + secs + '</div>';
+    },
+    platforms: function () {
+      var p = D.platforms;
+      var stores = p.stores.map(function (s) {
+        var live = /avail/i.test(s.status);
+        return '<div class="pf-card' + (live ? ' is-live' : '') + '">' +
+          '<div class="pf-top"><span class="pf-name">' + esc(s.name) + '</span>' +
+          '<span class="pf-kind">' + esc(s.kind) + '</span></div>' +
+          '<div class="pf-status ' + (live ? 'live' : 'soon') + '">' + esc(s.status) + '</div>' +
+          '<div class="pf-date">' + esc(s.date) + '</div>' +
+          '<div class="pf-note">' + esc(s.note) + '</div></div>';
+      }).join("");
+      var tiers = p.requirements.tiers.map(function (t) {
+        return '<div class="spec-card">' +
+          '<div class="spec-head"><span class="spec-tier">' + esc(t.tier) + '</span>' +
+          '<span class="spec-goal">' + esc(t.goal) + '</span></div>' +
+          '<ul class="spec-list">' +
+            '<li><span>OS</span><b>' + esc(t.os) + '</b></li>' +
+            '<li><span>CPU</span><b>' + esc(t.cpu) + '</b></li>' +
+            '<li><span>RAM</span><b>' + esc(t.ram) + '</b></li>' +
+            '<li><span>GPU</span><b>' + esc(t.gpu) + '</b></li>' +
+            '<li><span>DirectX</span><b>' + esc(t.dx) + '</b></li>' +
+            '<li><span>Storage</span><b>' + esc(t.storage) + '</b></li>' +
+          '</ul></div>';
+      }).join("");
+      var feats = p.requirements.features.map(function (f) {
+        return '<li class="chip">' + esc(f) + '</li>';
+      }).join("");
+      return sectionHead("Get the game", "Platforms & Requirements", p.intro) +
+        '<div class="pf-grid">' + stores + '</div>' +
+        '<p class="pf-mobile">' + esc(p.mobileNote) + '</p>' +
+        '<div class="section-head" style="margin-top:36px"><h2>PC System Requirements</h2>' +
+          '<p class="sub">Download size: <b>' + esc(p.requirements.size) + '</b> · ' + esc(p.requirements.console) + '</p></div>' +
+        '<div class="spec-grid">' + tiers + '</div>' +
+        '<div class="pf-feats"><span class="pf-feats-lbl">PC features</span><ul class="chip-row">' + feats + '</ul></div>';
     }
   };
 
@@ -449,7 +484,8 @@
     home: "Forza Horizon 6 Guide",
     wiki: "Wiki", database: "Database", guides: "Guides",
     cars: "Cars", map: "Interactive Map",
-    beginner: "Beginner's Guide", houses: "Houses", media: "Media"
+    beginner: "Beginner's Guide", houses: "Houses", media: "Media",
+    platforms: "Platforms"
   };
   // Deep-link aliases (old URLs) -> scroll target inside the Cars hub.
   var CAR_SCROLL = {
@@ -590,7 +626,7 @@
     : null;
   function setupReveal() {
     if (!revealIO || !document.documentElement.classList.contains('js-reveal')) return;
-    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec';
+    var sel = '.card, .car-card, .region-card, .house-card, .fact, .rec, .way, .pick, .faq-item, .gl, .me-block, .pitfall, .step, .tl, .co-head, .wiki-entry, .db-row, .guide-sec, .pf-card, .spec-card';
     var nodes = app.querySelectorAll(sel);
     for (var i = 0; i < nodes.length; i++) {
       var el = nodes[i];
