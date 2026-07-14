@@ -116,7 +116,7 @@ window.FH6DATA = {
           { year: "", make: "Porsche", model: "918", tag: "Horizon Play", disc: "top" },
           { year: "", make: "Porsche", model: "Cayman GT4 RS", tag: "Road Rivals", disc: "allround" },
           { year: "", make: "Opel", model: "Manta 400", tag: "Dirt Rivals", disc: "offroad" },
-          { year: "#37", model: "Pro 2 Truck", tag: "Cross Country Rivals" },
+          { year: "#37", model: "Pro 2 Truck", tag: "Cross Country Rivals", disc: "offroad" },
           { year: "", make: "Subaru", model: "Vivio FE", tag: "Horizon Life", disc: "allround" },
           { year: "", make: "Nissan", model: "Nismo GT-R '24", tag: "Touge & Street Rivals", disc: "allround" },
           { year: "", make: "Koenigsegg", model: "Agera RS", tag: "Explore Japan landmark", disc: "top" }
@@ -421,9 +421,9 @@ window.FH6DATA = {
       { date: "Jan 22, 2026", event: "Gameplay premieres at the Xbox Developer Direct [WIKI]." },
       { date: "Apr 20, 2026", event: "Limited-edition Xbox controller and headset announced (launch May 19) [WIKI]." },
       { date: "May 7–31, 2026", event: "Crunchyroll subscribers receive a free car voucher [WIKI]." },
+      { date: "May 10, 2026", event: "155 GB preload leaked/decrypted on Steam; Playground banned the leaker [WIKI]." },
       { date: "May 15, 2026", event: "Premium early access begins [WIKI]." },
       { date: "May 19, 2026", event: "Worldwide launch on Windows and Xbox Series X/S [WIKI]." },
-      { date: "May 10, 2026", event: "155 GB preload leaked/decrypted on Steam; Playground banned the leaker [WIKI]." },
       { date: "May 21, 2026", event: "Surpasses 6 million players [WIKI]." },
       { date: "May 24, 2026", event: "300,000 concurrent players on Steam — 52nd-highest all-time peak [WIKI]." },
       { date: "Late 2026", event: "PlayStation 5 version planned [WIKI]." }
