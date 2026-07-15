@@ -1065,7 +1065,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Saira+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Styles -->
-  <link rel="stylesheet" href="assets/css/style.css?v=12" />
+  <link rel="stylesheet" href="assets/css/style.css?v=13" />
 
   <!-- Prevent theme flash -->
   <script>
@@ -1088,11 +1088,24 @@
         <a href="#home" data-nav="home">Overview</a>
         <a href="#beginner" data-nav="beginner">Beginner</a>
         <a href="#map" data-nav="map">Map</a>
-        <a href="#cars" data-nav="cars">Cars</a>
+        <div class="nav-item-dd">
+          <a href="#cars" data-nav="cars" class="nav-dd-main">Cars</a>
+          <button type="button" id="cars-dd-btn" class="nav-dd-toggle" aria-haspopup="true" aria-expanded="false" aria-label="Cars menu">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div id="cars-dd" class="cars-dd" role="menu">
+            <a href="#cars" role="menuitem" data-scroll="cars-best">Best by discipline</a>
+            <a href="#cars" role="menuitem" data-scroll="cars-barn">Barn Finds</a>
+            <a href="#cars" role="menuitem" data-scroll="cars-treasure">Treasure Cars</a>
+            <a href="#cars" role="menuitem" data-scroll="cars-aftermarket">Aftermarket Cars</a>
+            <a href="#cars" role="menuitem" data-scroll="cars-forza">Forza Edition Cars</a>
+          </div>
+        </div>
         <a href="#houses" data-nav="houses">Houses</a>
         <a href="#guides" data-nav="guides">Guides</a>
       </nav>
       <div class="nav-actions">
+        <input type="search" id="global-search" class="global-search" placeholder="Search cars, e.g. Supra" aria-label="Search the guide" />
         <div class="translate-wrap" id="translate-wrap">
           <button class="icon-btn translate-btn" id="translate-btn" aria-haspopup="true" aria-expanded="false" title="Translate page" aria-label="Translate page">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/></svg>
@@ -1126,6 +1139,7 @@
         Facts compiled from community guides. Game content © their respective owners.<br />
         <a href="rss.xml" rel="alternate" type="application/rss+xml">RSS feed</a> · <a href="llms.txt">llms.txt</a> · <a href="llms-full.txt">Full guide (markdown)</a>
       </div>
+      <div id="community"></div>
     </div>
   </footer>
 
@@ -1188,9 +1202,9 @@
     </div>
   </noscript>
 
-  <script src="assets/js/data.js?v=9"></script>
+  <script src="assets/js/data.js?v=10"></script>
   <script src="assets/js/gamersky.js?v=4"></script>
-  <script src="assets/js/main.js?v=20"></script>
+  <script src="assets/js/main.js?v=21"></script>
   <script>
     // Load Google's Website Translator (defines googleTranslateElementInit, which main.js sets).
     (function () {

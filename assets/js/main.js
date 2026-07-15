@@ -5,6 +5,9 @@
   "use strict";
   var D = window.FH6DATA;
   var GS = window.FH6GS || { guides: [] };
+  var cmpSet = [];        // car-compare selection (cids)
+  var carIndex = {};      // cid -> car record (for the compare tray)
+  var pendingSearch = ""; // header search query to apply on #database
 
   /* ---------- helpers ---------- */
   function esc(s) {
@@ -81,15 +84,77 @@
     for (var i = 0; i < DISCIPLINES.length; i++) if (DISCIPLINES[i].k === k) return DISCIPLINES[i].l;
     return "";
   }
+
+  // ---- Editorial car classification (derived from real data — never invented stats) ----
+  var JDM_MAKES = { "Toyota":1,"Nissan":1,"Mazda":1,"Honda":1,"Mitsubishi":1,"Subaru":1,"Suzuki":1,"Acura":1,"Lexus":1,"Infiniti":1,"Daihatsu":1,"Mitsuoka":1,"Hino":1,"Isuzu":1 };
+  var SUPER_MAKES = { "Lamborghini":1,"Ferrari":1,"Koenigsegg":1,"GMA":1,"Pagani":1,"Bugatti":1,"McLaren":1,"Aston Martin":1,"Porsche":1,"Mercedes-AMG":1,"Mercedes-Benz":1,"Brabus":1,"Rimac":1,"Apollo":1,"Lotus":1 };
+  var CAR_TYPES = [
+    { k:"all", l:"All types" },
+    { k:"jdm", l:"JDM" },
+    { k:"super", l:"Supercar" },
+    { k:"offroad", l:"Off-road" },
+    { k:"classic", l:"Classic" },
+    { k:"modern", l:"Modern" }
+  ];
+  var CAR_ERAS = [
+    { k:"all", l:"All eras" },
+    { k:"classic", l:"Classic (≤89)" },
+    { k:"90s", l:"90s" },
+    { k:"2000s", l:"2000s" },
+    { k:"2010s", l:"2010s" },
+    { k:"2020s", l:"2020s" },
+    { k:"undated", l:"Undated" }
+  ];
+  function carYearNum(c){ var y = parseInt(c.year,10); return isNaN(y) ? 0 : y; }
+  function carType(c){
+    var d = c.disc || "allround";
+    if (d === "offroad") return "offroad";
+    if (JDM_MAKES[c.make]) return "jdm";
+    if (SUPER_MAKES[c.make]) return "super";
+    if (carYearNum(c) && carYearNum(c) < 1990) return "classic";
+    return "modern";
+  }
+  function carEra(c){
+    var y = carYearNum(c);
+    if (!y) return "undated";
+    if (y < 1990) return "classic";
+    if (y < 2000) return "90s";
+    if (y < 2010) return "2000s";
+    if (y < 2020) return "2010s";
+    return "2020s";
+  }
+  function carTypeLabel(k){ for (var i=0;i<CAR_TYPES.length;i++) if (CAR_TYPES[i].k===k) return CAR_TYPES[i].l; return ""; }
   function renderCarsList() {
-    var filterBar = '<div class="car-filter" role="group" aria-label="Filter cars by discipline">' +
+    var discBar = '<div class="car-filter" role="group" aria-label="Filter by discipline">' +
       DISCIPLINES.map(function (d, i) {
         return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-disc="' + d.k + '">' + esc(d.l) + '</button>';
       }).join("") + '</div>';
+    var typeBar = '<div class="car-filter type-filter" role="group" aria-label="Filter by type">' +
+      CAR_TYPES.map(function (d, i) {
+        return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-type="' + d.k + '">' + esc(d.l) + '</button>';
+      }).join("") + '</div>';
+    var eraBar = '<div class="car-filter era-filter" role="group" aria-label="Filter by era">' +
+      CAR_ERAS.map(function (d, i) {
+        return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-era="' + d.k + '">' + esc(d.l) + '</button>';
+      }).join("") + '</div>';
+    var viewToggle = '<div class="view-toggle" role="group" aria-label="View mode">' +
+      '<button type="button" class="vt-btn active" data-view="cards" aria-pressed="true">▦ Cards</button>' +
+      '<button type="button" class="vt-btn" data-view="list" aria-pressed="false">≣ List</button>' +
+      '</div>';
+    var toolbar = '<div class="car-toolbar">' + discBar + typeBar + eraBar + viewToggle +
+      '<span class="cmp-hint">Tick <b>＋ Compare</b> on 2–3 cars to compare them ↓</span></div>';
+
+    var cid = 0;
     var groups = D.cars.groups.map(function (g) {
       var cards = g.items.map(function (c) {
+        cid++;
         var d = c.disc || "allround";
-        return           '<div class="car-card" data-disc="' + esc(d) + '">' +
+        var t = carType(c);
+        var e = carEra(c);
+        carIndex[cid] = { make:c.make, model:c.model, year:c.year, disc:d, type:t, era:e, tag:c.tag, note:c.note, group:g.title };
+        var on = cmpSet.indexOf(cid) >= 0;
+        return '<div class="car-card" data-disc="' + esc(d) + '" data-type="' + t + '" data-era="' + e + '" data-cid="' + cid + '">' +
+          '<label class="cmp-toggle' + (on ? ' active' : '') + '"><input type="checkbox" class="cmp-check" data-cid="' + cid + '"' + (on ? ' checked' : '') + '><span class="cmp-lbl">' + (on ? '✓ Comparing' : '＋ Compare') + '</span></label>' +
           '<div class="monogram">' + carIcon(d) + '</div>' +
           '<div class="car-meta">' +
             '<div class="yr">' + esc(c.year || "—") + '</div>' +
@@ -105,7 +170,8 @@
         (g.note ? '<p class="note">' + esc(g.note) + '</p>' : '') +
         '<div class="car-grid">' + cards + '</div></div>';
     }).join("");
-    return sectionHead("Garage", "Cars List", D.cars.intro) + filterBar + groups;
+    return sectionHead("Garage", "Cars List", D.cars.intro) + toolbar + groups +
+      '<p class="db-note">Type &amp; era tags are editorial groupings derived from each car’s maker, discipline and model year — they’re filters, not official stats. Official PI / drivetrain figures aren’t published for this slice, so the compare tool shows confirmed attributes only (no invented numbers).</p>';
   }
 
   function renderCarsOverview() {
@@ -320,14 +386,23 @@
       }).join("");
       var tips = D.regions.tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join("");
       var extra = '<div class="map-extra">' +
-        '<div class="me-block"><h3>PR stunts &amp; activities</h3><ul class="me-list">' + stunts + '</ul></div>' +
-        '<div class="me-block"><h3>Exploring tips</h3><ul class="me-list">' + tips + '</ul></div>' +
+        '<div class="me-block" data-layer-block="prstunts" data-toc="PR stunts"><h3>PR stunts &amp; activities</h3><ul class="me-list">' + stunts + '</ul></div>' +
+        '<div class="me-block" data-layer-block="tips" data-toc="Exploring tips"><h3>Exploring tips</h3><ul class="me-list">' + tips + '</ul></div>' +
         '</div>';
-      return sectionHead("Horizon Japan", "Interactive Map", D.regions.intro) +
-        '<div class="map-wrap map-canvas"><img src="assets/img/map-japan.svg" alt="Horizon Japan festival map" loading="lazy">' + pins + '</div>' +
-        '<p class="map-hint">Tap a marker to jump to that region ↓</p>' +
-        '<div class="region-grid">' + cards + '</div>' +
-        '<div class="legend">' + legend + '</div>' + extra;
+    var layerBar = '<div class="layer-bar" role="group" aria-label="Map layers">' +
+      '<span class="lb-label">Layers</span>' +
+      '<button type="button" class="lb-chip active" data-layer="regions">Regions</button>' +
+      '<button type="button" class="lb-chip active" data-layer="prstunts">PR Stunts</button>' +
+      '<button type="button" class="lb-chip active" data-layer="tips">Tips</button>' +
+      '<button type="button" class="lb-chip active" data-layer="legend">Legend</button>' +
+      '</div>';
+    return sectionHead("Horizon Japan", "Interactive Map", D.regions.intro) +
+      '<div class="map-wrap map-canvas"><img src="assets/img/map-japan.svg" alt="Horizon Japan festival map" loading="lazy">' + pins + '</div>' +
+      '<p class="map-hint">Tap a marker to jump to that region ↓</p>' +
+      layerBar +
+      '<div class="region-grid" id="sec-regions" data-toc="Regions" data-layer-block="regions">' + cards + '</div>' +
+      renderCollectionTracker() +
+      '<div class="legend" id="sec-legend" data-toc="Legend" data-layer-block="legend">' + legend + '</div>' + extra;
     },
 
     beginner: function () {
@@ -339,12 +414,12 @@
       var pf = (D.beginner.pitfalls || []).map(function (p) {
         return '<div class="pitfall"><span class="pf-avoid">Avoid</span><div><h4>' + esc(p.t) + '</h4><p>' + esc(p.b) + '</p></div></div>';
       }).join("");
-      return sectionHead("No spoilers", "Beginner's Guide", D.beginner.intro) +
-        ol(D.beginner.steps) +
-        '<div class="pitfalls"><h3>Beginner Pitfalls</h3>' + pf + '</div>' +
-        '<div class="settings-box"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>' +
-        '<div class="glossary"><h3>Horizon glossary</h3><dl>' + gl + '</dl></div>' +
-        '<div class="credits-box"><h3>Credit farming 101</h3><ul>' + cred + '</ul></div>';
+    return sectionHead("No spoilers", "Beginner's Guide", D.beginner.intro) +
+      '<div id="sec-path" data-toc="14-step path">' + renderBeginnerSteps() + '</div>' +
+      '<div class="pitfalls" id="sec-pitfalls" data-toc="Beginner Pitfalls"><h3>Beginner Pitfalls</h3>' + pf + '</div>' +
+      '<div class="settings-box" id="sec-settings" data-toc="Settings to change"><h4>Settings worth changing first</h4><ul>' + settings + '</ul></div>' +
+      '<div class="glossary" id="sec-glossary" data-toc="Horizon glossary"><h3>Horizon glossary</h3><dl>' + gl + '</dl></div>' +
+      '<div class="credits-box" id="sec-credits" data-toc="Credit farming"><h3>Credit farming 101</h3><ul>' + cred + '</ul></div>';
     },
 
     /* (barn merged into Cars hub) */
@@ -440,11 +515,17 @@
 
   function renderWikiSection() {
       var w = D.wiki;
-      var cats = w.cats.map(function (c) {
+      var cats = w.cats.map(function (c, ci) {
         var entries = c.items.map(function (e) {
           return '<article class="wiki-entry"><h4>' + esc(e.t) + '</h4><p>' + esc(e.b) + '</p></article>';
         }).join("");
-        return '<section class="wiki-cat"><h3 class="wiki-cat-h">' + esc(c.name) + '</h3><div class="wiki-grid">' + entries + '</div></section>';
+        var diag = "";
+        if (c.name === "Core systems") diag = '<figure class="wiki-fig">' + diagramSkillChain() + '<figcaption>Skill chains: the longer you keep a clean combo alive, the higher the multiplier (up to ×8) — banking more Skill Points for each car’s Mastery tree.</figcaption></figure>';
+        if (c.name === "Car classes") diag = '<figure class="wiki-fig">' + diagramTuning() + '<figcaption>Every car has a Performance Index that puts it in a class band — D is beginner-friendly, X is the unrestricted top tier. Upgrades shift a car up the ladder.</figcaption></figure>';
+        return '<section class="wiki-cat wiki-acc open" id="wcat-' + ci + '" data-toc="' + esc(c.name) + '">' +
+          '<button type="button" class="wiki-cat-btn" aria-expanded="true"><span class="wc-title">' + esc(c.name) + '</span><span class="wc-chev" aria-hidden="true">▾</span></button>' +
+          '<div class="wiki-cat-body"><div class="wiki-grid">' + entries + '</div>' + diag + '</div>' +
+        '</section>';
       }).join("");
       return '<section class="section">' +
         sectionHead("Encyclopedia", "Wiki", w.intro) +
@@ -462,8 +543,9 @@
         });
       });
       var body = rows.map(function (r) {
-        var search = (r.year + " " + r.make + " " + r.model + " " + r.tag + " " + discLabel(r.disc)).toLowerCase();
-        return '<tr class="db-row" data-disc="' + esc(r.disc) + '" data-search="' + esc(search) + '">' +
+        var t = carType(r), e = carEra(r);
+        var search = (r.year + " " + r.make + " " + r.model + " " + r.tag + " " + discLabel(r.disc) + " " + carTypeLabel(t) + " " + e).toLowerCase();
+        return '<tr class="db-row" data-disc="' + esc(r.disc) + '" data-type="' + t + '" data-era="' + e + '" data-search="' + esc(search) + '">' +
           '<td class="db-year">' + esc(r.year || "—") + '</td>' +
           '<td class="db-make">' + esc(r.make) + '</td>' +
           '<td class="db-model">' + esc(r.model) + '</td>' +
@@ -475,9 +557,17 @@
         DISCIPLINES.map(function (d, i) {
           return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-db-disc="' + d.k + '">' + esc(d.l) + '</button>';
         }).join("") + '</div>';
+      var typeChips = '<div class="car-filter db-filter" role="group" aria-label="Filter by type">' +
+        CAR_TYPES.map(function (d, i) {
+          return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-db-type="' + d.k + '">' + esc(d.l) + '</button>';
+        }).join("") + '</div>';
+      var eraChips = '<div class="car-filter db-filter" role="group" aria-label="Filter by era">' +
+        CAR_ERAS.map(function (d, i) {
+          return '<button type="button" class="cf-chip' + (i === 0 ? ' active' : '') + '" data-db-era="' + d.k + '">' + esc(d.l) + '</button>';
+        }).join("") + '</div>';
       return '<section class="section">' +
         sectionHead("Raw data", "Database", db.intro) +
-        '<div class="db-toolbar">' + chips +
+        '<div class="db-toolbar">' + chips + typeChips + eraChips +
           '<input type="search" class="db-search" id="db-search" placeholder="Search make, model, year, tag…" aria-label="Search cars">' +
         '</div>' +
         '<p class="db-count" id="db-count"></p>' +
@@ -609,8 +699,15 @@
     var raw = (location.hash || "").replace(/^#/, "");
     var page = currentPage();
     app.innerHTML = (pages[page] || pages.home)();
+    if (pendingSearch) {
+      var ps = document.getElementById("db-search");
+      if (ps) ps.value = pendingSearch;
+      pendingSearch = "";
+    }
     setupReveal();
     if (page === "home" || page === "database") filterDb();
+    buildToc(page);
+    if (page === "map") refreshCollectionTracker();
     document.title = (TITLES[page] || "Guide") + " — Forza Horizon 6 Guide";
     // active nav
     var links = document.querySelectorAll("#nav a");
@@ -698,24 +795,46 @@
       setTimeout(function () { card.classList.remove("flash"); }, 1300);
     });
   }
+  function activeChipVal(attr) {
+    var a = app.querySelector('[data-' + attr + '].active');
+    return a ? a.getAttribute('data-' + attr) : 'all';
+  }
+  function applyCarFilters() {
+    var d = activeChipVal('disc'), t = activeChipVal('type'), e = activeChipVal('era');
+    var cards = app.querySelectorAll('.car-card[data-disc]');
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      var ok = (d === 'all' || d === c.getAttribute('data-disc'))
+            && (t === 'all' || t === c.getAttribute('data-type'))
+            && (e === 'all' || e === c.getAttribute('data-era'));
+      c.classList.toggle('is-hidden', !ok);
+    }
+    var groups = app.querySelectorAll('.car-group');
+    for (var g = 0; g < groups.length; g++) {
+      var vis = groups[g].querySelectorAll('.car-card:not(.is-hidden)');
+      groups[g].classList.toggle('is-hidden', vis.length === 0);
+    }
+  }
   function initCarFilter() {
-    app.addEventListener("click", function (e) {
-      var chip = e.target.closest(".cf-chip");
+    app.addEventListener('click', function (e) {
+      var chip = e.target.closest('.cf-chip');
       if (!chip) return;
+      if (chip.hasAttribute('data-db-disc') || chip.hasAttribute('data-db-type') || chip.hasAttribute('data-db-era')) return;
       e.preventDefault();
-      var disc = chip.getAttribute("data-disc");
-      var chips = app.querySelectorAll(".cf-chip");
-      for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("active", chips[i] === chip);
-      var cards = app.querySelectorAll(".car-card[data-disc]");
-      for (var j = 0; j < cards.length; j++) {
-        var d = cards[j].getAttribute("data-disc");
-        cards[j].classList.toggle("is-hidden", !(disc === "all" || d === disc));
-      }
-      var groups = app.querySelectorAll(".car-group");
-      for (var g = 0; g < groups.length; g++) {
-        var visible = groups[g].querySelectorAll(".car-card:not(.is-hidden)");
-        groups[g].classList.toggle("is-hidden", visible.length === 0);
-      }
+      var attr = chip.hasAttribute('data-disc') ? 'disc' : chip.hasAttribute('data-type') ? 'type' : chip.hasAttribute('data-era') ? 'era' : null;
+      if (!attr) return;
+      var sibs = chip.parentElement.querySelectorAll('.cf-chip');
+      for (var i = 0; i < sibs.length; i++) sibs[i].classList.toggle('active', sibs[i] === chip);
+      applyCarFilters();
+    });
+    app.addEventListener('click', function (e) {
+      var vt = e.target.closest('.vt-btn');
+      if (!vt) return;
+      var view = vt.getAttribute('data-view');
+      var grids = app.querySelectorAll('.car-grid');
+      for (var i = 0; i < grids.length; i++) grids[i].classList.toggle('list-view', view === 'list');
+      var vts = app.querySelectorAll('.vt-btn');
+      for (var j = 0; j < vts.length; j++) { vts[j].classList.toggle('active', vts[j] === vt); vts[j].setAttribute('aria-pressed', vts[j] === vt ? 'true' : 'false'); }
     });
   }
 
@@ -860,15 +979,21 @@
     var box = document.getElementById("db-search");
     if (!box) return;
     var q = (box.value || "").toLowerCase().trim();
-    var activeChip = app.querySelector("[data-db-disc].active");
-    var disc = activeChip ? activeChip.getAttribute("data-db-disc") : "all";
+    var discChip = app.querySelector("[data-db-disc].active");
+    var typeChip = app.querySelector("[data-db-type].active");
+    var eraChip = app.querySelector("[data-db-era].active");
+    var disc = discChip ? discChip.getAttribute("data-db-disc") : "all";
+    var type = typeChip ? typeChip.getAttribute("data-db-type") : "all";
+    var era = eraChip ? eraChip.getAttribute("data-db-era") : "all";
     var rows = app.querySelectorAll(".db-row");
     var shown = 0;
     for (var i = 0; i < rows.length; i++) {
       var r = rows[i];
       var matchQ = !q || (r.getAttribute("data-search") || "").indexOf(q) !== -1;
       var matchD = disc === "all" || r.getAttribute("data-disc") === disc;
-      var ok = matchQ && matchD;
+      var matchT = type === "all" || r.getAttribute("data-type") === type;
+      var matchE = era === "all" || r.getAttribute("data-era") === era;
+      var ok = matchQ && matchD && matchT && matchE;
       r.classList.toggle("is-hidden", !ok);
       if (ok) shown++;
     }
@@ -901,10 +1026,12 @@
       filterDb();
     });
     app.addEventListener("click", function (e) {
-      var chip = e.target.closest("[data-db-disc]");
+      var chip = e.target.closest("[data-db-disc],[data-db-type],[data-db-era]");
       if (chip) {
         e.preventDefault();
-        var chips = app.querySelectorAll("[data-db-disc]");
+        var sel = chip.hasAttribute("data-db-disc") ? "[data-db-disc]"
+                : chip.hasAttribute("data-db-type") ? "[data-db-type]" : "[data-db-era]";
+        var chips = app.querySelectorAll(sel);
         for (var i = 0; i < chips.length; i++) chips[i].classList.toggle("active", chips[i] === chip);
         filterDb();
         return;
@@ -912,6 +1039,408 @@
       var th = e.target.closest(".db-table th.sortable");
       if (th) { e.preventDefault(); sortDb(th.getAttribute("data-sort"), th); }
     });
+  }
+
+  /* =====================================================================
+     NEW INTERACTIVE FEATURES (P0–P2 revamp)
+     ===================================================================== */
+
+  // ---- Beginner roadmap: interactive accordion + must-read tags ----
+  var BSTEP_ICONS = {
+    1:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4h11l-2 4 2 4H5"/></svg>',
+    2:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-5.5A2 2 0 0 1 7 6h10a2 2 0 0 1 2 1.5L21 13"/><rect x="3" y="13" width="18" height="5" rx="1.6"/><circle cx="7.6" cy="18" r="1.4"/><circle cx="16.4" cy="18" r="1.4"/></svg>',
+    3:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 9.5h3.2a1.8 1.8 0 0 1 0 3.6H9.5h3.4a1.8 1.8 0 0 1 0 3.6H9.5"/></svg>',
+    4:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+    5:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.2 4.6L19 8.3l-3.5 3.4.9 5L12 14.8 7.6 16.7l.9-5L5 8.3l4.8-.7z"/></svg>',
+    6:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l8-8 9 9-3 3-6-6-2 2 6 6-3 3z"/><circle cx="8.5" cy="8.5" r="1.4"/></svg>',
+    7:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13v-1a7 7 0 0 1 14 0v1"/><rect x="3" y="13" width="18" height="6" rx="3"/><path d="M19 19v2M5 19v2"/></svg>',
+    8:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>',
+    9:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.4 5.5.6-4.1 3.8 1.1 5.4L12 15.9 6.5 18.2 7.6 12.8 3.5 9l5.5-.6z"/></svg>',
+    10: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 13a9 9 0 1 1 9 9"/><path d="M12 13V4M20 13h-8"/></svg>',
+    11: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h3l2-3h8l2 3h3v11H3z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+    12: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h11M4 15h11"/><path d="M14 5l4 4-4 4M10 19l-4-4 4-4"/></svg>',
+    13: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg>',
+    14: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="2"/><path d="M4 9a8 5 0 0 1 16 0"/><path d="M12 5v4"/></svg>'
+  };
+  function renderBeginnerSteps() {
+    var items = D.beginner.steps.map(function (s) {
+      var must = s.must ? '<span class="must-tag">Must-read</span>' : '';
+      var ico = BSTEP_ICONS[s.n] || '';
+      return '<div class="bstep" data-bstep>' +
+        '<button type="button" class="bstep-head" aria-expanded="false">' +
+          '<span class="bstep-num">' + esc(s.n) + '</span>' +
+          '<span class="bstep-ico" aria-hidden="true">' + ico + '</span>' +
+          '<span class="bstep-title">' + esc(s.title) + must + '</span>' +
+          '<span class="bstep-chev" aria-hidden="true">▾</span>' +
+        '</button>' +
+        '<div class="bstep-body"><p>' + esc(s.body) + '</p></div>' +
+      '</div>';
+    }).join("");
+    return '<div class="bstep-track" id="bstep-track">' + items +
+      '<p class="bstep-foot">Tap any step to expand the full walkthrough. Steps tagged <span class="must-tag">Must-read</span> are the ones new players most often skip — don’t.</p></div>';
+  }
+
+  // ---- Wiki diagrams (skill chains + tuning ladder) ----
+  function diagramSkillChain() {
+    var mult = [2, 4, 6, 8], x0 = 90, step = 160;
+    var nodes = mult.map(function (m, i) {
+      var x = x0 + i * step;
+      return '<g>' +
+        '<circle cx="' + x + '" cy="95" r="22" fill="rgba(34,211,238,.14)" stroke="url(#scg)" stroke-width="2.5"/>' +
+        '<text x="' + x + '" y="100" text-anchor="middle" fill="currentColor" font-family="Chakra Petch, sans-serif" font-size="16" font-weight="700">×' + m + '</text>' +
+        (i < mult.length - 1 ? '<path d="M' + (x + 26) + ' 95 H' + (x + step - 26) + '" stroke="url(#scg)" stroke-width="2.5" marker-end="url(#arrow)"/>' : '') +
+        '</g>';
+    }).join("");
+    return '<svg class="wiki-diagram" viewBox="0 0 680 170" role="img" aria-label="Skill chain multiplier ladder from x2 to x8">' +
+      '<defs><linearGradient id="scg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#f472b6"/></linearGradient>' +
+      '<marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#f472b6"/></marker></defs>' +
+      '<text x="12" y="28" fill="currentColor" font-family="Chakra Petch, sans-serif" font-size="15" font-weight="700">Skill chains build a multiplier</text>' +
+      '<text x="12" y="48" fill="currentColor" font-family="Inter, sans-serif" font-size="11" opacity=".7">Link drifts, jumps, near-misses &amp; clean racing — bigger chain, more Skill Points</text>' +
+      nodes + '</svg>';
+  }
+  function diagramTuning() {
+    var cls = ["D", "C", "B", "A", "S1", "S2", "X"], x0 = 40, step = 86;
+    var boxes = cls.map(function (c, i) {
+      var x = x0 + i * step, y = 120 - i * 11;
+      return '<g><rect x="' + x + '" y="' + y + '" width="64" height="30" rx="8" fill="rgba(167,139,250,.14)" stroke="#a78bfa" stroke-width="2"/>' +
+        '<text x="' + (x + 32) + '" y="' + (y + 20) + '" text-anchor="middle" fill="currentColor" font-family="Chakra Petch, sans-serif" font-size="15" font-weight="700">' + c + '</text></g>';
+    }).join("");
+    return '<svg class="wiki-diagram" viewBox="0 0 680 200" role="img" aria-label="Car class ladder from D to X">' +
+      '<text x="12" y="28" fill="currentColor" font-family="Chakra Petch, sans-serif" font-size="15" font-weight="700">Performance classes (PI bands)</text>' +
+      '<text x="12" y="48" fill="currentColor" font-family="Inter, sans-serif" font-size="11" opacity=".7">Every car has a PI number; upgrades push it up the ladder</text>' +
+      boxes +
+      '<path d="M150 132 C 300 200, 380 60, 560 40" fill="none" stroke="#22d3ee" stroke-width="2.5" stroke-dasharray="5 5" marker-end="url(#arrow2)"/>' +
+      '<defs><marker id="arrow2" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 z" fill="#22d3ee"/></marker></defs>' +
+      '<text x="300" y="150" fill="#22d3ee" font-family="Inter, sans-serif" font-size="11" font-weight="700">Upgrades ↑</text>' +
+      '</svg>';
+  }
+
+  // ---- Map collection tracker (localStorage) ----
+  function loadCollection() { try { return JSON.parse(localStorage.getItem('fh6-collection')) || {}; } catch (e) { return {}; } }
+  function saveCollection(o) { try { localStorage.setItem('fh6-collection', JSON.stringify(o)); } catch (e) {} }
+  function renderCollectionTracker() {
+    var cats = [
+      { key: 'barn', label: 'Barn Finds', max: 14, note: 'Community-reported total' },
+      { key: 'treasure', label: 'Treasure Cars', max: 9, note: 'Community-reported total' },
+      { key: 'mascots', label: 'Mascots', max: 50, note: 'Exact count unknown — set your own pace' }
+    ];
+    var rows = cats.map(function (c) {
+      return '<div class="trk-row" data-trk="' + c.key + '" data-max="' + c.max + '">' +
+        '<div class="trk-head"><span class="trk-label">' + esc(c.label) + '</span>' +
+          '<span class="trk-count"><span class="trk-cur">0</span>/' + c.max + '</span></div>' +
+        '<div class="trk-bar"><span class="trk-fill"></span></div>' +
+        '<div class="trk-ctrl"><button type="button" class="trk-dec" aria-label="Decrease">−</button>' +
+          '<button type="button" class="trk-inc" aria-label="Increase">+</button>' +
+          '<span class="trk-note">' + esc(c.note) + '</span></div></div>';
+    }).join("");
+    var stamps = ['Yellow', 'Green', 'Blue', 'Orange', 'Purple', 'Gold'].map(function (s, i) {
+      return '<label class="stamp-chk"><input type="checkbox" data-stamp="' + i + '"><span>' + esc(s) + '</span></label>';
+    }).join("");
+    return '<div class="coll-tracker" id="coll-tracker" data-toc="Collection tracker">' +
+      '<h3 class="coll-h">Collection Tracker</h3>' +
+      '<p class="coll-sub">Tick off what you’ve found. Progress is saved in your browser.</p>' +
+      rows +
+      '<div class="trk-row trk-stamps"><div class="trk-head"><span class="trk-label">Discover Japan Stamps</span>' +
+        '<span class="trk-count"><span class="trk-cur" data-stampcur>0</span>/6</span></div>' +
+        '<div class="trk-bar"><span class="trk-fill" data-stampfill></span></div>' +
+        '<div class="stamp-row">' + stamps + '</div></div>' +
+      '<div class="coll-total"><div class="trk-bar big"><span class="trk-fill" id="coll-total-fill"></span></div>' +
+        '<span id="coll-total-label">0 collected</span></div>' +
+      '</div>';
+  }
+  function refreshCollectionTracker() {
+    var el = document.getElementById('coll-tracker'); if (!el) return;
+    var data = loadCollection();
+    function setRow(key, max) {
+      var row = el.querySelector('[data-trk="' + key + '"]'); if (!row) return;
+      var cur = row.querySelector('.trk-cur'), fill = row.querySelector('.trk-fill');
+      cur.textContent = data[key] || 0;
+      fill.style.width = Math.min(100, Math.round(((data[key] || 0) / max) * 100)) + '%';
+    }
+    setRow('barn', 14); setRow('treasure', 9); setRow('mascots', 50);
+    var stamps = data.stamps || [false, false, false, false, false, false], sc = 0;
+    el.querySelectorAll('[data-stamp]').forEach(function (cb, i) { cb.checked = !!stamps[i]; if (stamps[i]) sc++; });
+    var scur = el.querySelector('[data-stampcur]'); if (scur) scur.textContent = sc;
+    var sfill = el.querySelector('[data-stampfill]'); if (sfill) sfill.style.width = Math.round((sc / 6) * 100) + '%';
+    var total = (data.barn || 0) + (data.treasure || 0) + (data.mascots || 0) + sc, max = 14 + 9 + 50 + 6;
+    var pct = Math.round((total / max) * 100);
+    var tf = document.getElementById('coll-total-fill'); if (tf) tf.style.width = pct + '%';
+    var tl = document.getElementById('coll-total-label'); if (tl) tl.textContent = total + ' collected (' + pct + '%)';
+  }
+  function initCollectionTracker() {
+    app.addEventListener('click', function (e) {
+      var inc = e.target.closest('.trk-inc'), dec = e.target.closest('.trk-dec');
+      if (!inc && !dec) return;
+      var row = (inc || dec).closest('[data-trk]'); if (!row) return;
+      var key = row.getAttribute('data-trk'), max = parseInt(row.getAttribute('data-max'), 10);
+      var data = loadCollection();
+      data[key] = data[key] || 0;
+      data[key] = Math.max(0, Math.min(max, data[key] + (inc ? 1 : -1)));
+      saveCollection(data); refreshCollectionTracker();
+    });
+    app.addEventListener('change', function (e) {
+      var cb = e.target.closest && e.target.closest('[data-stamp]');
+      if (!cb) return;
+      var data = loadCollection();
+      data.stamps = data.stamps || [false, false, false, false, false, false];
+      data.stamps[parseInt(cb.getAttribute('data-stamp'), 10)] = cb.checked;
+      saveCollection(data); refreshCollectionTracker();
+    });
+  }
+
+  // ---- "On this page" TOC (sticky, scroll-spy) ----
+  var TOC_PAGES = { beginner: 1, map: 1, wiki: 1, cars: 1, houses: 1, guides: 1 };
+  function buildToc(page) {
+    var old = document.getElementById('page-toc'); if (old) old.remove();
+    if (!TOC_PAGES[page]) return;
+    var nodes = app.querySelectorAll('[data-toc]');
+    if (nodes.length < 2) return;
+    var items = '';
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      if (!n.id) n.id = 'toc-' + page + '-' + i;
+      items += '<li><a href="#' + (location.hash.replace(/^#/, '') || 'home') + '" data-toc-link="' + n.id + '">' + esc(n.getAttribute('data-toc')) + '</a></li>';
+    }
+    var toc = document.createElement('nav');
+    toc.id = 'page-toc'; toc.className = 'page-toc'; toc.setAttribute('aria-label', 'On this page');
+    toc.innerHTML = '<div class="toc-h">On this page</div><ul>' + items + '</ul>';
+    document.body.appendChild(toc);
+    if ('IntersectionObserver' in window) {
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) {
+            toc.querySelectorAll('a').forEach(function (a) { a.classList.toggle('active', a.getAttribute('data-toc-link') === en.target.id); });
+          }
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      nodes.forEach(function (h) { spy.observe(h); });
+    }
+    toc.addEventListener('click', function (e) {
+      var a = e.target.closest('a'); if (!a) return;
+      e.preventDefault();
+      var t = document.getElementById(a.getAttribute('data-toc-link'));
+      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // ---- Car compare tray + modal ----
+  function initCompare() {
+    if (!document.getElementById('cmp-tray')) {
+      var tray = document.createElement('div');
+      tray.id = 'cmp-tray'; tray.className = 'cmp-tray'; tray.hidden = true;
+      tray.innerHTML = '<div class="cmp-tray-inner"><div class="cmp-slots" id="cmp-slots"></div>' +
+        '<div class="cmp-actions"><button type="button" class="cmp-clear" id="cmp-clear">Clear</button>' +
+        '<button type="button" class="cmp-go" id="cmp-go">Compare</button></div></div>';
+      document.body.appendChild(tray);
+    }
+    if (!document.getElementById('cmp-modal')) {
+      var m = document.createElement('div');
+      m.id = 'cmp-modal'; m.className = 'cmp-modal'; m.hidden = true; m.setAttribute('role', 'dialog'); m.setAttribute('aria-modal', 'true');
+      m.innerHTML = '<div class="cmp-modal-card"><div class="cmp-modal-head"><h3>Car comparison</h3>' +
+        '<button type="button" class="cmp-close" id="cmp-close" aria-label="Close">✕</button></div>' +
+        '<div class="cmp-modal-body" id="cmp-modal-body"></div>' +
+        '<p class="cmp-modal-note">Official acceleration / top-speed / handling figures aren’t published for this slice of the roster, so this compares confirmed attributes only — no invented numbers.</p></div>';
+      document.body.appendChild(m);
+    }
+    app.addEventListener('change', function (e) {
+      var cb = e.target.closest && e.target.closest('.cmp-check');
+      if (!cb) return;
+      var cid = parseInt(cb.getAttribute('data-cid'), 10), idx = cmpSet.indexOf(cid);
+      if (cb.checked) { if (idx < 0) cmpSet.push(cid); } else { if (idx >= 0) cmpSet.splice(idx, 1); }
+      var lbl = cb.parentNode.querySelector('.cmp-lbl');
+      if (lbl) { lbl.textContent = cb.checked ? '✓ Comparing' : '＋ Compare'; cb.parentNode.classList.toggle('active', cb.checked); }
+      updateCmpTray();
+    });
+    document.getElementById('cmp-clear').addEventListener('click', function () { cmpSet = []; syncCmpChecks(); updateCmpTray(); });
+    document.getElementById('cmp-go').addEventListener('click', openCompareModal);
+    document.getElementById('cmp-close').addEventListener('click', function () { document.getElementById('cmp-modal').hidden = true; });
+    document.getElementById('cmp-modal').addEventListener('click', function (e) { if (e.target === this) this.hidden = true; });
+  }
+  function syncCmpChecks() {
+    var boxes = app.querySelectorAll('.cmp-check');
+    for (var i = 0; i < boxes.length; i++) {
+      var cid = parseInt(boxes[i].getAttribute('data-cid'), 10), on = cmpSet.indexOf(cid) >= 0;
+      boxes[i].checked = on; boxes[i].parentNode.classList.toggle('active', on);
+      var lbl = boxes[i].parentNode.querySelector('.cmp-lbl'); if (lbl) lbl.textContent = on ? '✓ Comparing' : '＋ Compare';
+    }
+  }
+  function updateCmpTray() {
+    var tray = document.getElementById('cmp-tray'), slots = document.getElementById('cmp-slots');
+    if (!tray || !slots) return;
+    if (!cmpSet.length) { tray.hidden = true; return; }
+    tray.hidden = false;
+    slots.innerHTML = cmpSet.map(function (cid) {
+      var c = carIndex[cid]; if (!c) return '';
+      return '<span class="cmp-slot" data-cid="' + cid + '">' + esc((c.year ? c.year + ' ' : '') + c.make + ' ' + c.model) +
+        '<button type="button" class="cmp-x" data-xcid="' + cid + '" aria-label="Remove">✕</button></span>';
+    }).join("");
+    var go = document.getElementById('cmp-go');
+    go.disabled = cmpSet.length < 2;
+    go.textContent = cmpSet.length < 2 ? 'Pick 2–3 cars' : ('Compare (' + cmpSet.length + ')');
+    slots.querySelectorAll('.cmp-x').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var cid = parseInt(b.getAttribute('data-xcid'), 10), i = cmpSet.indexOf(cid);
+        if (i >= 0) cmpSet.splice(i, 1);
+        syncCmpChecks(); updateCmpTray();
+      });
+    });
+  }
+  function openCompareModal() {
+    var modal = document.getElementById('cmp-modal'), body = document.getElementById('cmp-modal-body');
+    if (!cmpSet.length) return;
+    var cars = cmpSet.map(function (cid) { return carIndex[cid]; }).filter(Boolean);
+    var attrs = [
+      ['Year', function (c) { return c.year || '—'; }],
+      ['Make', function (c) { return c.make; }],
+      ['Model', function (c) { return c.model; }],
+      ['Type', function (c) { return carTypeLabel(c.type); }],
+      ['Era', function (c) { return c.era; }],
+      ['Discipline', function (c) { return discLabel(c.disc); }],
+      ['Tag', function (c) { return c.tag || '—'; }],
+      ['Source group', function (c) { return c.group; }]
+    ];
+    var head = '<tr><th></th>' + cars.map(function (c) {
+      return '<th class="cmp-col-h">' + esc((c.year ? c.year + ' ' : '') + c.make + ' ' + c.model) + '</th>';
+    }).join("") + '</tr>';
+    var rows = attrs.map(function (a) {
+      var cells = cars.map(function (c) { return '<td>' + esc(a[1](c)) + '</td>'; }).join("");
+      return '<tr><th>' + esc(a[0]) + '</th>' + cells + '</tr>';
+    }).join("");
+    var maxY = 2026;
+    var yearBars = '<tr><th>Model-year (newer →)</th>' + cars.map(function (c) {
+      var y = parseInt(c.year, 10); if (isNaN(y)) return '<td>—</td>';
+      var pct = Math.max(6, Math.round((y / maxY) * 100));
+      return '<td><span class="cmp-ybar" style="width:' + pct + '%"></span></td>';
+    }).join("") + '</tr>';
+    body.innerHTML = '<div class="cmp-table-wrap"><table class="cmp-table"><thead>' + head + '</thead><tbody>' + rows + yearBars + '</tbody></table></div>';
+    modal.hidden = false;
+  }
+
+  // ---- Accordion init helpers ----
+  function initBeginnerAccordion() {
+    app.addEventListener('click', function (e) {
+      var h = e.target.closest && e.target.closest('.bstep-head');
+      if (!h) return;
+      var step = h.closest('.bstep'), open = step.classList.toggle('open');
+      h.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    app.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var h = e.target.closest && e.target.closest('.bstep-head');
+      if (h) { e.preventDefault(); h.click(); }
+    });
+  }
+  function initWikiAccordion() {
+    app.addEventListener('click', function (e) {
+      var b = e.target.closest && e.target.closest('.wiki-cat-btn');
+      if (!b) return;
+      var cat = b.closest('.wiki-cat'), open = cat.classList.toggle('open');
+      b.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+  function initMapLayers() {
+    app.addEventListener('click', function (e) {
+      var chip = e.target.closest && e.target.closest('.lb-chip');
+      if (!chip) return;
+      var layer = chip.getAttribute('data-layer');
+      chip.classList.toggle('active');
+      var on = chip.classList.contains('active');
+      var blocks = app.querySelectorAll('[data-layer-block="' + layer + '"]');
+      for (var i = 0; i < blocks.length; i++) blocks[i].classList.toggle('is-hidden', !on);
+    });
+  }
+
+  // ---- Global search + Cars dropdown (header) ----
+  function initGlobalSearch() {
+    var inp = document.getElementById('global-search');
+    if (!inp) return;
+    inp.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      e.preventDefault();
+      pendingSearch = inp.value.trim();
+      if ((location.hash || '').replace(/^#/, '') !== 'database') location.hash = '#database';
+      else { var s = document.getElementById('db-search'); if (s) { s.value = pendingSearch; filterDb(); } }
+    });
+  }
+  function initNavDropdown() {
+    var btn = document.getElementById('cars-dd-btn'), dd = document.getElementById('cars-dd');
+    if (!btn || !dd) return;
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = dd.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function (e) {
+      if (!dd.contains(e.target) && !btn.contains(e.target)) { dd.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    });
+    dd.addEventListener('click', function (e) {
+      var it = e.target.closest('[data-scroll]'); if (!it) return;
+      dd.classList.remove('open'); btn.setAttribute('aria-expanded', 'false');
+      var id = it.getAttribute('data-scroll');
+      if ((location.hash || '').replace(/^#/, '') !== 'cars') {
+        location.hash = '#cars';
+        setTimeout(function () { var el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 140);
+      } else {
+        var el2 = document.getElementById(id); if (el2) el2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  // ---- Footer community (Discord + tune share + local comments) ----
+  function loadJSON(k, def) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch (e) { return def; } }
+  function saveJSON(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function renderCommunitySection() {
+    var el = document.getElementById('community');
+    if (!el) return;
+    el.innerHTML = '<div class="comm-grid">' +
+      '<div class="comm-card"><h3>Join the community</h3>' +
+        '<p>Got a tune, a barn-find route, or a question? Hang out on our Discord (placeholder link) or drop a note below — comments are saved in your browser only.</p>' +
+        '<a class="comm-discord" href="https://discord.gg/forzahorizon6" target="_blank" rel="noopener">Open Discord (placeholder)</a></div>' +
+      '<div class="comm-card"><h3>Share a tuning setup</h3>' +
+        '<p>Paste your tune / share code and a one-line note. It’s copied to your clipboard and saved locally for quick reuse.</p>' +
+        '<textarea id="tune-input" class="comm-input" rows="2" placeholder="e.g. Drift tune — Nissan Silvia K’S — -1.2 camber, 55% rear diff…"></textarea>' +
+        '<div class="comm-row"><button type="button" id="tune-save" class="cmp-go">Save</button><button type="button" id="tune-copy" class="cmp-clear">Copy</button></div>' +
+        '<div class="comm-saved" id="tune-saved"></div></div>' +
+      '<div class="comm-card comm-comments"><h3>Comments</h3>' +
+        '<form id="comm-form" class="comm-form"><input id="comm-name" class="comm-input" type="text" maxlength="40" placeholder="Name (optional)">' +
+        '<textarea id="comm-text" class="comm-input" rows="2" placeholder="Share a tip or ask a question…"></textarea>' +
+        '<button type="submit" class="cmp-go">Post</button></form>' +
+        '<div class="comm-list" id="comm-list"></div></div>' +
+      '</div>';
+    var tunes = loadJSON('fh6-tunes', []);
+    function renderTunes() {
+      var box = document.getElementById('tune-saved'); if (!box) return;
+      box.innerHTML = tunes.length ? tunes.map(function (t, i) {
+        return '<div class="tune-chip">' + esc(t) + '<button type="button" data-ti="' + i + '" class="tune-del" aria-label="Delete">✕</button></div>';
+      }).join('') : '<span class="comm-muted">No saved tunes yet.</span>';
+      box.querySelectorAll('.tune-del').forEach(function (b) {
+        b.addEventListener('click', function () { tunes.splice(parseInt(b.getAttribute('data-ti'), 10), 1); saveJSON('fh6-tunes', tunes); renderTunes(); });
+      });
+    }
+    document.getElementById('tune-save').addEventListener('click', function () {
+      var v = document.getElementById('tune-input').value.trim(); if (!v) return;
+      tunes.unshift(v); saveJSON('fh6-tunes', tunes); document.getElementById('tune-input').value = ''; renderTunes();
+    });
+    document.getElementById('tune-copy').addEventListener('click', function () {
+      var v = document.getElementById('tune-input').value.trim(); if (v && navigator.clipboard) navigator.clipboard.writeText(v);
+    });
+    renderTunes();
+    var comments = loadJSON('fh6-comments', []);
+    function renderComments() {
+      var box = document.getElementById('comm-list'); if (!box) return;
+      box.innerHTML = comments.length ? comments.map(function (c) {
+        return '<div class="comm-item"><b>' + esc(c.n || 'Anon') + '</b><span class="comm-time">' + esc(c.t) + '</span><p>' + esc(c.m) + '</p></div>';
+      }).join('') : '<p class="comm-muted">Be the first to comment.</p>';
+    }
+    document.getElementById('comm-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('comm-name').value.trim();
+      var msg = document.getElementById('comm-text').value.trim();
+      if (!msg) return;
+      comments.unshift({ n: name, m: msg, t: new Date().toISOString().slice(0, 10) });
+      saveJSON('fh6-comments', comments); document.getElementById('comm-text').value = ''; renderComments();
+    });
+    renderComments();
   }
 
   function boot() {
@@ -926,6 +1455,14 @@
     initDatabase();
     initTranslate();
     initMediaPlayer();
+    initCompare();
+    initBeginnerAccordion();
+    initWikiAccordion();
+    initMapLayers();
+    initCollectionTracker();
+    initGlobalSearch();
+    initNavDropdown();
+    renderCommunitySection();
     window.addEventListener("hashchange", render);
     render();
   }

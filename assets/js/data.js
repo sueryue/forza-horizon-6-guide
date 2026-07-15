@@ -235,8 +235,8 @@ window.FH6DATA = {
     steps: [
       { n: 1, title: "Qualify, then Invitational", body: "Run the Horizon Qualifiers, then the Horizon Invitational. Finishing it grants your first (Yellow) Wristband and unlocks the festival, multiplayer, and free cars." },
       { n: 2, title: "Pick a starter that matches your style", body: "Silvia K'S for drift, Celica GT-Four for balance, GMC Jimmy for off-road. All three end up in your garage anyway." },
-      { n: 3, title: "Don't blow credits at the Autoshow", body: "Wheelspins, story events, and the Festival Playlist hand out cars fast. Spend early credits tuning your starter instead." },
-      { n: 4, title: "Earn Discover Japan stamps", body: "Explore regions, discover landmarks, and photograph them. Stamps feed your Collection Journal and unlock content [WIKI]." },
+      { n: 3, title: "Don't blow credits at the Autoshow", must: true, body: "Wheelspins, story events, and the Festival Playlist hand out cars fast. Spend early credits tuning your starter instead." },
+      { n: 4, title: "Earn Discover Japan stamps", must: true, body: "Explore regions, discover landmarks, and photograph them. Stamps feed your Collection Journal and unlock content [WIKI]." },
       { n: 5, title: "Farm mascots", body: "Mascots sit across the map — drive through them for credits. (Exact count is community-reported; clear them as you explore.)" },
       { n: 6, title: "Grab Aftermarket Cars", body: "Watch the minimap for green CT car icons. They're secondhand, fully tuned, and cheaper than the Autoshow." },
       { n: 7, title: "Use ANNA when you're tired", body: "The AI assistant can drive you to a destination; Cinema Mode hides the UI for screenshot tours." },
@@ -244,8 +244,8 @@ window.FH6DATA = {
       { n: 9, title: "Three-star PR stunts", body: "Speed Zones, Danger Signs, and Drift Zones earn Super Wheelspins and Skill Points for Car Mastery trees." },
       { n: 10, title: "Turn up difficulty for credits", body: "Higher difficulty + assists off can pay up to +125% credits per race. Only when you can still win." },
       { n: 11, title: "Photo everything", body: "Press Up for photo mode. The Horizon Promo challenge gives festival points per car photographed, and the journal wants landmark shots." },
-      { n: 12, title: "Fast-travel smart", body: "You can teleport to almost anywhere you've already visited — including the middle of a road. Explore first, blink later." },
-      { n: 13, title: "Unlock the Estate", body: "The Estate is your customisable mountainside property in rural Japan [WIKI] — build and decorate it, and collect daily credit payouts via the My Horizon message center." },
+      { n: 12, title: "Fast-travel smart", must: true, body: "You can teleport to almost anywhere you've already visited — including the middle of a road. Explore first, blink later." },
+      { n: 13, title: "Unlock the Estate", body: "The Estate is your customisable mountainside property in rural Japan [WIKI] — build and decorate it, and collect daily credit payouts via the My Horizon message center.", must: true },
       { n: 14, title: "Treasure & Barn loop", body: "Treasure Cars hide behind photo clues (no marker until found). Barn Finds appear as rumours once stamps unlock them. (Counts are community-reported — see those sections.)" }
     ],
     settings: [
