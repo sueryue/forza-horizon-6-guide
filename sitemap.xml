@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://sueryue.github.io/forza-horizon-6-guide/</loc>
+    <loc>https://www.forza-horizon-6.com/</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://sueryue.github.io/forza-horizon-6-guide/assets/img/og.png</image:loc>
+      <image:loc>https://www.forza-horizon-6.com/assets/img/og.png</image:loc>
       <image:title>Forza Horizon 6 Guide — Horizon Japan</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://sueryue.github.io/forza-horizon-6-guide/rss.xml</loc>
+    <loc>https://www.forza-horizon-6.com/rss.xml</loc>
     <lastmod>2026-08-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.3</priority>

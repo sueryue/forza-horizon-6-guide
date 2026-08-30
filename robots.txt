@@ -19,5 +19,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://sueryue.github.io/forza-horizon-6-guide/sitemap.xml
-Sitemap: https://sueryue.github.io/forza-horizon-6-guide/rss.xml
+Sitemap: https://www.forza-horizon-6.com/sitemap.xml
+Sitemap: https://www.forza-horizon-6.com/rss.xml
