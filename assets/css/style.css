@@ -1319,3 +1319,29 @@ html.no-google-translate .translate-btn { opacity: .55; }
   main { margin-left: auto !important; margin-right: auto !important; }
 }
 
+/* ---------- Pending / "listing in progress" banner ---------- */
+.pending-banner {
+  display: flex; gap: 12px; align-items: flex-start;
+  margin: 14px 0 18px; padding: 12px 14px;
+  border: 1px solid var(--warn, #fbbf24); border-radius: var(--radius-sm, 10px);
+  background: rgba(251, 191, 36, 0.10);
+  color: var(--text, #e9edf7);
+}
+.pb-dot {
+  flex: 0 0 auto; width: 10px; height: 10px; margin-top: 5px; border-radius: 50%;
+  background: var(--warn, #fbbf24); box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.18);
+}
+.pb-body { font-size: .92rem; line-height: 1.5; }
+.pb-body b { color: var(--warn, #fbbf24); }
+.pb-src { color: var(--text-dim, #9aa6c2); font-size: .85em; }
+
+/* ---------- House / garage illustrations (previously idle SVGs) ---------- */
+.house-art-fig, .garage-art-fig {
+  margin: 18px 0 4px; border: 1px solid var(--border, rgba(255, 255, 255, 0.10));
+  border-radius: var(--radius, 16px); overflow: hidden; background: var(--bg-2, #0e1322);
+}
+.house-art-fig img, .garage-art-fig img { display: block; width: 100%; height: auto; }
+
+/* ---------- Compact mini tracker (Barn / Treasure reuse) ---------- */
+.trk-mini { margin-top: 16px; max-width: 440px; }
+

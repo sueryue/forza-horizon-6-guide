@@ -295,6 +295,7 @@ window.FH6DATA = {
   barnFinds: {
     count: 14,
     countSource: "community-reported",
+    status: "pending",
     intro: "Barn Finds are reported by community guides as classic cars abandoned in barns across Japan, gated behind your Discover Japan stamps. Note: Wikipedia does not confirm this mechanic or its count.",
     howTo: [
       "Earn Discover Japan stamps by exploring regions, photographing landmarks, and completing stories.",
@@ -311,6 +312,7 @@ window.FH6DATA = {
   treasureCars: {
     count: 9,
     countSource: "community-reported",
+    status: "pending",
     intro: "Treasure Cars are reported by community guides as abandoned vehicles hidden across the map, found only via photo clues (no map marker until discovered). Note: Wikipedia does not confirm this mechanic or its count.",
     howTo: [
       "Drive around Japan; the game notifies you when you're near a Treasure Car.",
@@ -327,6 +329,7 @@ window.FH6DATA = {
   // ---------------------------------------------------------------------------
   aftermarket: {
     count: null,
+    status: "pending",
     intro: "Aftermarket Cars are secondhand vehicles scattered across the map. They match your current campaign progression, come fully tuned with kits, and cost less than the Autoshow. (Wikipedia confirms deep car customisation but does not define this specific system; details below are community-sourced.)",
     howTo: [
       "Watch the minimap for green CT car icons while driving to events.",

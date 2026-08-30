@@ -204,7 +204,11 @@
     var steps = D.aftermarket.howTo.map(function (s, i) {
       return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
     }).join("");
+    var status = D.aftermarket.status === "pending"
+      ? pendingBanner({ what: "Secondhand, fully-tuned cars are scattered across the map", source: "community-sourced" })
+      : '';
     return sectionHead("Cheap & ready", "Aftermarket Cars", D.aftermarket.intro) +
+      status +
       '<ol class="steps" style="list-style:none;padding:0;margin-top:8px;counter-reset:s">' + steps + '</ol>' +
       '<div class="callout"><b>Tip:</b> ' + esc(D.aftermarket.note) + '</div>';
   }
@@ -222,30 +226,66 @@
     var steps = D.treasureCars.howTo.map(function (s, i) {
       return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
     }).join("");
+    var status = D.treasureCars.status === "pending"
+      ? pendingBanner({ count: D.treasureCars.count, what: "Abandoned cars are hidden across the map", source: D.treasureCars.countSource })
+      : '';
     return sectionHead("Find the photo", "Treasure Cars", D.treasureCars.count + " abandoned cars are reported hidden across the map — found only by photo clues (community-sourced — Wikipedia is silent).") +
+      status +
       '<div class="facts"><div class="fact"><div class="k">Reported Treasure Cars</div><div class="v">' + esc(D.treasureCars.count) + '</div></div>' +
         '<div class="fact"><div class="k">Source</div><div class="v">' + esc(D.treasureCars.countSource) + '</div></div>' +
         '<div class="fact"><div class="k">Map marker</div><div class="v">None until found</div></div></div>' +
       '<p class="lead" style="margin-top:16px">' + esc(D.treasureCars.intro) + '</p>' +
       '<ol class="steps" style="list-style:none;padding:0;margin-top:16px;counter-reset:s">' + steps + '</ol>' +
-      '<div class="callout"><b>Honest note:</b> ' + esc(D.treasureCars.note) + '</div>';
+      '<div class="callout"><b>Honest note:</b> ' + esc(D.treasureCars.note) + '</div>' +
+      miniTracker('treasure', 'Treasure Cars found', 9, 'Community-reported total');
   }
 
   function renderBarn() {
     var steps = D.barnFinds.howTo.map(function (s, i) {
       return '<li class="step"><span class="num">' + (i + 1) + '</span><div><p>' + esc(s) + '</p></div></li>';
     }).join("");
+    var status = D.barnFinds.status === "pending"
+      ? pendingBanner({ count: D.barnFinds.count, what: "Classic cars are hidden in barns across Japan", source: D.barnFinds.countSource })
+      : '';
     return sectionHead("Rust never sleeps", "Barn Finds", D.barnFinds.count + " classic cars are reported hidden in barns across Japan (community-sourced — Wikipedia is silent).") +
+      status +
       '<div class="facts"><div class="fact"><div class="k">Reported Barn Finds</div><div class="v">' + esc(D.barnFinds.count) + '</div></div>' +
         '<div class="fact"><div class="k">Source</div><div class="v">' + esc(D.barnFinds.countSource) + '</div></div>' +
         '<div class="fact"><div class="k">Unlock gate</div><div class="v">Stamps</div></div></div>' +
       '<p class="lead" style="margin-top:16px">' + esc(D.barnFinds.intro) + '</p>' +
       '<ol class="steps" style="list-style:none;padding:0;margin-top:16px;counter-reset:s">' + steps + '</ol>' +
-      '<div class="callout"><b>Honest note:</b> ' + esc(D.barnFinds.note) + '</div>';
+      '<div class="callout"><b>Honest note:</b> ' + esc(D.barnFinds.note) + '</div>' +
+      miniTracker('barn', 'Barn Finds found', 14, 'Community-reported total');
   }
 
   function carSection(id, inner) {
     return '<section id="' + id + '" class="car-sec">' + inner + '</section>';
+  }
+
+  // Honest "listing in progress" banner for sections whose data is still being
+  // mapped by the community. Driven by a `status: "pending"` field in data.js so
+  // a user who opens the menu never hits an empty/blank wall.
+  function pendingBanner(o) {
+    var countTxt = (o.count == null || o.count === 0)
+      ? 'an exact count has not been confirmed'
+      : (o.count + ' are reported');
+    var src = o.source ? ' <span class="pb-src">(' + esc(o.source) + ')</span>' : '';
+    return '<div class="pending-banner" role="status">' +
+      '<span class="pb-dot" aria-hidden="true"></span>' +
+      '<div class="pb-body"><b>Listing in progress.</b> ' + esc(o.what) + ' ' + countTxt + src +
+      '. Specific details are not yet officially confirmed — we won’t publish unverified data. Check back as the community maps them.</div></div>';
+  }
+
+  // Compact single-counter reuse of the localStorage collection tracker
+  // (same data keys as the full tracker on the Map page: barn / treasure).
+  function miniTracker(key, label, max, note) {
+    return '<div class="trk-row trk-mini" data-trk="' + key + '" data-max="' + max + '">' +
+      '<div class="trk-head"><span class="trk-label">' + esc(label) + '</span>' +
+        '<span class="trk-count"><span class="trk-cur">0</span>/' + max + '</span></div>' +
+      '<div class="trk-bar"><span class="trk-fill"></span></div>' +
+      '<div class="trk-ctrl"><button type="button" class="trk-dec" aria-label="Decrease found count">−</button>' +
+        '<button type="button" class="trk-inc" aria-label="Increase found count">+</button>' +
+        '<span class="trk-note">' + esc(note) + '</span></div></div>';
   }
 
   /* ---------- page renderers ---------- */
@@ -469,6 +509,7 @@
           '<div class="fact"><div class="k">Headline</div><div class="v">The Estate</div></div>' +
         '</div>' +
         '<div class="house-grid" style="margin-top:18px">' + cards + '</div>' +
+        '<figure class="house-art-fig"><img src="assets/img/house-estate.svg" alt="The Estate — your buildable, customisable mountainside home in rural Japan" loading="lazy"></figure>' +
         '<div class="estate-box">' +
           '<div class="estate-head"><h3>What you can build at The Estate</h3>' +
             '<span class="estate-sub">Powered by an upgraded EventLab toolset [FH6GUIDE]</span></div>' +
@@ -476,6 +517,7 @@
         '</div>' +
         '<div class="garages-box">' +
           '<h3>Garages — the other "8"</h3>' +
+          '<figure class="garage-art-fig"><img src="assets/img/house-garage.svg" alt="A Horizon Japan garage — free fast-travel and car-display point" loading="lazy"></figure>' +
           '<p>' + esc(h.garages.intro) + '</p>' +
           '<p class="muted">' + esc(h.garages.note) + '</p>' +
         '</div>' +
@@ -707,7 +749,7 @@
     setupReveal();
     if (page === "home" || page === "database") filterDb();
     buildToc(page);
-    if (page === "map") refreshCollectionTracker();
+    if (page === "map" || page === "cars") refreshCollectionTracker();
     document.title = (TITLES[page] || "Guide") + " — Forza Horizon 6 Guide";
     // active nav
     var links = document.querySelectorAll("#nav a");
@@ -1149,15 +1191,17 @@
       '</div>';
   }
   function refreshCollectionTracker() {
-    var el = document.getElementById('coll-tracker'); if (!el) return;
     var data = loadCollection();
-    function setRow(key, max) {
-      var row = el.querySelector('[data-trk="' + key + '"]'); if (!row) return;
+    // Update every tracker row on the page — the full tracker (Map page) and the
+    // mini reuses on the Cars page (Barn / Treasure) share the same data keys.
+    document.querySelectorAll('[data-trk]').forEach(function (row) {
+      var key = row.getAttribute('data-trk'), max = parseInt(row.getAttribute('data-max'), 10);
       var cur = row.querySelector('.trk-cur'), fill = row.querySelector('.trk-fill');
-      cur.textContent = data[key] || 0;
-      fill.style.width = Math.min(100, Math.round(((data[key] || 0) / max) * 100)) + '%';
-    }
-    setRow('barn', 14); setRow('treasure', 9); setRow('mascots', 50);
+      if (cur) cur.textContent = data[key] || 0;
+      if (fill) fill.style.width = Math.min(100, Math.round(((data[key] || 0) / max) * 100)) + '%';
+    });
+    // Full-tracker-only extras (stamps + overall total) live inside #coll-tracker.
+    var el = document.getElementById('coll-tracker'); if (!el) return;
     var stamps = data.stamps || [false, false, false, false, false, false], sc = 0;
     el.querySelectorAll('[data-stamp]').forEach(function (cb, i) { cb.checked = !!stamps[i]; if (stamps[i]) sc++; });
     var scur = el.querySelector('[data-stampcur]'); if (scur) scur.textContent = sc;
