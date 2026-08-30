@@ -6,7 +6,7 @@
     <atom:link href="https://sueryue.github.io/forza-horizon-6-guide/rss.xml" rel="self" type="application/rss+xml" />
     <description>Forza Horizon 6 lands in a fictionalised Japan with the biggest map the series has ever built and 550+ cars. This guide covers the car list, barn finds, treasure cars, the Estate, the interactive Japan map, and a beginner path to Horizon Legend — with sources noted for everything.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 30 Aug 2026 04:45:53 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 30 Aug 2026 05:28:28 GMT</lastBuildDate>
     <generator>Forza Horizon 6 Guide (static)</generator>
     <item>
       <title>Cars — list, best picks, aftermarket, Forza Edition, treasure &amp; barn finds</title>
@@ -16,18 +16,25 @@
       <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
+      <title>Houses &amp; Property — plus the interactive garage map &amp; tracker</title>
+      <link>https://sueryue.github.io/forza-horizon-6-guide/#houses</link>
+      <guid isPermaLink="false">https://sueryue.github.io/forza-horizon-6-guide/section/houses</guid>
+      <description>Forza Horizon 6 scatters 8 player houses across Japan, and each comes with a permanent perk that stays active no matter where you spawn. The headline is The Estate (Yashiki House) — a fully buildable plot you shape with an upgraded EventLab toolset. Houses unlock through the Discover Japan Stamp system (yellow → green → blue → orange → gold). Heads-up: the game also has 8 separate Garages (fast-travel + car-display points) — a different set of &quot;8&quot;, not the houses. [RPS, TECH, FH6GUIDE]</description>
+      <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>FAQ — release, platforms, cars, garages &amp; the Estate</title>
+      <link>https://sueryue.github.io/forza-horizon-6-guide/#faq</link>
+      <guid isPermaLink="false">https://sueryue.github.io/forza-horizon-6-guide/section/faq</guid>
+      <description>Straight answers on platforms, the PS5 version, Game Pass, PC specs, cars, garages, houses and progression — only from sourced, confirmed information.</description>
+      <pubDate>Sun, 30 Aug 2026 00:00:00 GMT</pubDate>
+    </item>
+    <item>
       <title>Festival Playlist Tracker — seasons &amp; rewards</title>
       <link>https://sueryue.github.io/forza-horizon-6-guide/#playlist</link>
       <guid isPermaLink="false">https://sueryue.github.io/forza-horizon-6-guide/section/playlist</guid>
       <description>The Festival Playlist is the live content backbone of every Forza Horizon. A new season drops each week across a four-week Series; each season hands out exclusive cars, credits and accolades. Track your own progress below — we never list rewards we can&apos;t verify.</description>
       <pubDate>Sat, 29 Aug 2026 00:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>Houses &amp; Property</title>
-      <link>https://sueryue.github.io/forza-horizon-6-guide/#houses</link>
-      <guid isPermaLink="false">https://sueryue.github.io/forza-horizon-6-guide/section/houses</guid>
-      <description>Forza Horizon 6 scatters 8 player houses across Japan, and each comes with a permanent perk that stays active no matter where you spawn. The headline is The Estate (Yashiki House) — a fully buildable plot you shape with an upgraded EventLab toolset. Houses unlock through the Discover Japan Stamp system (yellow → green → blue → orange → gold). Heads-up: the game also has 8 separate Garages (fast-travel + car-display points) — a different set of &quot;8&quot;, not the houses. [RPS, TECH, FH6GUIDE]</description>
-      <pubDate>Tue, 28 Jul 2026 00:00:00 GMT</pubDate>
     </item>
     <item>
       <title>Beginner&apos;s Guide — Path to Horizon Legend</title>
