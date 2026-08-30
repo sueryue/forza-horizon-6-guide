@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180" role="img" aria-label="All-rounder car">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#378ADD"/>
+      <stop offset="0.55" stop-color="#534AB7"/>
+      <stop offset="1" stop-color="#26215C"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="180" fill="url(#g)"/>
+  <g transform="translate(28,58) scale(4.2)" fill="#04121a"><circle cx="18" cy="29" r="6" fill="#04121a"/><circle cx="46" cy="29" r="6" fill="#04121a"/><path d="M5 25 Q6 18 14 18 L22 18 Q25 13 32 13 L40 15 Q52 16 57 21 L57 25 Q57 27 53 27 L9 27 Q5 27 5 25 Z"/><circle cx="18" cy="29" r="2.7" fill="#fff"/><circle cx="46" cy="29" r="2.7" fill="#fff"/><path d="M24 18 Q27 14 32 15 L39 16 C36 17 32 18 27 18 Z" fill="rgba(255,255,255,.30)"/></g>
+  <text x="20" y="160" font-family="Chakra Petch, sans-serif" font-size="20" font-weight="700" fill="#ffffff" letter-spacing="1">All-rounder</text>
+</svg>
