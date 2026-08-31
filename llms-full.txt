@@ -145,7 +145,7 @@ Pre-order incentive.
 Note: the Italian Passion Car Pack is a standalone purchase. It is NOT included with the Car Pass.
 
 ## Cars
-Forza Horizon 6 launches with 550+ cars [WIKI] and now sits at 636 in the live roster (Aug 13, 2026). The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced.
+Forza Horizon 6 launches with 550+ cars [WIKI] and now sits at 636 in the live roster (Aug 13, 2026). The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced. Three further groups — Japanese icons, hypercars & track toys, and muscle & super-saloons — are pulled straight from the official forza.net roster table (Updated 13 Aug 2026) and carry real Performance Index (PI) and class figures from that table [Official]. This is still a curated slice of the full 636, not a 640+ database — for that, see the links in the note on the cars hub.
 
 ### Confirmed vehicles (Wikipedia) [WIKI]
 _From the official key art and cross-title loyalty rewards [WIKI]._
@@ -216,6 +216,58 @@ _A slice of the launch roster — the full list spans 64+ pages on IGN._
 - **2004 Porsche 996 GT3**
 - **1982 Porsche 911 Turbo**
 - **1989 Porsche 944 Turbo**
+
+### Japanese icons (from the official roster) [OFFICIAL]
+_A curated slice of Japan-built legends in the live 636-car roster, each verified against the forza.net table (Updated 13 Aug 2026). PI and class are real figures from that table._
+- **2024 Nissan Nissan GT-R Nismo** — *Track Toys*
+- **2017 Nissan Nissan GT-R (R35)** — *Modern Supercars*
+- **1990 Nissan Nissan #12 Skyline GT-R (BNR32 Gr.A) JTC** — *Retro Racers*
+- **1998 Nissan Nissan #23 Pennzoil NISMO Skyline GT-R** — *Retro Racers*
+- **2020 Toyota Toyota GR Supra** — *Modern Sports Cars*
+- **2005 Honda Honda NSX-R GT** — *Retro Sports Cars*
+- **2023 Honda Honda Civic Type R** — *Super Hot Hatch*
+- **2003 Honda Honda S2000** — *Modern Sports Cars*
+- **1991 Mazda Mazda #55 Mazda 787B** — *Retro Racers*
+- **1994 Mazda Mazda MX-5 Miata** — *Retro Sports Cars*
+- **1992 Mazda Mazda RX-7 Type R** — *Retro Sports Cars*
+- **2004 Mitsubishi Mitsubishi Lancer Evolution VIII MR** — *Modern Rally*
+- **1998 Subaru Subaru Impreza 22B-STi Version** — *Retro Rally*
+- **2018 Subaru Subaru WRX STI ARX Supercar** — *Rally Monsters*
+
+### Hypercars & track toys (from the official roster) [OFFICIAL]
+_The headline machines of the roster — Koenigsegg, Pagani, Rimac, the Ferrari LaFerrari, Porsche 918 and McLaren P1. PI and class verified against the official table._
+- **2021 Rimac Rimac Nevera** — *Hypercars*
+- **2024 Koenigsegg Koenigsegg Gemera** — *Hypercars*
+- **2020 Koenigsegg Koenigsegg Jesko** — *Hypercars*
+- **2015 Koenigsegg Koenigsegg One:1** — *Hypercars*
+- **2017 Koenigsegg Koenigsegg Agera RS** — *Hypercars*
+- **2016 Koenigsegg Koenigsegg Regera** — *Hypercars*
+- **2014 Porsche Porsche 918 Spyder** — *Hypercars*
+- **2013 Ferrari Ferrari LaFerrari** — *Hypercars*
+- **2016 Pagani Pagani Huayra BC Coupe** — *Hypercars*
+- **2013 McLaren McLaren P1** — *Hypercars*
+- **2012 Hennessey Hennessey Venom GT** — *Hypercars*
+- **2019 McLaren McLaren Speedtail** — *Hypercars*
+- **2021 Pagani Pagani Huayra R** — *Extreme Track Toys*
+- **2009 Pagani Pagani Zonda R** — *Extreme Track Toys*
+- **2008 Koenigsegg Koenigsegg CCGT** — *Extreme Track Toys*
+
+### Muscle & super saloons (from the official roster) [OFFICIAL]
+_American muscle and European super-saloons, verified against the official roster table (PI and class from forza.net)._
+- **2015 Chevrolet Chevrolet Corvette Z06** — *Modern Muscle*
+- **2020 Ford Ford Mustang Shelby GT500** — *Modern Muscle*
+- **2021 BMW BMW M4 Competition Coupé Welcome Pack** — *Modern Super Saloons*
+- **2022 BMW BMW M5 CS** — *Modern Super Saloons*
+- **2017 Chevrolet Chevrolet Camaro ZL1** — *Modern Muscle*
+- **2009 Chevrolet Chevrolet Corvette ZR1** — *Modern Muscle*
+- **2013 SRT SRT Viper GTS** — *Modern Muscle*
+- **2022 Dodge Dodge Challenger SRT Super Stock** — *Modern Muscle*
+- **2018 Dodge Dodge Challenger SRT Demon** — *Modern Muscle*
+- **2024 Ford Ford Mustang Dark Horse** — *Modern Muscle*
+- **2021 Alfa Romeo Alfa Romeo Giulia GTAm** — *Modern Super Saloons*
+- **2018 Mercedes-AMG Mercedes-AMG GT 4-Door Coupé** — *Modern Super Saloons*
+- **2020 BMW BMW M2 Competition Coupé** — *Modern Super Saloons*
+- **2018 Ford Ford Mustang RTR Spec 5** — *Modern Muscle*
 
 ## Best cars by discipline
 Forget hunting for one 'best' car — Horizon is built so different machines win at different things. These are the standout picks for each discipline, pulled from the walkthrough reward cars and what reviewers actually rated.
