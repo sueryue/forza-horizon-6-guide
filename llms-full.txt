@@ -355,7 +355,7 @@ Barn Finds are classic cars abandoned in barns across Japan, gated behind your D
 - Search the circle for the barn; you can spot it fast by flying a Drone over the zone.
 - The car is sent for restoration, which takes real time — a couple of hours up to several days. You can pay credits to skip it, but it is rarely worth it.
 
-_We deliberately give descriptive landmark pointers, not map coordinates — the four guides we cross-checked describe these spots in words, and inventing coordinate pairs would be exactly the kind of fabrication this site avoids. Restoration takes real time (hours to days), so start hunting early._
+_We deliberately give descriptive landmark pointers, not map coordinates — the four guides we cross-checked describe these spots in words, and inventing coordinate pairs would be exactly the kind of fabrication this site avoids. We track all 15 Barn Finds; some interactive maps still list only 14 (a stale count, corrected against IGN's May 2026 update). Restoration takes real time (hours to days), so start hunting early._
 
 ## Treasure Cars
 **Count**: 9 (GamesRadar, PC Gamer, Gamereactor, GamingBolt).
