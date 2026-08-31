@@ -145,7 +145,7 @@ Pre-order incentive.
 Note: the Italian Passion Car Pack is a standalone purchase. It is NOT included with the Car Pass.
 
 ## Cars
-Forza Horizon 6 launches with 550+ cars [WIKI] and now sits at 636 in the live roster (Aug 13, 2026). The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced. Three further groups — Japanese icons, hypercars & track toys, and muscle & super-saloons — are pulled straight from the official forza.net roster table (Updated 13 Aug 2026) and carry real Performance Index (PI) and class figures from that table [Official]. This is still a curated slice of the full 636, not a 640+ database — for that, see the links in the note on the cars hub.
+Forza Horizon 6 now has 636 cars in the live roster (Aug 13, 2026) [WIKI], up from 550+ at launch. The first group is confirmed by Wikipedia; later groups are community-sourced (IGN, GamesRadar, Reddit) and clearly tagged. Three more — Japanese icons, hypercars & track toys, and muscle & super-saloons — come straight from the official forza.net roster table with real PI and class figures [Official]. This is a curated slice, not a 640+ database; see the source links on the cars hub.
 
 ### Confirmed vehicles (Wikipedia) [WIKI]
 _From the official key art and cross-title loyalty rewards [WIKI]._
@@ -378,7 +378,7 @@ Highlights: Community: island roads; Beachfront straights; Discover Japan stamps
 
 ## Barn Finds
 **Count**: 15 (IGN, Windows Central, PC Gamer, Red Bull).
-Barn Finds are classic cars abandoned in barns across Japan, gated behind your Discover Japan stamps. There are 15 of them, unlocked in batches of one to four as you climb the seven Discover Japan stamp tiers from Visitor to Master Explorer. Wikipedia does not enumerate this mechanic, so the roster below is guide-sourced and cross-checked between IGN, Windows Central, PC Gamer and Red Bull.
+Barn Finds are classic cars hidden in barns across Japan, gated behind your Discover Japan stamps. There are 15, unlocked in batches as you climb the seven stamp tiers (Visitor to Master Explorer). Wikipedia does not list them, so this roster is guide-sourced and cross-checked across IGN, Windows Central, PC Gamer and Red Bull.
 
 ### All 15 Barn Finds
 
@@ -411,7 +411,7 @@ _We deliberately give descriptive landmark pointers, not map coordinates — the
 
 ## Treasure Cars
 **Count**: 9 (GamesRadar, PC Gamer, Gamereactor, GamingBolt).
-Treasure Cars are abandoned vehicles hidden across Japan, found only via photo clues (no map marker until you are nearly on top of one). There are nine — one per region of the mainland, with the ninth in Tokyo City. Unlike Barn Finds they need no stamp progression and no restoration: just drive up and claim them, in any order. Wikipedia does not enumerate this mechanic, so the roster below is guide-sourced and cross-checked across four outlets.
+Treasure Cars are hidden vehicles found only via photo clues (no marker until you're nearly on top of one). There are nine — one per mainland region, plus one in Tokyo City. Unlike Barn Finds they need no stamps and no restoration: drive up and claim them in any order. Wikipedia does not list them, so this roster is guide-sourced and cross-checked across four outlets.
 
 ### All 9 Treasure Cars
 
@@ -501,7 +501,7 @@ Standard event types each season (structure is stable across the series):
 _Season rewards reset weekly and are only claimable during their own week. Series rewards need a bigger point total across the whole month and are the more desirable cars. Seasons roll over every Thursday at 09:30 ET / 06:30 PT._
 
 ## Houses & property
-Two different sets of "8" in Horizon Japan — and mixing them up is the single most common error in FH6 property guides. Wikipedia confirms one headline property, The Estate, plus 8 Garages that double as fast-travel and car-display points [WIKI]. Separately, community guides enumerate 8 buyable player houses, each with a permanent perk that stays active wherever you spawn; Wikipedia does not enumerate those, so they are labelled community-sourced [RPS, TECH, FH6GUIDE]. The Estate (Yashiki House) is the headline — a fully buildable plot you shape with an upgraded EventLab toolset. Houses unlock through the seven Discover Japan stamp tiers (yellow Visitor → green Sightseer → blue Traveller → pink Pathfinder → orange Navigator → purple Adventurer → gold Master Explorer).
+Two different sets of "8" trip up most FH6 property guides. Wikipedia confirms one headline property — The Estate — plus 8 Garages that double as fast-travel and car-display points [WIKI]. Separately, community guides list 8 buyable houses, each with a permanent perk; Wikipedia does not enumerate those, so they are tagged community-sourced [RPS, TECH, FH6GUIDE]. The Estate (Yashiki House) is the buildable headline plot. Houses unlock via the seven Discover Japan stamp tiers (Visitor to Master Explorer).
 
 ### Mei's House
 - **Region**: Ohtani
