@@ -4,4 +4,15 @@
 
 ## Guide sections
 - [Full guide (llms-full.txt)](https://www.forza-horizon-6.com/llms-full.txt): the complete guide as clean, citable markdown — beginner path, car list, best cars, map regions, barn finds, treasure cars, aftermarket/Forza Edition cars, houses, critic scores, and development timeline.
-- [Live site](https://www.forza-horizon-6.com/): the interactive guide (JavaScript-rendered; same content as llms-full.txt).
+- [Live site](https://www.forza-horizon-6.com/): the interactive guide. Every section below has its own real URL with the content server-rendered, so it is readable without executing JavaScript.
+
+## Pages (real URLs, content inlined in the HTML)
+- [Cars](https://www.forza-horizon-6.com/cars/): roster, best picks by discipline, aftermarket & Forza Edition cars, and the Barn Find / Treasure Car lists.
+- [Barn Finds](https://www.forza-horizon-6.com/barn-finds/): all 15, with car, unlock stamp tier, region and landmark pointer.
+- [Treasure Cars](https://www.forza-horizon-6.com/treasure-cars/): all 9, with region and where to look.
+- [Interactive Map](https://www.forza-horizon-6.com/map/): regions of Japan and what is scattered across them.
+- [Beginner's Guide](https://www.forza-horizon-6.com/beginner/): 14-step path to Horizon Legend.
+- [Houses & Property](https://www.forza-horizon-6.com/houses/): The Estate, the 8 Garages and the buyable houses.
+- [Guides & Wiki](https://www.forza-horizon-6.com/guides/): walkthroughs and the systems encyclopedia.
+- [Festival Playlist](https://www.forza-horizon-6.com/playlist/): seasons, event types and progress tracking.
+- [FAQ](https://www.forza-horizon-6.com/faq/): release, platforms, PS5 status, Game Pass, PC specs, cars, houses, progression.
