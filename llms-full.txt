@@ -3,12 +3,12 @@
 > Unofficial fan strategy guide. Primary source: the English Wikipedia article on Forza Horizon 6. 
 > Gameplay detail where Wikipedia is silent is drawn from community guides (Reddit, IGN, GamesRadar, game8, Red Bull, Polygon) and labelled community-sourced. No car names, locations, or stats are invented.
 
-**An unofficial, source-checked guide to the festival in Japan** — Forza Horizon 6 lands in a fictionalised Japan with the biggest map the series has ever built — 550+ cars at launch and 636 in the live roster today. This guide covers the car list, Car Pass and DLC packs, barn finds, treasure cars, the Estate, the interactive Japan map, and a beginner path to Horizon Legend — with sources noted for everything.
+**An unofficial, source-checked guide to the festival in Japan** — Forza Horizon 6 lands in a fictionalised Japan with the biggest map the series has ever built — 636 cars in the live roster today (550+ at launch). This guide covers the car list, Car Pass and DLC packs, barn finds, treasure cars, the Estate, the interactive Japan map, and a beginner path to Horizon Legend — with sources noted for everything.
 
 ## Key facts (Wikipedia-confirmed)
 - **Setting**: Japan (fictionalised)
 - **Released**: May 19, 2026
-- **Cars at launch**: 550+ (636 in the live roster as of Aug 13, 2026)
+- **Cars at launch**: 636 in the live roster (550+ at launch, as of Aug 13, 2026)
 - **Developer**: Playground Games
 - **Publisher**: Xbox Game Studios
 - **Platforms**: PC · Xbox Series X|S (PS5 delayed — TBC)
@@ -145,7 +145,7 @@ Pre-order incentive.
 Note: the Italian Passion Car Pack is a standalone purchase. It is NOT included with the Car Pass.
 
 ## Cars
-Forza Horizon 6 launches with 550+ cars [WIKI]. The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced.
+Forza Horizon 6 launches with 550+ cars [WIKI] and now sits at 636 in the live roster (Aug 13, 2026). The first group lists vehicles confirmed directly by Wikipedia (key-art cover car and the cross-title loyalty rewards). The remaining groups are drawn from community guides (IGN, GamesRadar, Reddit) and are clearly marked as community-sourced.
 
 ### Confirmed vehicles (Wikipedia) [WIKI]
 _From the official key art and cross-title loyalty rewards [WIKI]._
@@ -267,7 +267,7 @@ The M12S Warthog CST (Danger Signs reward) has a brutal launch, the Ram 1500 TRX
 The Lamborghini Huracán Sterrato (Dirt Racing max reward) and the Mini JCW Buggy (Cross Country reward) handle loose surfaces best; the #37 Pro 2 Truck and GMC Jimmy are solid too.
 
 **Q: How many cars are in Forza Horizon 6 at launch?**
-550+ cars at launch [WIKI]. The lists above are curated, sourced picks — not the full roster.
+636 in the live roster (Aug 13, 2026); 550+ at launch [WIKI]. The lists above are curated, sourced picks — not the full roster.
 
 **Q: What is the best car for farming credits?**
 Any of the fast event-reward cars above will do; pair it with higher difficulty and assists off for up to +125% credit payouts, and three-star PR stunts for Super Wheelspins.
