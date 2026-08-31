@@ -382,7 +382,7 @@ Treasure Cars are abandoned vehicles hidden across Japan, found only via photo c
 - Once discovered, the location stays marked on your map.
 - A systematic north-to-south sweep covers all nine in a couple of hours.
 
-_All nine are free. GamingBolt reports that claiming every Treasure Car unlocks the 'Lost and Found' badge — treat that one as single-sourced. As with Barn Finds, we publish landmark descriptions rather than invented coordinate pairs._
+_All nine are free. GamingBolt reports that claiming every Treasure Car unlocks the 'Lost and Found' badge — treat that one as single-sourced. We show GamingBolt's map-grid label (letter+number, e.g. D 234) for each car as a navigation aid — that is their overlay grid, not an in-game GPS readout, and we still publish landmark descriptions rather than invented coordinates. Barn Finds remain landmark-only, since no trusted numeric source exists for them._
 
 ## Aftermarket Cars
 Aftermarket Cars are secondhand vehicles scattered across the map. They match your current campaign progression, come fully tuned with kits, and cost less than the Autoshow. (Wikipedia confirms deep car customisation but does not define this specific system; details below are community-sourced.)
